@@ -9,18 +9,18 @@ package model.entity;
  * @author User
  */
 public class Restaurante extends AtracaoTuristica {
-    private String categoria;
+    private int categoria;
 
-    public Restaurante(int codr, String nome, String endereco, Cidade cidade, String categoria){
+    public Restaurante(int codr, String nome, String endereco, Cidade cidade, int categoria){
         super(codr,nome,endereco,cidade);
         this.categoria = categoria;
     }
 
-    public String getCategoria() {
+    public int getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(int categoria) {
         this.categoria = categoria;
     }
 }

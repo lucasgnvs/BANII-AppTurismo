@@ -5,29 +5,29 @@
 package model.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
  * @author User
  */
 public class Museu extends PontoTuristico {
-    private Date dtfundacao;
+    private LocalDate dtfundacao;
     private int nrsalas;
     final private ArrayList<Fundador> fundadores;
     
-    public Museu(int codpt, String nome, String endereco, Cidade cidade, String descricao, Date dtfundacao, int nrsalas){
+    public Museu(int codpt, String nome, String endereco, Cidade cidade, String descricao, LocalDate dtfundacao, int nrsalas){
         super(codpt, nome, endereco, cidade, descricao);
         this.dtfundacao = dtfundacao;
         this.nrsalas = nrsalas;
         this.fundadores = new ArrayList<>();
     }
 
-    public Date getDtfundacao() {
+    public LocalDate getDtfundacao() {
         return dtfundacao;
     }
 
-    public void setDtfundacao(Date dtfundacao) {
+    public void setDtfundacao(LocalDate dtfundacao) {
         this.dtfundacao = dtfundacao;
     }
 

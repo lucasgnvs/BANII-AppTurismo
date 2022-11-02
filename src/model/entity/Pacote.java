@@ -5,7 +5,7 @@
 package model.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -13,15 +13,15 @@ import java.util.Date;
  */
 public class Pacote extends Entidade {
     private float valor;
-    private Date dtinicio;
-    private Date dtfim;
+    private LocalDate dtinicio;
+    private LocalDate dtfim;
     private int disp;
     private Cidade cidade;
     private ArrayList<Hotel> hoteis;
     private ArrayList<Restaurante> restaurantes;
     private ArrayList<PontoTuristico> pontosTuristicos;
         
-    public Pacote(int codp, String nome, float valor, Date dtinicio, Date dtfim, int disp, Cidade cidade){
+    public Pacote(int codp, String nome, float valor, LocalDate dtinicio, LocalDate dtfim, int disp, Cidade cidade){
         super(codp, nome);
         this.valor = valor;
         this.dtinicio = dtinicio;
@@ -41,19 +41,19 @@ public class Pacote extends Entidade {
         this.valor = valor;
     }
 
-    public Date getDtinicio() {
+    public LocalDate getDtinicio() {
         return dtinicio;
     }
 
-    public void setDtinicio(Date dtinicio) {
+    public void setDtinicio(LocalDate dtinicio) {
         this.dtinicio = dtinicio;
     }
 
-    public Date getDtfim() {
+    public LocalDate getDtfim() {
         return dtfim;
     }
 
-    public void setDtfim(Date dtfim) {
+    public void setDtfim(LocalDate dtfim) {
         this.dtfim = dtfim;
     }
 

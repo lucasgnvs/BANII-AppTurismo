@@ -4,37 +4,38 @@
  */
 package model.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
  * @author User
  */
 public class Fundador extends Entidade {
-    private Date dtnasc;
-    private Date dtmorte;
+    private LocalDate dtnasc;
+    private LocalDate dtmorte;
     private String nacionalidade;
     private String ativprof;
     
-    public Fundador(int codf, String nome, Date dtnasc, String nacionalidade, String ativprof){
+    public Fundador(int codf, String nome, LocalDate dtnasc, String nacionalidade, String ativprof){
         super(codf,nome);
+        this.dtnasc = dtnasc;
         this.nacionalidade = nacionalidade;
         this.ativprof = ativprof;
     }
 
-    public Date getDtnasc() {
+    public LocalDate getDtnasc() {
         return dtnasc;
     }
 
-    public void setDtnasc(Date dtnasc) {
+    public void setDtnasc(LocalDate dtnasc) {
         this.dtnasc = dtnasc;
     }
 
-    public Date getDtmorte() {
+    public LocalDate getDtmorte() {
         return dtmorte;
     }
 
-    public void setDtmorte(Date dtmorte) {
+    public void setDtmorte(LocalDate dtmorte) {
         this.dtmorte = dtmorte;
     }
 

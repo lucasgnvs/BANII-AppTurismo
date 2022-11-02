@@ -8,18 +8,37 @@ package model.entity;
  *
  * @author User
  */
-public class Quarto extends Entidade {
+public class Quarto{
+    private int codq;
+    private int nome;
     private float valor;
     private int nrquartos;
     private int nrhospedes;
     
-    public Quarto(int codq, String nome, float valor, int nrquartos, int nrhospedes){
-        super(codq,nome);
+    public Quarto(int codq, int nome, float valor, int nrquartos, int nrhospedes){
+        this.codq = codq;
+        this.nome = nome;
         this.valor = valor;
         this.nrquartos = nrquartos;
         this.nrhospedes = nrhospedes;
     }
 
+    public int getCod() {
+        return codq;
+    }
+
+    public void setCod(int codq) {
+        this.codq = codq;
+    }
+    
+    public int getNome() {
+        return nome;
+    }
+
+    public void setNome(int nome) {
+        this.nome = nome;
+    }
+    
     public float getValor() {
         return valor;
     }

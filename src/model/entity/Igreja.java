@@ -4,27 +4,27 @@
  */
 package model.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
  * @author User
  */
 public class Igreja extends PontoTuristico {
-    private Date data;
+    private LocalDate data;
     private String estilo;
         
-    public Igreja(int codpt, String nome, String endereco, Cidade cidade, String descricao, Date data, String estilo){
+    public Igreja(int codpt, String nome, String endereco, Cidade cidade, String descricao, LocalDate data, String estilo){
         super(codpt, nome, endereco, cidade, descricao);
         this.data = data;
         this.estilo = estilo;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 

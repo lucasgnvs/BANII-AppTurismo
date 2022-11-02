@@ -12,12 +12,12 @@ import java.time.LocalTime;
  */
 public class CasaShow extends PontoTuristico {
     private LocalTime hrinicio;
-    private String diafech;
+    private int diafech;
     private Restaurante restaurante;
     private float precomedio;
-    private String especialidade;
+    private int especialidade;
         
-    public CasaShow(int codpt, String nome, String endereco, Cidade cidade, String descricao, LocalTime hrinicio, String diafech){
+    public CasaShow(int codpt, String nome, String endereco, Cidade cidade, String descricao, LocalTime hrinicio, int diafech){
         super(codpt, nome, endereco, cidade, descricao);
         this.hrinicio = hrinicio;
         this.diafech = diafech;
@@ -31,11 +31,11 @@ public class CasaShow extends PontoTuristico {
         this.hrinicio = hrinicio;
     }
 
-    public String getDiafech() {
+    public int getDiafech() {
         return diafech;
     }
 
-    public void setDiafech(String diafech) {
+    public void setDiafech(int diafech) {
         this.diafech = diafech;
     }
 
@@ -55,11 +55,11 @@ public class CasaShow extends PontoTuristico {
         this.precomedio = precomedio;
     }
 
-    public String getEspecialidade() {
+    public int getEspecialidade() {
         return especialidade;
     }
 
-    public void setEspecialidade(String especialidade) {
+    public void setEspecialidade(int especialidade) {
         this.especialidade = especialidade;
     }
 }

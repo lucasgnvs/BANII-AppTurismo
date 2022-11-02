@@ -4,19 +4,19 @@
  */
 package model.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
  * @author User
  */
 public class Cliente extends Entidade {
-    private Date dtnasc;
+    private LocalDate dtnasc;
     private String email;
     private String endereco;
     private String telefone;
     
-    public Cliente(int codc, String nome, String endereco, Date dtnasc, String email, String telefone){
+    public Cliente(int codc, String nome, String endereco, LocalDate dtnasc, String email, String telefone){
         super(codc,nome);
         this.dtnasc = dtnasc;
         this.email = email;
@@ -24,11 +24,11 @@ public class Cliente extends Entidade {
         this.telefone = telefone;
     }
 
-    public Date getDtnasc() {
+    public LocalDate getDtnasc() {
         return dtnasc;
     }
 
-    public void setDtnasc(Date dtnasc) {
+    public void setDtnasc(LocalDate dtnasc) {
         this.dtnasc = dtnasc;
     }
 

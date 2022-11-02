@@ -6,7 +6,13 @@ package view;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalTime;
+import java.time.LocalDate;
+
 import model.dao.Conexao;
+import model.dao.PacoteDAO;
+import model.entity.Pacote;
+import model.entity.Cidade;
 
 /**
  *
@@ -60,6 +66,7 @@ public class Home extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        /*
         try{
             ResultSet rs = Conexao.getConnection().prepareStatement("select * from parques").executeQuery();
             while(rs.next()){
@@ -68,6 +75,7 @@ public class Home extends javax.swing.JPanel {
         }catch (SQLException e){
             System.err.println("foi de f");
         }
+        */
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
