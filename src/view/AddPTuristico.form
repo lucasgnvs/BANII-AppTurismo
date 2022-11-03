@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    </Component>
+  </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -16,13 +20,610 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jPPturistico" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jLInserir" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLDescricao" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLCidade" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLEndereco" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLTipo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLNome" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jRBCasaShow" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jRBIgreja" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jRBMuseu" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jRBParque" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                                  <Component id="jTFEndereco" max="32767" attributes="0"/>
+                                  <Component id="jCBCidade" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jTFNome" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="130" max="32767" attributes="0"/>
+                      <Component id="jBConcluir" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+              <Component id="jLInserir" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTFNome" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane1" min="-2" pref="46" max="-2" attributes="0"/>
+                  <Component id="jLDescricao" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jCBCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLEndereco" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTFEndereco" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jRBCasaShow" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRBMuseu" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRBIgreja" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRBParque" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLTipo" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPPturistico" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jBConcluir" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLInserir">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Inserir Ponto Tur&#xed;stico"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jBConcluir">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Concluir"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBConcluirActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRBCasaShow">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="Casa de Show"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRBCasaShowActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRBParque">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Parque"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRBParqueActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRBMuseu">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Museu"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRBMuseuActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRBIgreja">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Igreja"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRBIgrejaActionPerformed"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JPanel" name="jPPturistico">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPCasashow">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="addcasashow"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLCasashowHrinicio" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLCasashowRestaurante" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLCasashowPreco" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jTFCasashowHrinicio" min="-2" pref="75" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLCasashowDiafech" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jCBCasashowDiafech" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jTFCasashowPreco" min="-2" pref="75" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jLCasashowEsp" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jCBCasashowEsp" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="jCBCasashowRestaurante" min="-2" pref="296" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jCkBCasashowRestaurante" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLCasashowHrinicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFCasashowHrinicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLCasashowDiafech" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCBCasashowDiafech" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLCasashowRestaurante" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCBCasashowRestaurante" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jCkBCasashowRestaurante" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLCasashowPreco" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFCasashowPreco" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLCasashowEsp" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCBCasashowEsp" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLCasashowHrinicio">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Hora de in&#xed;cio:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTFCasashowHrinicio">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="hh:mm"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLCasashowDiafech">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Dia de fechamento:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="jCBCasashowDiafech">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="7">
+                    <StringItem index="0" value="DOM"/>
+                    <StringItem index="1" value="SEG"/>
+                    <StringItem index="2" value="TER"/>
+                    <StringItem index="3" value="QUA"/>
+                    <StringItem index="4" value="QUI"/>
+                    <StringItem index="5" value="SEX"/>
+                    <StringItem index="6" value="SAB"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLCasashowRestaurante">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Restaurante:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="jCBCasashowRestaurante">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="4">
+                    <StringItem index="0" value="Res 1"/>
+                    <StringItem index="1" value="Res 2"/>
+                    <StringItem index="2" value="Res 3"/>
+                    <StringItem index="3" value="Res 4"/>
+                  </StringArray>
+                </Property>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="jCkBCasashowRestaurante">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCkBCasashowRestauranteActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLCasashowPreco">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pre&#xe7;o m&#xe9;dio:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTFCasashowPreco">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLCasashowEsp">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Especialidade:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="jCBCasashowEsp">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="5">
+                    <StringItem index="0" value="OUTRO"/>
+                    <StringItem index="1" value="BRA"/>
+                    <StringItem index="2" value="ITA"/>
+                    <StringItem index="3" value="JAP"/>
+                    <StringItem index="4" value="MEX"/>
+                  </StringArray>
+                </Property>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPIgreja">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="addigreja"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLIgrejaData" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLIgrejaEstilo" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jTFIgrejaData" min="-2" pref="75" max="-2" attributes="0"/>
+                          <Component id="jTFIgrejaEstilo" min="-2" pref="200" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="172" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLIgrejaData" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFIgrejaData" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLIgrejaEstilo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFIgrejaEstilo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="54" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLIgrejaData">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Data:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLIgrejaEstilo">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Estilo:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTFIgrejaData">
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTFIgrejaEstilo">
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPMuseu">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="addmuseu"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLMuseuNrsalas" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLMuseuData" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLMuseuFundadores" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jCBMuseuFundadores" min="-2" pref="207" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jBMuseuAdicionar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jTFMuseuNrsalas" pref="75" max="32767" attributes="0"/>
+                                  <Component id="jTFMuseuData" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jLFALTAAAAAA" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLMuseuData" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFMuseuData" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLMuseuNrsalas" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFMuseuNrsalas" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLFALTAAAAAA" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLMuseuFundadores" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCBMuseuFundadores" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jBMuseuAdicionar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLMuseuData">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Data:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLMuseuNrsalas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="N&#xfa;mero de Salas:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTFMuseuNrsalas">
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTFMuseuData">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLMuseuFundadores">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Fundadores:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="jCBMuseuFundadores">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="4">
+                    <StringItem index="0" value="Fund 1"/>
+                    <StringItem index="1" value="Fund 2"/>
+                    <StringItem index="2" value="Fund 3"/>
+                    <StringItem index="3" value="Fund 4"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="jBMuseuAdicionar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Adicionar"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLFALTAAAAAA">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="FALTA LISTAGEM"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPParque">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="addparque"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLParqueNratracoes" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLParqueCapacidade" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jTFParqueCapacidade" pref="100" max="32767" attributes="0"/>
+                          <Component id="jTFParqueNrAtracoes" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="190" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLParqueNratracoes" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFParqueNrAtracoes" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLParqueCapacidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFParqueCapacidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="54" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLParqueNratracoes">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="N&#xfa;mero de Atra&#xe7;&#xf5;es:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLParqueCapacidade">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Capacidade:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTFParqueNrAtracoes">
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTFParqueCapacidade">
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLTipo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tipo:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLNome">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nome:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLDescricao">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLCidade">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cidade:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLEndereco">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Endere&#xe7;o:"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="jTADescricao">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JTextField" name="jTFNome">
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTFEndereco">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jCBCidade">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Cid 1"/>
+            <StringItem index="1" value="Cid 2"/>
+            <StringItem index="2" value="Cid 3"/>
+            <StringItem index="3" value="Cid 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+  </SubComponents>
 </Form>

@@ -26,19 +26,168 @@ public class AddCliente extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLInserir = new javax.swing.JLabel();
+        jBConcluir = new javax.swing.JButton();
+        jBLimpar = new javax.swing.JButton();
+        jLNome = new javax.swing.JLabel();
+        jLDtnasc = new javax.swing.JLabel();
+        jLEmail = new javax.swing.JLabel();
+        jLEndereco = new javax.swing.JLabel();
+        jLTelefone = new javax.swing.JLabel();
+        jTFNome = new javax.swing.JTextField();
+        jTFEmail = new javax.swing.JTextField();
+        jTFEndereco = new javax.swing.JTextField();
+        jTFTelefone = new javax.swing.JTextField();
+        jTFDtnasc = new javax.swing.JTextField();
+
+        jLInserir.setText("Inserir Cliente");
+
+        jBConcluir.setText("Concluir");
+        jBConcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBConcluirActionPerformed(evt);
+            }
+        });
+
+        jBLimpar.setText("Limpar");
+        jBLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimparActionPerformed(evt);
+            }
+        });
+
+        jLNome.setText("Nome Completo:");
+
+        jLDtnasc.setText("Data de Nascimento:");
+
+        jLEmail.setText("E-mail:");
+
+        jLEndereco.setText("Endereço:");
+
+        jLTelefone.setText("Telefone:");
+
+        jTFEmail.setToolTipText("nome@email.com");
+
+        jTFEndereco.setToolTipText("Rua, Número, Bairro");
+
+        jTFTelefone.setToolTipText("(xx) x xxxx-xxxx");
+
+        jTFDtnasc.setToolTipText("dd/mm/aaaa");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLInserir)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLEmail)
+                            .addComponent(jLTelefone)
+                            .addComponent(jLEndereco)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLDtnasc, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLNome)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTFEmail)
+                            .addComponent(jTFNome)
+                            .addComponent(jTFEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTFTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTFDtnasc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(115, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBLimpar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBConcluir)
+                .addGap(95, 95, 95))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jLInserir)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jBConcluir)
+                            .addComponent(jBLimpar))
+                        .addGap(130, 130, 130))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLNome))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLDtnasc)
+                            .addComponent(jTFDtnasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTFEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLEmail))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTFEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLEndereco))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTFTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLTelefone))
+                        .addContainerGap(182, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConcluirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBConcluirActionPerformed
+
+    private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
+        getjTFNome().setText("");
+        getjTFDtnasc().setText("");
+        getjTFEmail().setText("");
+        getjTFEndereco().setText("");
+        getjTFTelefone().setText("");
+    }//GEN-LAST:event_jBLimparActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBConcluir;
+    private javax.swing.JButton jBLimpar;
+    private javax.swing.JLabel jLDtnasc;
+    private javax.swing.JLabel jLEmail;
+    private javax.swing.JLabel jLEndereco;
+    private javax.swing.JLabel jLInserir;
+    private javax.swing.JLabel jLNome;
+    private javax.swing.JLabel jLTelefone;
+    private javax.swing.JTextField jTFDtnasc;
+    private javax.swing.JTextField jTFEmail;
+    private javax.swing.JTextField jTFEndereco;
+    private javax.swing.JTextField jTFNome;
+    private javax.swing.JTextField jTFTelefone;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JTextField getjTFDtnasc() {
+        return jTFDtnasc;
+    }
+
+    public javax.swing.JTextField getjTFEmail() {
+        return jTFEmail;
+    }
+
+    public javax.swing.JTextField getjTFEndereco() {
+        return jTFEndereco;
+    }
+
+    public javax.swing.JTextField getjTFNome() {
+        return jTFNome;
+    }
+
+    public javax.swing.JTextField getjTFTelefone() {
+        return jTFTelefone;
+    }
 }

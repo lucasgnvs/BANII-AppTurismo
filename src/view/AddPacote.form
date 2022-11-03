@@ -16,13 +16,176 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jBConcluir" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLCidade" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLInserir" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLNome" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jCBCidade" max="32767" attributes="0"/>
+                                  <Component id="jTFNome" pref="310" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLDtinicio" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jTFValor" pref="75" max="32767" attributes="0"/>
+                                          <Component id="jTFDtinicio" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="jLValor" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLDtfim" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLDisp" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jTFDtfim" min="-2" pref="75" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                      <Component id="jTFDisp" min="-2" pref="75" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="198" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="149" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+              <Component id="jLInserir" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTFNome" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jCBCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLDtinicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTFDtinicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTFDtfim" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLDtfim" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLValor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLDisp" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTFValor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTFDisp" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="86" max="32767" attributes="0"/>
+              <Component id="jBConcluir" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLInserir">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Inserir Pacote"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLNome">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nome:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTFNome">
+    </Component>
+    <Component class="javax.swing.JButton" name="jBConcluir">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Concluir"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBConcluirActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLValor">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pre&#xe7;o:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLDtinicio">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Data in&#xed;cio:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLCidade">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cidade:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTFDtinicio">
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTFDtfim">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLDtfim">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Data fim:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLDisp">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Vagas:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTFValor">
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTFDisp">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jCBCidade">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Cid 1"/>
+            <StringItem index="1" value="Cid 2"/>
+            <StringItem index="2" value="Cid 3"/>
+            <StringItem index="3" value="Cid 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="FALTAM AS ATRACOES"/>
+      </Properties>
+    </Component>
+  </SubComponents>
 </Form>

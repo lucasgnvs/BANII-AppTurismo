@@ -26,19 +26,146 @@ public class AddPacote extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLInserir = new javax.swing.JLabel();
+        jLNome = new javax.swing.JLabel();
+        jTFNome = new javax.swing.JTextField();
+        jBConcluir = new javax.swing.JButton();
+        jLValor = new javax.swing.JLabel();
+        jLDtinicio = new javax.swing.JLabel();
+        jLCidade = new javax.swing.JLabel();
+        jTFDtinicio = new javax.swing.JTextField();
+        jTFDtfim = new javax.swing.JTextField();
+        jLDtfim = new javax.swing.JLabel();
+        jLDisp = new javax.swing.JLabel();
+        jTFValor = new javax.swing.JTextField();
+        jTFDisp = new javax.swing.JTextField();
+        jCBCidade = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+
+        jLInserir.setText("Inserir Pacote");
+
+        jLNome.setText("Nome:");
+
+        jBConcluir.setText("Concluir");
+        jBConcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBConcluirActionPerformed(evt);
+            }
+        });
+
+        jLValor.setText("Preço:");
+
+        jLDtinicio.setText("Data início:");
+
+        jLCidade.setText("Cidade:");
+
+        jLDtfim.setText("Data fim:");
+
+        jLDisp.setText("Vagas:");
+
+        jCBCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cid 1", "Cid 2", "Cid 3", "Cid 4" }));
+
+        jLabel1.setText("FALTAM AS ATRACOES");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBConcluir)
+                .addGap(95, 95, 95))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLCidade)
+                            .addComponent(jLInserir)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLNome)
+                                .addGap(42, 42, 42)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jCBCidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTFNome, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLDtinicio)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jTFValor, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                                            .addComponent(jTFDtinicio)))
+                                    .addComponent(jLValor))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLDtfim)
+                                    .addComponent(jLDisp))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTFDtfim, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(7, 7, 7)
+                                        .addComponent(jTFDisp, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(198, 198, 198)
+                        .addComponent(jLabel1)))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jLInserir)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLNome)
+                    .addComponent(jTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLCidade)
+                    .addComponent(jCBCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLDtinicio)
+                    .addComponent(jTFDtinicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFDtfim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLDtfim))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLValor)
+                    .addComponent(jLDisp)
+                    .addComponent(jTFValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFDisp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addComponent(jBConcluir)
+                .addGap(50, 50, 50))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConcluirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBConcluirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBConcluir;
+    private javax.swing.JComboBox<String> jCBCidade;
+    private javax.swing.JLabel jLCidade;
+    private javax.swing.JLabel jLDisp;
+    private javax.swing.JLabel jLDtfim;
+    private javax.swing.JLabel jLDtinicio;
+    private javax.swing.JLabel jLInserir;
+    private javax.swing.JLabel jLNome;
+    private javax.swing.JLabel jLValor;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField jTFDisp;
+    private javax.swing.JTextField jTFDtfim;
+    private javax.swing.JTextField jTFDtinicio;
+    private javax.swing.JTextField jTFNome;
+    private javax.swing.JTextField jTFValor;
     // End of variables declaration//GEN-END:variables
 }

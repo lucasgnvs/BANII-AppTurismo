@@ -9,7 +9,9 @@ package view;
  * @author User
  */
 public class Menu extends javax.swing.JPanel {
-
+    
+    private javax.swing.JPanel panelController;
+    
     /**
      * Creates new form Menu
      */
@@ -26,21 +28,248 @@ public class Menu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(102, 102, 255));
+        jPanel1 = new javax.swing.JPanel();
+        jPTitulo = new javax.swing.JPanel();
+        jLTitulo = new javax.swing.JLabel();
+        jLBemVindo = new javax.swing.JLabel();
+        jBInicio = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLCadastrar = new javax.swing.JLabel();
+        jBVenda = new javax.swing.JButton();
+        jBCliente = new javax.swing.JButton();
+        jBPacote = new javax.swing.JButton();
+        jBPTuristico = new javax.swing.JButton();
+        jBHotel = new javax.swing.JButton();
+        jBRestaurante = new javax.swing.JButton();
+        jBCidade = new javax.swing.JButton();
+        jBFundador = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        setBackground(new java.awt.Color(153, 153, 255));
+
+        jPTitulo.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLTitulo.setBackground(new java.awt.Color(255, 255, 255));
+        jLTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jLTitulo.setText("AppTurismo");
+
+        javax.swing.GroupLayout jPTituloLayout = new javax.swing.GroupLayout(jPTitulo);
+        jPTitulo.setLayout(jPTituloLayout);
+        jPTituloLayout.setHorizontalGroup(
+            jPTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPTituloLayout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(jLTitulo)
+                .addGap(34, 34, 34))
+        );
+        jPTituloLayout.setVerticalGroup(
+            jPTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPTituloLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLTitulo)
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+
+        jLBemVindo.setText("Bem Vindo!");
+
+        jBInicio.setText("Início");
+        jBInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBInicioActionPerformed(evt);
+            }
+        });
+
+        jLCadastrar.setText("Cadastrar");
+
+        jBVenda.setText("Venda");
+        jBVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBVendaActionPerformed(evt);
+            }
+        });
+
+        jBCliente.setText("Cliente");
+        jBCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBClienteActionPerformed(evt);
+            }
+        });
+
+        jBPacote.setText("Pacote");
+        jBPacote.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPacoteActionPerformed(evt);
+            }
+        });
+
+        jBPTuristico.setText("Ponto Turístico");
+        jBPTuristico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPTuristicoActionPerformed(evt);
+            }
+        });
+
+        jBHotel.setText("Hotel");
+        jBHotel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBHotelActionPerformed(evt);
+            }
+        });
+
+        jBRestaurante.setText("Restaurante");
+        jBRestaurante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBRestauranteActionPerformed(evt);
+            }
+        });
+
+        jBCidade.setText("Cidade");
+        jBCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCidadeActionPerformed(evt);
+            }
+        });
+
+        jBFundador.setText("Fundador");
+        jBFundador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBFundadorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addComponent(jPTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1)
+                    .addComponent(jBVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBPacote, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBHotel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBRestaurante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBCidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLBemVindo)
+                            .addComponent(jLCadastrar))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jBFundador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBPTuristico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLBemVindo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBInicio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLCadastrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBVenda)
+                .addGap(18, 18, 18)
+                .addComponent(jBCliente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBPacote)
+                .addGap(18, 18, 18)
+                .addComponent(jBHotel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBRestaurante)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBPTuristico)
+                .addGap(18, 18, 18)
+                .addComponent(jBCidade)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBFundador)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInicioActionPerformed
+        java.awt.CardLayout c = (java.awt.CardLayout)(panelController.getLayout());
+        c.show(panelController, "home");
+    }//GEN-LAST:event_jBInicioActionPerformed
+
+    private void jBVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVendaActionPerformed
+        java.awt.CardLayout c = (java.awt.CardLayout)(panelController.getLayout());
+        c.show(panelController, "addcontrato");
+    }//GEN-LAST:event_jBVendaActionPerformed
+
+    private void jBPTuristicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPTuristicoActionPerformed
+        java.awt.CardLayout c = (java.awt.CardLayout)(panelController.getLayout());
+        c.show(panelController, "addpturistico");
+    }//GEN-LAST:event_jBPTuristicoActionPerformed
+
+    private void jBRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRestauranteActionPerformed
+        java.awt.CardLayout c = (java.awt.CardLayout)(panelController.getLayout());
+        c.show(panelController, "addrestaurante");
+    }//GEN-LAST:event_jBRestauranteActionPerformed
+
+    private void jBClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBClienteActionPerformed
+        java.awt.CardLayout c = (java.awt.CardLayout)(panelController.getLayout());
+        c.show(panelController, "addcliente");
+    }//GEN-LAST:event_jBClienteActionPerformed
+
+    private void jBPacoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPacoteActionPerformed
+        java.awt.CardLayout c = (java.awt.CardLayout)(panelController.getLayout());
+        c.show(panelController, "addpacote");
+    }//GEN-LAST:event_jBPacoteActionPerformed
+
+    private void jBHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHotelActionPerformed
+        java.awt.CardLayout c = (java.awt.CardLayout)(panelController.getLayout());
+        c.show(panelController, "addhotel");
+    }//GEN-LAST:event_jBHotelActionPerformed
+
+    private void jBCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCidadeActionPerformed
+        java.awt.CardLayout c = (java.awt.CardLayout)(panelController.getLayout());
+        c.show(panelController, "addcidade");
+    }//GEN-LAST:event_jBCidadeActionPerformed
+
+    private void jBFundadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFundadorActionPerformed
+        java.awt.CardLayout c = (java.awt.CardLayout)(panelController.getLayout());
+        c.show(panelController, "addfundador");
+    }//GEN-LAST:event_jBFundadorActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBCidade;
+    private javax.swing.JButton jBCliente;
+    private javax.swing.JButton jBFundador;
+    private javax.swing.JButton jBHotel;
+    private javax.swing.JButton jBInicio;
+    private javax.swing.JButton jBPTuristico;
+    private javax.swing.JButton jBPacote;
+    private javax.swing.JButton jBRestaurante;
+    private javax.swing.JButton jBVenda;
+    private javax.swing.JLabel jLBemVindo;
+    private javax.swing.JLabel jLCadastrar;
+    private javax.swing.JLabel jLTitulo;
+    private javax.swing.JPanel jPTitulo;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
+
+    public void setPanelController(javax.swing.JPanel panelController) {
+        this.panelController = panelController;
+    }
 }

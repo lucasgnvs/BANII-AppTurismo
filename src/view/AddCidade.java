@@ -4,6 +4,9 @@
  */
 package view;
 
+import controller.CidadeController;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User
@@ -26,19 +29,141 @@ public class AddCidade extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLInserir = new javax.swing.JLabel();
+        jLNome = new javax.swing.JLabel();
+        jLEstado = new javax.swing.JLabel();
+        jTFNome = new javax.swing.JTextField();
+        jLPopulacao = new javax.swing.JLabel();
+        jFTFPopulacao = new javax.swing.JFormattedTextField();
+        jBConcluir = new javax.swing.JButton();
+        jBLimpar = new javax.swing.JButton();
+        jCBEstado = new javax.swing.JComboBox<>();
+
+        jLInserir.setText("Inserir Cidade");
+        jLInserir.setToolTipText("");
+
+        jLNome.setText("Nome:");
+
+        jLEstado.setText("Estado:");
+
+        jLPopulacao.setText("População:");
+
+        jFTFPopulacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        jFTFPopulacao.setActionCommand("<Not Set>");
+        jFTFPopulacao.setVerifyInputWhenFocusTarget(false);
+
+        jBConcluir.setText("Concluir");
+        jBConcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBConcluirActionPerformed(evt);
+            }
+        });
+
+        jBLimpar.setText("Limpar");
+        jBLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimparActionPerformed(evt);
+            }
+        });
+
+        jCBEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLInserir)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLNome)
+                            .addComponent(jLEstado)
+                            .addComponent(jLPopulacao))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jCBEstado, javax.swing.GroupLayout.Alignment.LEADING, 0, 85, Short.MAX_VALUE)
+                                .addComponent(jFTFPopulacao, javax.swing.GroupLayout.Alignment.LEADING)))))
+                .addContainerGap(107, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBLimpar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBConcluir)
+                .addGap(95, 95, 95))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jLInserir)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLNome)
+                    .addComponent(jTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLEstado)
+                    .addComponent(jCBEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLPopulacao)
+                    .addComponent(jFTFPopulacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBLimpar)
+                    .addComponent(jBConcluir))
+                .addGap(130, 130, 130))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
+        getjTFNome().setText("");
+        getjCBEstado().setSelectedIndex(0);
+        getjFTFPopulacao().setText("");
+    }//GEN-LAST:event_jBLimparActionPerformed
+
+    private void jBConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConcluirActionPerformed
+        try{
+            getjTFNome().setEnabled(false);
+            getjCBEstado().setEnabled(false);
+            getjFTFPopulacao().setEnabled(false);
+            new CidadeController().addCidade(this);
+            JOptionPane.showMessageDialog(null,"Cidade inserida com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Ocorreu um erro ao inserir a cidade...","Erro",JOptionPane.ERROR_MESSAGE);
+        }finally{
+            getjTFNome().setEnabled(true);
+            getjCBEstado().setEnabled(true);
+            getjFTFPopulacao().setEnabled(true);
+        }
+    }//GEN-LAST:event_jBConcluirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBConcluir;
+    private javax.swing.JButton jBLimpar;
+    private javax.swing.JComboBox<String> jCBEstado;
+    private javax.swing.JFormattedTextField jFTFPopulacao;
+    private javax.swing.JLabel jLEstado;
+    private javax.swing.JLabel jLInserir;
+    private javax.swing.JLabel jLNome;
+    private javax.swing.JLabel jLPopulacao;
+    private javax.swing.JTextField jTFNome;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JComboBox<String> getjCBEstado() {
+        return jCBEstado;
+    }
+
+    public javax.swing.JFormattedTextField getjFTFPopulacao() {
+        return jFTFPopulacao;
+    }
+
+    public javax.swing.JTextField getjTFNome() {
+        return jTFNome;
+    }
 }

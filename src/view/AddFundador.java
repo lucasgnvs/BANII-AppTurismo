@@ -26,19 +26,178 @@ public class AddFundador extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLInserir = new javax.swing.JLabel();
+        jBConcluir = new javax.swing.JButton();
+        jBLimpar = new javax.swing.JButton();
+        jLNome = new javax.swing.JLabel();
+        jLDtnasc = new javax.swing.JLabel();
+        jLDtmorte = new javax.swing.JLabel();
+        jLAtivprof = new javax.swing.JLabel();
+        jLNacionalidade = new javax.swing.JLabel();
+        jTFNome = new javax.swing.JTextField();
+        jTFDtnasc = new javax.swing.JTextField();
+        jTFDtmorte = new javax.swing.JTextField();
+        jTFNascionalidade = new javax.swing.JTextField();
+        jTFAtivprof = new javax.swing.JTextField();
+        jCkBMorte = new javax.swing.JCheckBox();
+
+        jLInserir.setText("Inserir Fundador");
+
+        jBConcluir.setText("Concluir");
+        jBConcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBConcluirActionPerformed(evt);
+            }
+        });
+
+        jBLimpar.setText("Limpar");
+        jBLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimparActionPerformed(evt);
+            }
+        });
+
+        jLNome.setText("Nome Completo:");
+
+        jLDtnasc.setText("Data de Nascimento:");
+
+        jLDtmorte.setText("Data de Falecimento:");
+
+        jLAtivprof.setText("Atividade Profissional:");
+
+        jLNacionalidade.setText("Nacionalidade:");
+
+        jTFDtnasc.setToolTipText("dd/mm/aaaa");
+
+        jTFDtmorte.setToolTipText("dd/mm/aaaa");
+        jTFDtmorte.setEnabled(false);
+
+        jCkBMorte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCkBMorteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLInserir)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLNome)
+                            .addComponent(jLDtmorte)
+                            .addComponent(jLDtnasc)
+                            .addComponent(jLNacionalidade)
+                            .addComponent(jLAtivprof))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTFNome, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                            .addComponent(jTFNascionalidade, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTFDtnasc)
+                                    .addComponent(jTFDtmorte, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                                .addComponent(jCkBMorte))
+                            .addComponent(jTFAtivprof, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))))
+                .addContainerGap(73, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBLimpar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBConcluir)
+                .addGap(95, 95, 95))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jLInserir)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLNome))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFDtnasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLDtnasc))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCkBMorte, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTFDtmorte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLDtmorte)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFNascionalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLNacionalidade))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFAtivprof, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLAtivprof))
+                .addGap(18, 29, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBConcluir)
+                    .addComponent(jBLimpar))
+                .addGap(130, 130, 130))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConcluirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBConcluirActionPerformed
+
+    private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBLimparActionPerformed
+
+    private void jCkBMorteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCkBMorteActionPerformed
+        boolean value = getjTFDtmorte().isEnabled();
+        getjTFDtmorte().setText("");
+        getjTFDtmorte().setEnabled(!value);
+    }//GEN-LAST:event_jCkBMorteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBConcluir;
+    private javax.swing.JButton jBLimpar;
+    private javax.swing.JCheckBox jCkBMorte;
+    private javax.swing.JLabel jLAtivprof;
+    private javax.swing.JLabel jLDtmorte;
+    private javax.swing.JLabel jLDtnasc;
+    private javax.swing.JLabel jLInserir;
+    private javax.swing.JLabel jLNacionalidade;
+    private javax.swing.JLabel jLNome;
+    private javax.swing.JTextField jTFAtivprof;
+    private javax.swing.JTextField jTFDtmorte;
+    private javax.swing.JTextField jTFDtnasc;
+    private javax.swing.JTextField jTFNascionalidade;
+    private javax.swing.JTextField jTFNome;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JTextField getjTFAtivprof() {
+        return jTFAtivprof;
+    }
+
+    public javax.swing.JTextField getjTFDtmorte() {
+        return jTFDtmorte;
+    }
+
+    public javax.swing.JTextField getjTFDtnasc() {
+        return jTFDtnasc;
+    }
+
+    public javax.swing.JTextField getjTFNascionalidade() {
+        return jTFNascionalidade;
+    }
+
+    public javax.swing.JTextField getjTFNome() {
+        return jTFNome;
+    }
 }

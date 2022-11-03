@@ -16,13 +16,159 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="70" pref="70" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLInserir" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLNome" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLDtmorte" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLDtnasc" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLNacionalidade" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLAtivprof" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jTFNome" pref="262" max="32767" attributes="0"/>
+                          <Component id="jTFNascionalidade" pref="262" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jTFDtnasc" max="32767" attributes="0"/>
+                                  <Component id="jTFDtmorte" min="-2" pref="100" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="143" max="32767" attributes="0"/>
+                              <Component id="jCkBMorte" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jTFAtivprof" pref="262" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace pref="73" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jBLimpar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jBConcluir" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+              <Component id="jLInserir" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jTFNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLNome" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jTFDtnasc" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLDtnasc" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jCkBMorte" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jTFDtmorte" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLDtmorte" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jTFNascionalidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLNacionalidade" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jTFAtivprof" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLAtivprof" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" pref="29" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jBConcluir" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBLimpar" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLInserir">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Inserir Fundador"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jBConcluir">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Concluir"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBConcluirActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jBLimpar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Limpar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBLimparActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLNome">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nome Completo:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLDtnasc">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Data de Nascimento:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLDtmorte">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Data de Falecimento:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLAtivprof">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Atividade Profissional:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLNacionalidade">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nacionalidade:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTFNome">
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTFDtnasc">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="dd/mm/aaaa"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTFDtmorte">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="dd/mm/aaaa"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTFNascionalidade">
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTFAtivprof">
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="jCkBMorte">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCkBMorteActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
 </Form>

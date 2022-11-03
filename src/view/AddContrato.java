@@ -26,19 +26,110 @@ public class AddContrato extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLInserir = new javax.swing.JLabel();
+        jBConcluir = new javax.swing.JButton();
+        jBLimpar = new javax.swing.JButton();
+        jLPacote = new javax.swing.JLabel();
+        jLCliente = new javax.swing.JLabel();
+        jCBCliente = new javax.swing.JComboBox<>();
+        jCBPacote = new javax.swing.JComboBox<>();
+
+        jLInserir.setText("Inserir Venda");
+
+        jBConcluir.setText("Concluir");
+        jBConcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBConcluirActionPerformed(evt);
+            }
+        });
+
+        jBLimpar.setText("Limpar");
+        jBLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimparActionPerformed(evt);
+            }
+        });
+
+        jLPacote.setText("Pacote:");
+
+        jLCliente.setText("Cliente:");
+
+        jCBCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cli 1", "Cli 2", "Cli 3", "Cli 4" }));
+
+        jCBPacote.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pac 1", "Pac 2", "Pac 3", "Pac 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLInserir)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLCliente)
+                                    .addComponent(jLPacote))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jCBCliente, 0, 310, Short.MAX_VALUE)
+                                    .addComponent(jCBPacote, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBLimpar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBConcluir)))
+                .addGap(95, 95, 95))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jLInserir)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLPacote)
+                    .addComponent(jCBPacote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLCliente)
+                    .addComponent(jCBCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBConcluir)
+                    .addComponent(jBLimpar))
+                .addGap(130, 130, 130))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConcluirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBConcluirActionPerformed
+
+    private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
+        getjCBPacote().setSelectedIndex(0);
+        getjCBCliente().setSelectedIndex(0);
+    }//GEN-LAST:event_jBLimparActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBConcluir;
+    private javax.swing.JButton jBLimpar;
+    private javax.swing.JComboBox<String> jCBCliente;
+    private javax.swing.JComboBox<String> jCBPacote;
+    private javax.swing.JLabel jLCliente;
+    private javax.swing.JLabel jLInserir;
+    private javax.swing.JLabel jLPacote;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JComboBox<String> getjCBCliente() {
+        return jCBCliente;
+    }
+
+    public javax.swing.JComboBox<String> getjCBPacote() {
+        return jCBPacote;
+    }
 }

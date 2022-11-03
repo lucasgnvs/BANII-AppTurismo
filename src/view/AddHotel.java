@@ -26,19 +26,429 @@ public class AddHotel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jLInserir = new javax.swing.JLabel();
+        jBConcluir = new javax.swing.JButton();
+        jBLimpar = new javax.swing.JButton();
+        jLNome = new javax.swing.JLabel();
+        jLEndereco = new javax.swing.JLabel();
+        jLCategoria = new javax.swing.JLabel();
+        jLRestaurante = new javax.swing.JLabel();
+        jCBRestaurante = new javax.swing.JComboBox<>();
+        jCkBRestaurante = new javax.swing.JCheckBox();
+        jLCidade = new javax.swing.JLabel();
+        jCBCidade = new javax.swing.JComboBox<>();
+        jTFEndereco = new javax.swing.JTextField();
+        jTFNome = new javax.swing.JTextField();
+        jLCatEstrelas = new javax.swing.JLabel();
+        jRBCat1 = new javax.swing.JRadioButton();
+        jRBCat2 = new javax.swing.JRadioButton();
+        jRBCat5 = new javax.swing.JRadioButton();
+        jRBCat4 = new javax.swing.JRadioButton();
+        jRBCat3 = new javax.swing.JRadioButton();
+        jLQuartos = new javax.swing.JLabel();
+        jCkBQuartos1 = new javax.swing.JCheckBox();
+        jCkBQuartos2 = new javax.swing.JCheckBox();
+        jCkBQuartos3 = new javax.swing.JCheckBox();
+        jLValor = new javax.swing.JLabel();
+        jLNrquartos = new javax.swing.JLabel();
+        jLNrhospedes = new javax.swing.JLabel();
+        jTFNrquartos1 = new javax.swing.JTextField();
+        jTFNrquartos2 = new javax.swing.JTextField();
+        jTFNrquartos3 = new javax.swing.JTextField();
+        jTFNrhospedes1 = new javax.swing.JTextField();
+        jTFNrhospedes2 = new javax.swing.JTextField();
+        jTFNrhospedes3 = new javax.swing.JTextField();
+        jTFValor1 = new javax.swing.JTextField();
+        jTFValor2 = new javax.swing.JTextField();
+        jTFValor3 = new javax.swing.JTextField();
+
+        jLInserir.setText("Inserir Hotel");
+
+        jBConcluir.setText("Concluir");
+        jBConcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBConcluirActionPerformed(evt);
+            }
+        });
+
+        jBLimpar.setText("Limpar");
+        jBLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimparActionPerformed(evt);
+            }
+        });
+
+        jLNome.setText("Nome:");
+
+        jLEndereco.setText("Endereço:");
+
+        jLCategoria.setText("Categoria:");
+
+        jLRestaurante.setText("Restaurante:");
+
+        jCBRestaurante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Res 1", "Res 2" }));
+        jCBRestaurante.setEnabled(false);
+
+        jCkBRestaurante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCkBRestauranteActionPerformed(evt);
+            }
+        });
+
+        jLCidade.setText("Cidade:");
+
+        jCBCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cid 1", "Cid 2" }));
+
+        jTFEndereco.setToolTipText("Rua, Número, Bairro");
+
+        jLCatEstrelas.setText("estrelas");
+
+        buttonGroup1.add(jRBCat1);
+        jRBCat1.setText("1");
+
+        buttonGroup1.add(jRBCat2);
+        jRBCat2.setText("2");
+
+        buttonGroup1.add(jRBCat5);
+        jRBCat5.setText("5");
+
+        buttonGroup1.add(jRBCat4);
+        jRBCat4.setText("4");
+
+        buttonGroup1.add(jRBCat3);
+        jRBCat3.setText("3");
+
+        jLQuartos.setText("Quartos:");
+
+        jCkBQuartos1.setText("Simples");
+        jCkBQuartos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCkBQuartos1ActionPerformed(evt);
+            }
+        });
+
+        jCkBQuartos2.setText("Luxo");
+        jCkBQuartos2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCkBQuartos2ActionPerformed(evt);
+            }
+        });
+
+        jCkBQuartos3.setText("Supeluxo");
+        jCkBQuartos3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCkBQuartos3ActionPerformed(evt);
+            }
+        });
+
+        jLValor.setText("Preço:");
+        jLValor.setToolTipText("Preço do quarto deste tipo");
+
+        jLNrquartos.setText("Quantidade:");
+        jLNrquartos.setToolTipText("Número de quartos deste tipo disponíveis");
+
+        jLNrhospedes.setText("Hóspedes:");
+        jLNrhospedes.setToolTipText("Número de hóspedes por quarto deste tipo");
+
+        jTFNrquartos1.setEnabled(false);
+
+        jTFNrquartos2.setEnabled(false);
+
+        jTFNrquartos3.setEnabled(false);
+
+        jTFNrhospedes1.setEnabled(false);
+
+        jTFNrhospedes2.setEnabled(false);
+
+        jTFNrhospedes3.setEnabled(false);
+
+        jTFValor1.setEnabled(false);
+
+        jTFValor2.setEnabled(false);
+
+        jTFValor3.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBLimpar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBConcluir)
+                .addGap(95, 95, 95))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLQuartos)
+                                .addGap(4, 4, 4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(89, 89, 89)
+                                .addComponent(jCkBQuartos1)
+                                .addGap(27, 27, 27)
+                                .addComponent(jCkBQuartos2)
+                                .addGap(47, 47, 47)
+                                .addComponent(jCkBQuartos3)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLRestaurante)
+                            .addComponent(jLCidade)
+                            .addComponent(jLCategoria)
+                            .addComponent(jLEndereco)
+                            .addComponent(jLNome)
+                            .addComponent(jLInserir)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLValor)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(22, 22, 22)
+                                            .addComponent(jLNrhospedes))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addGap(16, 16, 16)
+                                            .addComponent(jLNrquartos))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jTFEndereco, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jCBCidade, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jTFNome, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jRBCat1)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jRBCat2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jRBCat3)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jRBCat4)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jRBCat5)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jLCatEstrelas))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jCBRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jCkBRestaurante)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jTFValor1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                                            .addComponent(jTFNrhospedes1, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTFNrquartos1, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jTFNrquartos2)
+                                            .addComponent(jTFNrhospedes2)
+                                            .addComponent(jTFValor2, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jTFNrquartos3, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                                            .addComponent(jTFNrhospedes3)
+                                            .addComponent(jTFValor3))))))
+                        .addContainerGap(91, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jLInserir)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLNome)
+                    .addComponent(jTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLCidade)
+                    .addComponent(jCBCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLEndereco)
+                    .addComponent(jTFEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLCategoria)
+                    .addComponent(jLCatEstrelas)
+                    .addComponent(jRBCat1)
+                    .addComponent(jRBCat2)
+                    .addComponent(jRBCat3)
+                    .addComponent(jRBCat4)
+                    .addComponent(jRBCat5))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCkBRestaurante, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLRestaurante)
+                        .addComponent(jCBRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLQuartos)
+                    .addComponent(jCkBQuartos1)
+                    .addComponent(jCkBQuartos3)
+                    .addComponent(jCkBQuartos2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLNrquartos)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTFNrquartos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTFNrquartos2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTFNrquartos3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLNrhospedes)
+                    .addComponent(jTFNrhospedes1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFNrhospedes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFNrhospedes3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLValor)
+                    .addComponent(jTFValor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFValor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFValor3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBConcluir)
+                    .addComponent(jBLimpar))
+                .addGap(30, 30, 30))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jCkBRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCkBRestauranteActionPerformed
+        boolean value = getjCBRestaurante().isEnabled();
+        getjCBRestaurante().setSelectedIndex(0);
+        getjCBRestaurante().setEnabled(!value);
+    }//GEN-LAST:event_jCkBRestauranteActionPerformed
+
+    private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
+        getjTFNome().setText("");
+        getjCBCidade().setSelectedIndex(0);
+        getjTFEndereco().setText("");
+        getButtonGroup1().clearSelection();
+        getjCBRestaurante().setSelectedIndex(0);
+        getjCkBRestaurante().setSelected(false);
+        getjCBRestaurante().setEnabled(false);
+        jCkBQuartos1.setSelected(false);
+        jTFNrquartos1.setText("");
+        jTFNrquartos1.setEnabled(false);
+        jTFNrhospedes1.setText("");
+        jTFNrhospedes1.setEnabled(false);
+        jTFValor1.setText("");
+        jTFValor1.setEnabled(false);
+        jCkBQuartos2.setSelected(false);
+        jTFNrquartos2.setText("");
+        jTFNrquartos2.setEnabled(false);
+        jTFNrhospedes2.setText("");
+        jTFNrhospedes2.setEnabled(false);
+        jTFValor2.setText("");
+        jTFValor2.setEnabled(false);
+        jCkBQuartos3.setSelected(false);
+        jTFNrquartos3.setText("");
+        jTFNrquartos3.setEnabled(false);
+        jTFNrhospedes3.setText("");
+        jTFNrhospedes3.setEnabled(false);
+        jTFValor3.setText("");
+        jTFValor3.setEnabled(false);
+    }//GEN-LAST:event_jBLimparActionPerformed
+
+    private void jBConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConcluirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBConcluirActionPerformed
+
+    private void jCkBQuartos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCkBQuartos1ActionPerformed
+        boolean value = jTFNrquartos1.isEnabled();
+        jTFNrquartos1.setText("");
+        jTFNrquartos1.setEnabled(!value);
+        jTFNrhospedes1.setText("");
+        jTFNrhospedes1.setEnabled(!value);
+        jTFValor1.setText("");
+        jTFValor1.setEnabled(!value);
+    }//GEN-LAST:event_jCkBQuartos1ActionPerformed
+
+    private void jCkBQuartos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCkBQuartos2ActionPerformed
+        boolean value = jTFNrquartos2.isEnabled();
+        jTFNrquartos2.setText("");
+        jTFNrquartos2.setEnabled(!value);
+        jTFNrhospedes2.setText("");
+        jTFNrhospedes2.setEnabled(!value);
+        jTFValor2.setText("");
+        jTFValor2.setEnabled(!value);
+    }//GEN-LAST:event_jCkBQuartos2ActionPerformed
+
+    private void jCkBQuartos3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCkBQuartos3ActionPerformed
+        boolean value = jTFNrquartos3.isEnabled();
+        jTFNrquartos3.setText("");
+        jTFNrquartos3.setEnabled(!value);
+        jTFNrhospedes3.setText("");
+        jTFNrhospedes3.setEnabled(!value);
+        jTFValor3.setText("");
+        jTFValor3.setEnabled(!value);
+    }//GEN-LAST:event_jCkBQuartos3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jBConcluir;
+    private javax.swing.JButton jBLimpar;
+    private javax.swing.JComboBox<String> jCBCidade;
+    private javax.swing.JComboBox<String> jCBRestaurante;
+    private javax.swing.JCheckBox jCkBQuartos1;
+    private javax.swing.JCheckBox jCkBQuartos2;
+    private javax.swing.JCheckBox jCkBQuartos3;
+    private javax.swing.JCheckBox jCkBRestaurante;
+    private javax.swing.JLabel jLCatEstrelas;
+    private javax.swing.JLabel jLCategoria;
+    private javax.swing.JLabel jLCidade;
+    private javax.swing.JLabel jLEndereco;
+    private javax.swing.JLabel jLInserir;
+    private javax.swing.JLabel jLNome;
+    private javax.swing.JLabel jLNrhospedes;
+    private javax.swing.JLabel jLNrquartos;
+    private javax.swing.JLabel jLQuartos;
+    private javax.swing.JLabel jLRestaurante;
+    private javax.swing.JLabel jLValor;
+    private javax.swing.JRadioButton jRBCat1;
+    private javax.swing.JRadioButton jRBCat2;
+    private javax.swing.JRadioButton jRBCat3;
+    private javax.swing.JRadioButton jRBCat4;
+    private javax.swing.JRadioButton jRBCat5;
+    private javax.swing.JTextField jTFEndereco;
+    private javax.swing.JTextField jTFNome;
+    private javax.swing.JTextField jTFNrhospedes1;
+    private javax.swing.JTextField jTFNrhospedes2;
+    private javax.swing.JTextField jTFNrhospedes3;
+    private javax.swing.JTextField jTFNrquartos1;
+    private javax.swing.JTextField jTFNrquartos2;
+    private javax.swing.JTextField jTFNrquartos3;
+    private javax.swing.JTextField jTFValor1;
+    private javax.swing.JTextField jTFValor2;
+    private javax.swing.JTextField jTFValor3;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.ButtonGroup getButtonGroup1() {
+        return buttonGroup1;
+    }
+
+    public javax.swing.JComboBox<String> getjCBCidade() {
+        return jCBCidade;
+    }
+
+    public javax.swing.JComboBox<String> getjCBRestaurante() {
+        return jCBRestaurante;
+    }
+
+    public javax.swing.JTextField getjTFEndereco() {
+        return jTFEndereco;
+    }
+
+    public javax.swing.JTextField getjTFNome() {
+        return jTFNome;
+    }
+
+    public javax.swing.JCheckBox getjCkBRestaurante() {
+        return jCkBRestaurante;
+    }
 }

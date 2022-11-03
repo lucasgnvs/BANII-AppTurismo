@@ -18,6 +18,7 @@ public class AppGUI extends javax.swing.JFrame {
      */
     public AppGUI() {
         initComponents();
+        menu1.setPanelController(panel);
     }
 
     /**
@@ -29,27 +30,37 @@ public class AppGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        menu1 = new view.Menu();
-        jPanel1 = new javax.swing.JPanel();
+        panel = new javax.swing.JPanel();
         home1 = new view.Home();
+        addContrato1 = new view.AddContrato();
+        addCliente1 = new view.AddCliente();
+        addPacote1 = new view.AddPacote();
+        addHotel1 = new view.AddHotel();
+        addRestaurante1 = new view.AddRestaurante();
+        addPTuristico1 = new view.AddPTuristico();
+        addCidade1 = new view.AddCidade();
+        addFundador1 = new view.AddFundador();
+        menu1 = new view.Menu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(720, 480));
         setPreferredSize(new java.awt.Dimension(1080, 720));
 
-        javax.swing.GroupLayout menu1Layout = new javax.swing.GroupLayout(menu1);
-        menu1.setLayout(menu1Layout);
-        menu1Layout.setHorizontalGroup(
-            menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
-        );
-        menu1Layout.setVerticalGroup(
-            menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        panel.setPreferredSize(new java.awt.Dimension(544, 480));
+        panel.setLayout(new java.awt.CardLayout());
+        panel.add(home1, "home");
+        panel.add(addContrato1, "addcontrato");
+        addContrato1.getAccessibleContext().setAccessibleName("");
 
-        jPanel1.setLayout(new java.awt.CardLayout());
-        jPanel1.add(home1, "card2");
+        panel.add(addCliente1, "addcliente");
+        panel.add(addPacote1, "addpacote");
+        panel.add(addHotel1, "addhotel");
+        panel.add(addRestaurante1, "addrestaurante");
+        panel.add(addPTuristico1, "addpturistico");
+        panel.add(addCidade1, "addcidade");
+        panel.add(addFundador1, "addfundador");
+
+        menu1.setPreferredSize(new java.awt.Dimension(170, 480));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -58,12 +69,12 @@ public class AppGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(menu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -71,8 +82,16 @@ public class AppGUI extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private view.AddCidade addCidade1;
+    private view.AddCliente addCliente1;
+    private view.AddContrato addContrato1;
+    private view.AddFundador addFundador1;
+    private view.AddHotel addHotel1;
+    private view.AddPTuristico addPTuristico1;
+    private view.AddPacote addPacote1;
+    private view.AddRestaurante addRestaurante1;
     private view.Home home1;
-    private javax.swing.JPanel jPanel1;
     private view.Menu menu1;
+    private javax.swing.JPanel panel;
     // End of variables declaration//GEN-END:variables
 }
