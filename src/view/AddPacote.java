@@ -4,6 +4,8 @@
  */
 package view;
 
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author User
@@ -26,6 +28,7 @@ public class AddPacote extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLInserir = new javax.swing.JLabel();
         jLNome = new javax.swing.JLabel();
         jTFNome = new javax.swing.JTextField();
@@ -40,7 +43,22 @@ public class AddPacote extends javax.swing.JPanel {
         jTFValor = new javax.swing.JTextField();
         jTFDisp = new javax.swing.JTextField();
         jCBCidade = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        jLAtracoes = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLData = new javax.swing.JLabel();
+        jLTipo = new javax.swing.JLabel();
+        jTFData = new javax.swing.JTextField();
+        jRBTipoHotel = new javax.swing.JRadioButton();
+        jCBAtracoes = new javax.swing.JComboBox<>();
+        jBAdicionar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jLtAtracoes = new javax.swing.JList(new javax.swing.DefaultListModel());
+        jBRemover = new javax.swing.JButton();
+        jRBTipoRestaurante = new javax.swing.JRadioButton();
+        jRBTipoCasashow = new javax.swing.JRadioButton();
+        jRBTipoIgreja = new javax.swing.JRadioButton();
+        jRBTipoMuseu = new javax.swing.JRadioButton();
+        jRBTipoParque = new javax.swing.JRadioButton();
 
         jLInserir.setText("Inserir Pacote");
 
@@ -65,84 +83,166 @@ public class AddPacote extends javax.swing.JPanel {
 
         jCBCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cid 1", "Cid 2", "Cid 3", "Cid 4" }));
 
-        jLabel1.setText("FALTAM AS ATRACOES");
+        jLAtracoes.setText("Atrações:");
+
+        jLData.setText("Data:");
+
+        jLTipo.setText("Tipo:");
+
+        jTFData.setToolTipText("dd/mm/aaaa");
+        jTFData.setPreferredSize(new java.awt.Dimension(65, 22));
+
+        buttonGroup1.add(jRBTipoHotel);
+        jRBTipoHotel.setSelected(true);
+        jRBTipoHotel.setText("Hotel");
+
+        jCBAtracoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Atr 1", "Atr 2", "Atr 3", "Atr 4" }));
+
+        jBAdicionar.setText("Adicionar");
+        jBAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAdicionarActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.setViewportView(jLtAtracoes);
+
+        jBRemover.setText("Remover");
+        jBRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBRemoverActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRBTipoRestaurante);
+        jRBTipoRestaurante.setText("Restaurante");
+
+        buttonGroup1.add(jRBTipoCasashow);
+        jRBTipoCasashow.setText("Casa de Show");
+
+        buttonGroup1.add(jRBTipoIgreja);
+        jRBTipoIgreja.setText("Igreja");
+
+        buttonGroup1.add(jRBTipoMuseu);
+        jRBTipoMuseu.setText("Museu");
+
+        buttonGroup1.add(jRBTipoParque);
+        jRBTipoParque.setText("Parque");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBConcluir)
-                .addGap(95, 95, 95))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
+                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLNome)
+                        .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLCidade)
-                            .addComponent(jLInserir)
+                            .addComponent(jCBCidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTFNome)))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLCidade, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLInserir, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLNome)
-                                .addGap(42, 42, 42)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jCBCidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTFNome, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLDtinicio)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTFValor, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                                            .addComponent(jTFDtinicio)))
-                                    .addComponent(jLValor))
+                                .addComponent(jLDtinicio)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLDtfim)
-                                    .addComponent(jLDisp))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTFDtfim, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(7, 7, 7)
-                                        .addComponent(jTFDisp, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
-                        .addComponent(jLabel1)))
-                .addContainerGap(149, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTFValor, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                                    .addComponent(jTFDtinicio)))
+                            .addComponent(jLValor))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLDtfim)
+                            .addComponent(jLDisp))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTFDtfim, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTFDisp, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLAtracoes)
+                            .addComponent(jLData)
+                            .addComponent(jTFData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jCBAtracoes, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLTipo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRBTipoHotel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRBTipoRestaurante)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRBTipoCasashow)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRBTipoIgreja)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRBTipoMuseu)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRBTipoParque)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBAdicionar)
+                            .addComponent(jBRemover)
+                            .addComponent(jBConcluir, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addGap(95, 95, 95))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(70, 70, 70)
                 .addComponent(jLInserir)
-                .addGap(27, 27, 27)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLNome)
                     .addComponent(jTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLCidade)
                     .addComponent(jCBCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLDtinicio)
                     .addComponent(jTFDtinicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFDtfim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLDtfim))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLValor)
                     .addComponent(jLDisp)
                     .addComponent(jTFValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFDisp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLAtracoes)
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLTipo)
+                    .addComponent(jLData)
+                    .addComponent(jRBTipoHotel)
+                    .addComponent(jRBTipoRestaurante)
+                    .addComponent(jRBTipoCasashow)
+                    .addComponent(jRBTipoIgreja)
+                    .addComponent(jRBTipoMuseu)
+                    .addComponent(jRBTipoParque))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCBAtracoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBAdicionar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBRemover)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jBConcluir)
-                .addGap(50, 50, 50))
+                .addGap(130, 130, 130))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -150,18 +250,53 @@ public class AddPacote extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBConcluirActionPerformed
 
+    private void jBAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAdicionarActionPerformed
+        String selected = jCBAtracoes.getSelectedItem().toString();
+        DefaultListModel<String> list = (DefaultListModel<String>) jLtAtracoes.getModel();
+        if(!list.contains(selected)){
+            list.addElement(selected);
+            jTFData.setText("");
+        }
+        jLtAtracoes.setModel(list);
+    }//GEN-LAST:event_jBAdicionarActionPerformed
+
+    private void jBRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRemoverActionPerformed
+        int item = jLtAtracoes.getSelectedIndex();
+        DefaultListModel<String> list = (DefaultListModel<String>) jLtAtracoes.getModel();
+        if (item != -1){
+            list.remove(item);
+        }
+        jLtAtracoes.setModel(list);
+    }//GEN-LAST:event_jBRemoverActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jBAdicionar;
     private javax.swing.JButton jBConcluir;
+    private javax.swing.JButton jBRemover;
+    private javax.swing.JComboBox<String> jCBAtracoes;
     private javax.swing.JComboBox<String> jCBCidade;
+    private javax.swing.JLabel jLAtracoes;
     private javax.swing.JLabel jLCidade;
+    private javax.swing.JLabel jLData;
     private javax.swing.JLabel jLDisp;
     private javax.swing.JLabel jLDtfim;
     private javax.swing.JLabel jLDtinicio;
     private javax.swing.JLabel jLInserir;
     private javax.swing.JLabel jLNome;
+    private javax.swing.JLabel jLTipo;
     private javax.swing.JLabel jLValor;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JList<String> jLtAtracoes;
+    private javax.swing.JRadioButton jRBTipoCasashow;
+    private javax.swing.JRadioButton jRBTipoHotel;
+    private javax.swing.JRadioButton jRBTipoIgreja;
+    private javax.swing.JRadioButton jRBTipoMuseu;
+    private javax.swing.JRadioButton jRBTipoParque;
+    private javax.swing.JRadioButton jRBTipoRestaurante;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField jTFData;
     private javax.swing.JTextField jTFDisp;
     private javax.swing.JTextField jTFDtfim;
     private javax.swing.JTextField jTFDtinicio;

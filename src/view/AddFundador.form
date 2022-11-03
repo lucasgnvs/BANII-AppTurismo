@@ -33,21 +33,22 @@
                       </Group>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTFNome" pref="262" max="32767" attributes="0"/>
-                          <Component id="jTFNascionalidade" pref="262" max="32767" attributes="0"/>
+                          <Component id="jTFNome" pref="240" max="32767" attributes="0"/>
+                          <Component id="jTFNascionalidade" pref="240" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jTFDtnasc" max="32767" attributes="0"/>
                                   <Component id="jTFDtmorte" min="-2" pref="100" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="143" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jCkBMorte" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jTFAtivprof" pref="262" max="32767" attributes="0"/>
+                          <Component id="jTFAtivprof" pref="240" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="73" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>

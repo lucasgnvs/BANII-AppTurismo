@@ -32,10 +32,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLQuartos" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jLQuartos" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="89" pref="89" max="-2" attributes="0"/>
                               <Component id="jCkBQuartos1" min="-2" max="-2" attributes="0"/>
@@ -55,7 +52,7 @@
                           <Component id="jLEndereco" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLNome" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLInserir" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="jLValor" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -69,12 +66,12 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jTFEndereco" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="jCBCidade" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jTFNome" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jTFEndereco" alignment="0" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jRBCat1" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -87,36 +84,40 @@
                                           <Component id="jRBCat5" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="jLCatEstrelas" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="74" max="32767" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jCBRestaurante" min="-2" pref="269" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jCBRestaurante" max="32767" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jCkBRestaurante" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="jTFNrhospedes1" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jTFValor1" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Component id="jTFNrquartos1" min="-2" pref="66" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jTFValor1" alignment="0" pref="90" max="32767" attributes="0"/>
-                                          <Component id="jTFNrhospedes1" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jTFNrquartos1" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jTFNrhospedes2" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jTFValor2" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jTFNrquartos2" max="32767" attributes="0"/>
-                                          <Component id="jTFNrhospedes2" max="32767" attributes="0"/>
-                                          <Component id="jTFValor2" pref="90" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jTFNrquartos3" pref="90" max="32767" attributes="0"/>
-                                          <Component id="jTFNrhospedes3" max="32767" attributes="0"/>
-                                          <Component id="jTFValor3" alignment="0" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jTFNrhospedes3" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jTFNrquartos3" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jTFValor3" max="32767" attributes="0"/>
                                       </Group>
+                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="91" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -127,7 +128,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
               <Component id="jLInserir" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLNome" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTFNome" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -161,11 +162,13 @@
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLQuartos" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jCkBQuartos1" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jCkBQuartos3" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jCkBQuartos2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLQuartos" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCkBQuartos2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -190,12 +193,12 @@
                   <Component id="jTFValor2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTFValor3" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="33" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jBConcluir" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBLimpar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -354,7 +357,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCkBQuartos3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Supeluxo"/>
+        <Property name="text" type="java.lang.String" value="Superluxo"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCkBQuartos3ActionPerformed"/>
@@ -381,46 +384,73 @@
     <Component class="javax.swing.JTextField" name="jTFNrquartos1">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[65, 22]"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFNrquartos2">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[65, 22]"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFNrquartos3">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[65, 22]"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFNrhospedes1">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[65, 22]"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFNrhospedes2">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[65, 22]"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFNrhospedes3">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[65, 22]"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFValor1">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[65, 22]"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFValor2">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[65, 22]"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFValor3">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[65, 22]"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>
