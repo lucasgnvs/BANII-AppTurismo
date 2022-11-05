@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import model.dao.FundadorDAO;
 import model.entity.Fundador;
 import view.AddFundador;
-import view.AddPTuristico;
 
 /**
  *

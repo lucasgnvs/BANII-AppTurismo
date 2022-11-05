@@ -84,7 +84,7 @@ public class Pacote extends Entidade {
         return hoteis;
     }
 
-    public void addHotel(Hotel hotel) {
+    public void addHoteis(Hotel hotel) {
         this.hoteis.add(hotel);
     }
 

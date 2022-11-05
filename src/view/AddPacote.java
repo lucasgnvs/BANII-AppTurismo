@@ -12,6 +12,8 @@ import controller.IgrejaController;
 import controller.MuseuController;
 import controller.ParqueController;
 import controller.PacoteController;
+import controller.AtracaoInclusaController;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -22,6 +24,8 @@ import model.entity.CasaShow;
 import model.entity.Igreja;
 import model.entity.Museu;
 import model.entity.Parque;
+import model.entity.AtracaoTuristica;
+import model.entity.AtracaoInclusa;
 
 /**
  *
@@ -97,9 +101,9 @@ public class AddPacote extends javax.swing.JPanel {
     }
     
     private void updateCB(ArrayList<?> list){
-        jCBAtracoes.removeAllItems();
+        getjCBAtracoes().removeAllItems();
         for(Object item : list){
-            jCBAtracoes.addItem(item.toString());
+            getjCBAtracoes().addItem((AtracaoTuristica)item);
         }
     }
     
@@ -133,10 +137,10 @@ public class AddPacote extends javax.swing.JPanel {
         jLTipo = new javax.swing.JLabel();
         jTFData = new javax.swing.JTextField();
         jRBTipoHotel = new javax.swing.JRadioButton();
-        jCBAtracoes = new javax.swing.JComboBox<>();
+        jCBAtracoes = new javax.swing.JComboBox<AtracaoTuristica>();
         jBAdicionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jLtAtracoes = new javax.swing.JList(new javax.swing.DefaultListModel());
+        jLtAtracoes = new javax.swing.JList(new javax.swing.DefaultListModel<AtracaoInclusa>());
         jBRemover = new javax.swing.JButton();
         jRBTipoRestaurante = new javax.swing.JRadioButton();
         jRBTipoCasashow = new javax.swing.JRadioButton();
@@ -180,6 +184,11 @@ public class AddPacote extends javax.swing.JPanel {
 
         jTFData.setToolTipText("dd/mm/aaaa");
         jTFData.setPreferredSize(new java.awt.Dimension(65, 22));
+        jTFData.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                jTFDataCaretUpdate(evt);
+            }
+        });
 
         buttonGroup1.add(jRBTipoHotel);
         jRBTipoHotel.setSelected(true);
@@ -190,8 +199,6 @@ public class AddPacote extends javax.swing.JPanel {
             }
         });
 
-        jCBAtracoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Atr 1", "Atr 2", "Atr 3", "Atr 4" }));
-
         jBAdicionar.setText("Adicionar");
         jBAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,7 +206,9 @@ public class AddPacote extends javax.swing.JPanel {
             }
         });
 
+        jLtAtracoes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jLtAtracoes);
+        jLtAtracoes.getAccessibleContext().setAccessibleName("");
 
         jBRemover.setText("Remover");
         jBRemover.addActionListener(new java.awt.event.ActionListener() {
@@ -285,8 +294,8 @@ public class AddPacote extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLAtracoes)
                             .addComponent(jLData)
-                            .addComponent(jTFData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(jTFData, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
                             .addComponent(jCBAtracoes, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -375,55 +384,69 @@ public class AddPacote extends javax.swing.JPanel {
             message = "Ocorreu um erro ao inserir o pacote...\n\n" + e.getMessage().split("\n")[0];
             title = "Erro";
             type = JOptionPane.ERROR_MESSAGE;
+            e.printStackTrace();
         }finally{
             JOptionPane.showMessageDialog(null,message,title,type);
         }
     }//GEN-LAST:event_jBConcluirActionPerformed
 
     private void jBAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAdicionarActionPerformed
-        String selected = jCBAtracoes.getSelectedItem().toString();
-        DefaultListModel<String> list = (DefaultListModel<String>) getjLtAtracoes().getModel();
-        if(!list.contains(selected)){
-            list.addElement(selected);
+        try{
+            new AtracaoInclusaController().addAtracao(this);
             getjTFData().setText("");
+        }catch(DateTimeParseException e){
+            JOptionPane.showMessageDialog(null,"O formato da data está incorreto. (dd/mm/aaaa)","Erro",JOptionPane.ERROR_MESSAGE);
         }
-        getjLtAtracoes().setModel(list);
     }//GEN-LAST:event_jBAdicionarActionPerformed
 
     private void jBRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRemoverActionPerformed
-        int item = getjLtAtracoes().getSelectedIndex();
-        DefaultListModel<String> list = (DefaultListModel<String>) getjLtAtracoes().getModel();
-        if (item != -1){
-            list.remove(item);
-        }
-        getjLtAtracoes().setModel(list);
+        new AtracaoInclusaController().removeAtracao(this);
     }//GEN-LAST:event_jBRemoverActionPerformed
 
     private void jRBTipoHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTipoHotelActionPerformed
         updateCB(getListHotel());
+        boolean enable = !getListHotel().isEmpty();
+        jBAdicionar.setEnabled(enable && !getjTFData().getText().isBlank());
+        getjCBAtracoes().setEnabled(enable);
     }//GEN-LAST:event_jRBTipoHotelActionPerformed
 
     private void jRBTipoRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTipoRestauranteActionPerformed
         updateCB(getListRestaurante());
+        boolean enable = !getListRestaurante().isEmpty();
+        jBAdicionar.setEnabled(enable && !getjTFData().getText().isBlank());
+        getjCBAtracoes().setEnabled(enable);
     }//GEN-LAST:event_jRBTipoRestauranteActionPerformed
 
     private void jRBTipoCasashowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTipoCasashowActionPerformed
         updateCB(getListCasaShow());
+        boolean enable = !getListCasaShow().isEmpty();
+        jBAdicionar.setEnabled(enable && !getjTFData().getText().isBlank());
+        getjCBAtracoes().setEnabled(enable);
     }//GEN-LAST:event_jRBTipoCasashowActionPerformed
 
     private void jRBTipoIgrejaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTipoIgrejaActionPerformed
         updateCB(getListIgreja());
+        boolean enable = !getListIgreja().isEmpty();
+        jBAdicionar.setEnabled(enable && !getjTFData().getText().isBlank());
+        getjCBAtracoes().setEnabled(enable);
     }//GEN-LAST:event_jRBTipoIgrejaActionPerformed
 
     private void jRBTipoMuseuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTipoMuseuActionPerformed
         updateCB(getListMuseu());
+        boolean enable = !getListMuseu().isEmpty();
+        jBAdicionar.setEnabled(enable && !getjTFData().getText().isBlank());
+        getjCBAtracoes().setEnabled(enable);
     }//GEN-LAST:event_jRBTipoMuseuActionPerformed
 
     private void jRBTipoParqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTipoParqueActionPerformed
         updateCB(getListParque());
+        boolean enable = !getListParque().isEmpty();
+        jBAdicionar.setEnabled(enable && !getjTFData().getText().isBlank());
+        getjCBAtracoes().setEnabled(enable);
     }//GEN-LAST:event_jRBTipoParqueActionPerformed
 
     private void jCBCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCidadeActionPerformed
+        getjLtAtracoes().setModel(new DefaultListModel<>());
         loadHotel();
         loadRestaurante();
         loadCasaShow();
@@ -433,13 +456,17 @@ public class AddPacote extends javax.swing.JPanel {
         jRBTipoHotel.doClick();
     }//GEN-LAST:event_jCBCidadeActionPerformed
 
+    private void jTFDataCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTFDataCaretUpdate
+        jBAdicionar.setEnabled(getjCBAtracoes().isEnabled() && !getjTFData().getText().isBlank());
+    }//GEN-LAST:event_jTFDataCaretUpdate
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBAdicionar;
     private javax.swing.JButton jBConcluir;
     private javax.swing.JButton jBRemover;
-    private javax.swing.JComboBox<String> jCBAtracoes;
+    private javax.swing.JComboBox<AtracaoTuristica> jCBAtracoes;
     private javax.swing.JComboBox<String> jCBCidade;
     private javax.swing.JLabel jLAtracoes;
     private javax.swing.JLabel jLCidade;
@@ -451,7 +478,7 @@ public class AddPacote extends javax.swing.JPanel {
     private javax.swing.JLabel jLNome;
     private javax.swing.JLabel jLTipo;
     private javax.swing.JLabel jLValor;
-    private javax.swing.JList<String> jLtAtracoes;
+    private javax.swing.JList<AtracaoInclusa> jLtAtracoes;
     private javax.swing.JRadioButton jRBTipoCasashow;
     private javax.swing.JRadioButton jRBTipoHotel;
     private javax.swing.JRadioButton jRBTipoIgreja;
@@ -500,7 +527,7 @@ public class AddPacote extends javax.swing.JPanel {
         return jCBCidade;
     }
 
-    public javax.swing.JList<String> getjLtAtracoes() {
+    public javax.swing.JList<AtracaoInclusa> getjLtAtracoes() {
         return jLtAtracoes;
     }
 
@@ -526,6 +553,10 @@ public class AddPacote extends javax.swing.JPanel {
 
     public javax.swing.JTextField getjTFValor() {
         return jTFValor;
+    }
+
+    public javax.swing.JComboBox<AtracaoTuristica> getjCBAtracoes() {
+        return jCBAtracoes;
     }
 
 }
