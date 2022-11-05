@@ -4,17 +4,34 @@
  */
 package view;
 
+import controller.CidadeController;
+import controller.RestauranteController;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import model.entity.Cidade;
+
 /**
  *
  * @author User
  */
 public class AddRestaurante extends javax.swing.JPanel {
 
+    private ArrayList<Cidade> listCidade;
+    
     /**
      * Creates new form AddRestaurante
      */
     public AddRestaurante() {
         initComponents();
+        loadCidade();
+    }
+    
+    private void loadCidade(){
+        listCidade = new CidadeController().loadAllCidade();
+        jCBCidade.removeAllItems();
+        for(Cidade item: listCidade){
+            jCBCidade.addItem(item.toString());
+        }
     }
 
     /**
@@ -54,6 +71,7 @@ public class AddRestaurante extends javax.swing.JPanel {
 
         buttonGroup1.add(jRBCat1);
         jRBCat1.setText("Simples");
+        jRBCat1.setActionCommand("1");
 
         jTFEndereco.setToolTipText("Rua, Número, Bairro");
 
@@ -61,6 +79,7 @@ public class AddRestaurante extends javax.swing.JPanel {
 
         buttonGroup1.add(jRBCat2);
         jRBCat2.setText("Luxo");
+        jRBCat2.setActionCommand("2");
 
         jBConcluir.setText("Concluir");
         jBConcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -142,7 +161,18 @@ public class AddRestaurante extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConcluirActionPerformed
-        // TODO add your handling code here:
+        String message = "Restaurante inserido com sucesso!";
+        String title = "Sucesso";
+        int type = JOptionPane.INFORMATION_MESSAGE;
+        try{
+            new RestauranteController().addRestaurante(this);
+        }catch(Exception e){
+            message = "Ocorreu um erro ao inserir o restaurante...\n\n" + e.getMessage().split("\n")[0];
+            title = "Erro";
+            type = JOptionPane.ERROR_MESSAGE;
+        }finally{
+            JOptionPane.showMessageDialog(null,message,title,type);
+        }
     }//GEN-LAST:event_jBConcluirActionPerformed
 
     private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
@@ -183,5 +213,9 @@ public class AddRestaurante extends javax.swing.JPanel {
 
     public javax.swing.JTextField getjTFNome() {
         return jTFNome;
+    }
+
+    public ArrayList<Cidade> getListCidade() {
+        return listCidade;
     }
 }

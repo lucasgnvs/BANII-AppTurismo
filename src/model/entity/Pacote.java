@@ -6,6 +6,7 @@ package model.entity;
 
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -31,6 +32,12 @@ public class Pacote extends Entidade {
         this.hoteis = new ArrayList<>();
         this.restaurantes = new ArrayList<>();
         this.pontosTuristicos = new ArrayList<>();
+    }
+    
+    @Override
+    public String toString(){
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+        return "%s - (%s - %s)".formatted(getNome(),getDtinicio().format(format),getDtfim().format(format));
     }
 
     public float getValor() {

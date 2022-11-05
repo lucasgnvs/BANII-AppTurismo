@@ -4,7 +4,24 @@
  */
 package view;
 
+import controller.CidadeController;
+import controller.HotelController;
+import controller.RestauranteController;
+import controller.CasaShowController;
+import controller.IgrejaController;
+import controller.MuseuController;
+import controller.ParqueController;
+import controller.PacoteController;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import model.entity.Cidade;
+import model.entity.Hotel;
+import model.entity.Restaurante;
+import model.entity.CasaShow;
+import model.entity.Igreja;
+import model.entity.Museu;
+import model.entity.Parque;
 
 /**
  *
@@ -12,13 +29,80 @@ import javax.swing.DefaultListModel;
  */
 public class AddPacote extends javax.swing.JPanel {
 
+    private ArrayList<Cidade> listCidade;
+    private ArrayList<Hotel> listHotel;
+    private ArrayList<Restaurante> listRestaurante;
+    private ArrayList<CasaShow> listCasaShow;
+    private ArrayList<Igreja> listIgreja;
+    private ArrayList<Museu> listMuseu;
+    private ArrayList<Parque> listParque;
+
     /**
      * Creates new form AddPacote
      */
     public AddPacote() {
         initComponents();
+        loadCidade();
+        loadHotel();
+        loadRestaurante();
+        loadCasaShow();
+        loadIgreja();
+        loadMuseu();
+        loadParque();
+        jRBTipoHotel.doClick();
+    }
+    
+    private void loadCidade(){
+        listCidade = new CidadeController().loadAllCidade();
+        getjCBCidade().removeAllItems();
+        for(Cidade item: getListCidade()){
+            getjCBCidade().addItem(item.toString());
+        }
     }
 
+    private void loadHotel(){
+        int index = getjCBCidade().getSelectedIndex();
+        Cidade cd = getListCidade().get(index == -1 ? 0 : index);
+        listHotel = new HotelController().loadAllHotel(cd);
+    }
+    
+    private void loadRestaurante(){
+        int index = getjCBCidade().getSelectedIndex();
+        Cidade cd = getListCidade().get(index == -1 ? 0 : index);
+        listRestaurante = new RestauranteController().loadAllRestaurante(cd);
+    }
+    
+    private void loadCasaShow(){
+        int index = getjCBCidade().getSelectedIndex();
+        Cidade cd = getListCidade().get(index == -1 ? 0 : index);
+        listCasaShow = new CasaShowController().loadAllCasaShow(cd);
+    }
+    
+    private void loadIgreja(){
+        int index = getjCBCidade().getSelectedIndex();
+        Cidade cd = getListCidade().get(index == -1 ? 0 : index);
+        listIgreja = new IgrejaController().loadAllIgreja(cd);
+    }
+    
+    private void loadMuseu(){
+        int index = getjCBCidade().getSelectedIndex();
+        Cidade cd = getListCidade().get(index == -1 ? 0 : index);
+        listMuseu = new MuseuController().loadAllMuseu(cd);
+    }
+    
+    private void loadParque(){
+        int index = getjCBCidade().getSelectedIndex();
+        Cidade cd = getListCidade().get(index == -1 ? 0 : index);
+        listParque = new ParqueController().loadAllParque(cd);
+    }
+    
+    private void updateCB(ArrayList<?> list){
+        jCBAtracoes.removeAllItems();
+        for(Object item : list){
+            jCBAtracoes.addItem(item.toString());
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,6 +166,11 @@ public class AddPacote extends javax.swing.JPanel {
         jLDisp.setText("Vagas:");
 
         jCBCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cid 1", "Cid 2", "Cid 3", "Cid 4" }));
+        jCBCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBCidadeActionPerformed(evt);
+            }
+        });
 
         jLAtracoes.setText("Atrações:");
 
@@ -95,6 +184,11 @@ public class AddPacote extends javax.swing.JPanel {
         buttonGroup1.add(jRBTipoHotel);
         jRBTipoHotel.setSelected(true);
         jRBTipoHotel.setText("Hotel");
+        jRBTipoHotel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBTipoHotelActionPerformed(evt);
+            }
+        });
 
         jCBAtracoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Atr 1", "Atr 2", "Atr 3", "Atr 4" }));
 
@@ -116,18 +210,43 @@ public class AddPacote extends javax.swing.JPanel {
 
         buttonGroup1.add(jRBTipoRestaurante);
         jRBTipoRestaurante.setText("Restaurante");
+        jRBTipoRestaurante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBTipoRestauranteActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jRBTipoCasashow);
         jRBTipoCasashow.setText("Casa de Show");
+        jRBTipoCasashow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBTipoCasashowActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jRBTipoIgreja);
         jRBTipoIgreja.setText("Igreja");
+        jRBTipoIgreja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBTipoIgrejaActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jRBTipoMuseu);
         jRBTipoMuseu.setText("Museu");
+        jRBTipoMuseu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBTipoMuseuActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jRBTipoParque);
         jRBTipoParque.setText("Parque");
+        jRBTipoParque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBTipoParqueActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -247,27 +366,72 @@ public class AddPacote extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConcluirActionPerformed
-        // TODO add your handling code here:
+        String message = "Pacote inserido com sucesso!";
+        String title = "Sucesso";
+        int type = JOptionPane.INFORMATION_MESSAGE;
+        try{
+            new PacoteController().addPacote(this);
+        }catch(Exception e){
+            message = "Ocorreu um erro ao inserir o pacote...\n\n" + e.getMessage().split("\n")[0];
+            title = "Erro";
+            type = JOptionPane.ERROR_MESSAGE;
+        }finally{
+            JOptionPane.showMessageDialog(null,message,title,type);
+        }
     }//GEN-LAST:event_jBConcluirActionPerformed
 
     private void jBAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAdicionarActionPerformed
         String selected = jCBAtracoes.getSelectedItem().toString();
-        DefaultListModel<String> list = (DefaultListModel<String>) jLtAtracoes.getModel();
+        DefaultListModel<String> list = (DefaultListModel<String>) getjLtAtracoes().getModel();
         if(!list.contains(selected)){
             list.addElement(selected);
-            jTFData.setText("");
+            getjTFData().setText("");
         }
-        jLtAtracoes.setModel(list);
+        getjLtAtracoes().setModel(list);
     }//GEN-LAST:event_jBAdicionarActionPerformed
 
     private void jBRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRemoverActionPerformed
-        int item = jLtAtracoes.getSelectedIndex();
-        DefaultListModel<String> list = (DefaultListModel<String>) jLtAtracoes.getModel();
+        int item = getjLtAtracoes().getSelectedIndex();
+        DefaultListModel<String> list = (DefaultListModel<String>) getjLtAtracoes().getModel();
         if (item != -1){
             list.remove(item);
         }
-        jLtAtracoes.setModel(list);
+        getjLtAtracoes().setModel(list);
     }//GEN-LAST:event_jBRemoverActionPerformed
+
+    private void jRBTipoHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTipoHotelActionPerformed
+        updateCB(getListHotel());
+    }//GEN-LAST:event_jRBTipoHotelActionPerformed
+
+    private void jRBTipoRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTipoRestauranteActionPerformed
+        updateCB(getListRestaurante());
+    }//GEN-LAST:event_jRBTipoRestauranteActionPerformed
+
+    private void jRBTipoCasashowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTipoCasashowActionPerformed
+        updateCB(getListCasaShow());
+    }//GEN-LAST:event_jRBTipoCasashowActionPerformed
+
+    private void jRBTipoIgrejaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTipoIgrejaActionPerformed
+        updateCB(getListIgreja());
+    }//GEN-LAST:event_jRBTipoIgrejaActionPerformed
+
+    private void jRBTipoMuseuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTipoMuseuActionPerformed
+        updateCB(getListMuseu());
+    }//GEN-LAST:event_jRBTipoMuseuActionPerformed
+
+    private void jRBTipoParqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTipoParqueActionPerformed
+        updateCB(getListParque());
+    }//GEN-LAST:event_jRBTipoParqueActionPerformed
+
+    private void jCBCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCidadeActionPerformed
+        loadHotel();
+        loadRestaurante();
+        loadCasaShow();
+        loadIgreja();
+        loadMuseu();
+        loadParque();
+        jRBTipoHotel.doClick();
+    }//GEN-LAST:event_jCBCidadeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -303,4 +467,65 @@ public class AddPacote extends javax.swing.JPanel {
     private javax.swing.JTextField jTFNome;
     private javax.swing.JTextField jTFValor;
     // End of variables declaration//GEN-END:variables
+
+    public ArrayList<Cidade> getListCidade() {
+        return listCidade;
+    }
+
+    public ArrayList<Hotel> getListHotel() {
+        return listHotel;
+    }
+
+    public ArrayList<Restaurante> getListRestaurante() {
+        return listRestaurante;
+    }
+
+    public ArrayList<CasaShow> getListCasaShow() {
+        return listCasaShow;
+    }
+
+    public ArrayList<Igreja> getListIgreja() {
+        return listIgreja;
+    }
+
+    public ArrayList<Museu> getListMuseu() {
+        return listMuseu;
+    }
+
+    public ArrayList<Parque> getListParque() {
+        return listParque;
+    }
+
+    public javax.swing.JComboBox<String> getjCBCidade() {
+        return jCBCidade;
+    }
+
+    public javax.swing.JList<String> getjLtAtracoes() {
+        return jLtAtracoes;
+    }
+
+    public javax.swing.JTextField getjTFData() {
+        return jTFData;
+    }
+
+    public javax.swing.JTextField getjTFDisp() {
+        return jTFDisp;
+    }
+
+    public javax.swing.JTextField getjTFDtfim() {
+        return jTFDtfim;
+    }
+
+    public javax.swing.JTextField getjTFDtinicio() {
+        return jTFDtinicio;
+    }
+
+    public javax.swing.JTextField getjTFNome() {
+        return jTFNome;
+    }
+
+    public javax.swing.JTextField getjTFValor() {
+        return jTFValor;
+    }
+
 }

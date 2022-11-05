@@ -1,8 +1,16 @@
-/*
+/*  
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package view;
+
+import controller.RestauranteController;
+import controller.CidadeController;
+import controller.HotelController;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import model.entity.Cidade;
+import model.entity.Restaurante;
 
 /**
  *
@@ -10,11 +18,34 @@ package view;
  */
 public class AddHotel extends javax.swing.JPanel {
 
+    private ArrayList<Cidade> listCidade;
+    private ArrayList<Restaurante> listRestaurante;
+    
     /**
      * Creates new form AddHotel
      */
     public AddHotel() {
         initComponents();
+        loadCidade();
+        loadRestaurante();
+    }
+    
+    private void loadCidade(){
+        listCidade = new CidadeController().loadAllCidade();
+        jCBCidade.removeAllItems();
+        for(Cidade item: getListCidade()){
+            jCBCidade.addItem(item.toString());
+        }
+    }
+    
+    private void loadRestaurante(){
+        int index = jCBCidade.getSelectedIndex();
+        Cidade cd = getListCidade().get(index == -1 ? 0 : index);
+        listRestaurante = new RestauranteController().loadAllRestaurante(cd);
+        jCBRestaurante.removeAllItems();
+        for(Restaurante item: getListRestaurante()){
+            jCBRestaurante.addItem(item.toString());
+        }
     }
 
     /**
@@ -99,6 +130,11 @@ public class AddHotel extends javax.swing.JPanel {
         jLCidade.setText("Cidade:");
 
         jCBCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cid 1", "Cid 2" }));
+        jCBCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBCidadeActionPerformed(evt);
+            }
+        });
 
         jTFEndereco.setToolTipText("Rua, Número, Bairro");
 
@@ -106,18 +142,23 @@ public class AddHotel extends javax.swing.JPanel {
 
         buttonGroup1.add(jRBCat1);
         jRBCat1.setText("1");
+        jRBCat1.setActionCommand("1");
 
         buttonGroup1.add(jRBCat2);
         jRBCat2.setText("2");
+        jRBCat2.setActionCommand("2");
 
         buttonGroup1.add(jRBCat5);
         jRBCat5.setText("5");
+        jRBCat5.setActionCommand("5");
 
         buttonGroup1.add(jRBCat4);
         jRBCat4.setText("4");
+        jRBCat4.setActionCommand("4");
 
         buttonGroup1.add(jRBCat3);
         jRBCat3.setText("3");
+        jRBCat3.setActionCommand("3");
 
         jLQuartos.setText("Quartos:");
 
@@ -342,62 +383,82 @@ public class AddHotel extends javax.swing.JPanel {
         getjCBRestaurante().setSelectedIndex(0);
         getjCkBRestaurante().setSelected(false);
         getjCBRestaurante().setEnabled(false);
-        jCkBQuartos1.setSelected(false);
-        jTFNrquartos1.setText("");
-        jTFNrquartos1.setEnabled(false);
-        jTFNrhospedes1.setText("");
-        jTFNrhospedes1.setEnabled(false);
-        jTFValor1.setText("");
-        jTFValor1.setEnabled(false);
-        jCkBQuartos2.setSelected(false);
-        jTFNrquartos2.setText("");
-        jTFNrquartos2.setEnabled(false);
-        jTFNrhospedes2.setText("");
-        jTFNrhospedes2.setEnabled(false);
-        jTFValor2.setText("");
-        jTFValor2.setEnabled(false);
-        jCkBQuartos3.setSelected(false);
-        jTFNrquartos3.setText("");
-        jTFNrquartos3.setEnabled(false);
-        jTFNrhospedes3.setText("");
-        jTFNrhospedes3.setEnabled(false);
-        jTFValor3.setText("");
-        jTFValor3.setEnabled(false);
+        getjCkBQuartos1().setSelected(false);
+        getjTFNrquartos1().setText("");
+        getjTFNrquartos1().setEnabled(false);
+        getjTFNrhospedes1().setText("");
+        getjTFNrhospedes1().setEnabled(false);
+        getjTFValor1().setText("");
+        getjTFValor1().setEnabled(false);
+        getjCkBQuartos2().setSelected(false);
+        getjTFNrquartos2().setText("");
+        getjTFNrquartos2().setEnabled(false);
+        getjTFNrhospedes2().setText("");
+        getjTFNrhospedes2().setEnabled(false);
+        getjTFValor2().setText("");
+        getjTFValor2().setEnabled(false);
+        getjCkBQuartos3().setSelected(false);
+        getjTFNrquartos3().setText("");
+        getjTFNrquartos3().setEnabled(false);
+        getjTFNrhospedes3().setText("");
+        getjTFNrhospedes3().setEnabled(false);
+        getjTFValor3().setText("");
+        getjTFValor3().setEnabled(false);
     }//GEN-LAST:event_jBLimparActionPerformed
 
     private void jBConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConcluirActionPerformed
-        // TODO add your handling code here:
+        String message = "Hotel inserido com sucesso!";
+        String title = "Sucesso";
+        int type = JOptionPane.INFORMATION_MESSAGE;
+        try{
+            new HotelController().addHotel(this);
+        }catch(Exception e){
+            message = "Ocorreu um erro ao inserir o hotel...\n\n" + e.getMessage().split("\n")[0];
+            title = "Erro";
+            type = JOptionPane.ERROR_MESSAGE;
+            e.printStackTrace();
+        }finally{
+            JOptionPane.showMessageDialog(null,message,title,type);
+        }
     }//GEN-LAST:event_jBConcluirActionPerformed
 
     private void jCkBQuartos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCkBQuartos1ActionPerformed
-        boolean value = jTFNrquartos1.isEnabled();
-        jTFNrquartos1.setText("");
-        jTFNrquartos1.setEnabled(!value);
-        jTFNrhospedes1.setText("");
-        jTFNrhospedes1.setEnabled(!value);
-        jTFValor1.setText("");
-        jTFValor1.setEnabled(!value);
+        boolean value = getjTFNrquartos1().isEnabled();
+        getjTFNrquartos1().setText("");
+        getjTFNrquartos1().setEnabled(!value);
+        getjTFNrhospedes1().setText("");
+        getjTFNrhospedes1().setEnabled(!value);
+        getjTFValor1().setText("");
+        getjTFValor1().setEnabled(!value);
     }//GEN-LAST:event_jCkBQuartos1ActionPerformed
 
     private void jCkBQuartos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCkBQuartos2ActionPerformed
-        boolean value = jTFNrquartos2.isEnabled();
-        jTFNrquartos2.setText("");
-        jTFNrquartos2.setEnabled(!value);
-        jTFNrhospedes2.setText("");
-        jTFNrhospedes2.setEnabled(!value);
-        jTFValor2.setText("");
-        jTFValor2.setEnabled(!value);
+        boolean value = getjTFNrquartos2().isEnabled();
+        getjTFNrquartos2().setText("");
+        getjTFNrquartos2().setEnabled(!value);
+        getjTFNrhospedes2().setText("");
+        getjTFNrhospedes2().setEnabled(!value);
+        getjTFValor2().setText("");
+        getjTFValor2().setEnabled(!value);
     }//GEN-LAST:event_jCkBQuartos2ActionPerformed
 
     private void jCkBQuartos3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCkBQuartos3ActionPerformed
-        boolean value = jTFNrquartos3.isEnabled();
-        jTFNrquartos3.setText("");
-        jTFNrquartos3.setEnabled(!value);
-        jTFNrhospedes3.setText("");
-        jTFNrhospedes3.setEnabled(!value);
-        jTFValor3.setText("");
-        jTFValor3.setEnabled(!value);
+        boolean value = getjTFNrquartos3().isEnabled();
+        getjTFNrquartos3().setText("");
+        getjTFNrquartos3().setEnabled(!value);
+        getjTFNrhospedes3().setText("");
+        getjTFNrhospedes3().setEnabled(!value);
+        getjTFValor3().setText("");
+        getjTFValor3().setEnabled(!value);
     }//GEN-LAST:event_jCkBQuartos3ActionPerformed
+
+    private void jCBCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCidadeActionPerformed
+        if(getjCkBRestaurante().isSelected()){
+            getjCkBRestaurante().doClick();
+        }
+        loadRestaurante();
+        getjCkBRestaurante().setEnabled(!getListRestaurante().isEmpty());
+    }//GEN-LAST:event_jCBCidadeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -462,4 +523,61 @@ public class AddHotel extends javax.swing.JPanel {
     public javax.swing.JCheckBox getjCkBRestaurante() {
         return jCkBRestaurante;
     }
+
+    public ArrayList<Cidade> getListCidade() {
+        return listCidade;
+    }
+
+    public ArrayList<Restaurante> getListRestaurante() {
+        return listRestaurante;
+    }
+
+    public javax.swing.JCheckBox getjCkBQuartos1() {
+        return jCkBQuartos1;
+    }
+
+    public javax.swing.JCheckBox getjCkBQuartos2() {
+        return jCkBQuartos2;
+    }
+
+    public javax.swing.JCheckBox getjCkBQuartos3() {
+        return jCkBQuartos3;
+    }
+    
+    public javax.swing.JTextField getjTFNrhospedes1() {
+        return jTFNrhospedes1;
+    }
+
+    public javax.swing.JTextField getjTFNrhospedes2() {
+        return jTFNrhospedes2;
+    }
+
+    public javax.swing.JTextField getjTFNrhospedes3() {
+        return jTFNrhospedes3;
+    }
+
+    public javax.swing.JTextField getjTFNrquartos1() {
+        return jTFNrquartos1;
+    }
+
+    public javax.swing.JTextField getjTFNrquartos2() {
+        return jTFNrquartos2;
+    }
+
+    public javax.swing.JTextField getjTFNrquartos3() {
+        return jTFNrquartos3;
+    }
+
+    public javax.swing.JTextField getjTFValor1() {
+        return jTFValor1;
+    }
+
+    public javax.swing.JTextField getjTFValor2() {
+        return jTFValor2;
+    }
+
+    public javax.swing.JTextField getjTFValor3() {
+        return jTFValor3;
+    }
+    
 }

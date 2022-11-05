@@ -4,6 +4,10 @@
  */
 package view;
 
+import controller.ClienteController;
+import java.time.format.DateTimeParseException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User
@@ -144,7 +148,22 @@ public class AddCliente extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConcluirActionPerformed
-        // TODO add your handling code here:
+        String message = "Cliente inserido com sucesso!";
+        String title = "Sucesso";
+        int type = JOptionPane.INFORMATION_MESSAGE;
+        try{
+            new ClienteController().addCliente(this);
+        }catch(DateTimeParseException e){
+            message = "O formato da data está incorreto. (dd/mm/aaaa)";
+            title = "Erro";
+            type = JOptionPane.ERROR_MESSAGE;
+        }catch(Exception e){
+            message = "Ocorreu um erro ao inserir o cliente...\n\n" + e.getMessage().split("\n")[0];
+            title = "Erro";
+            type = JOptionPane.ERROR_MESSAGE;
+        }finally{
+            JOptionPane.showMessageDialog(null,message,title,type);
+        }
     }//GEN-LAST:event_jBConcluirActionPerformed
 
     private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed

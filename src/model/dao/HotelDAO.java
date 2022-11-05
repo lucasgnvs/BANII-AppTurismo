@@ -6,9 +6,12 @@ package model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 import model.entity.Hotel;
+import model.entity.Cidade;
 
 /**
  *
@@ -17,6 +20,8 @@ import model.entity.Hotel;
 public class HotelDAO {
     private static HotelDAO instance;
     private PreparedStatement insertHotel;
+    private PreparedStatement selectAllHotel;
+    private PreparedStatement selectHotelCidade;
     
     public static HotelDAO getInstance(){
        if (instance == null){
@@ -29,28 +34,62 @@ public class HotelDAO {
         Connection con = Conexao.getConnection();
         try{
             insertHotel = con.prepareStatement("select add_hotel(?, ?, ?, ?, ?)");
+            selectAllHotel = con.prepareStatement("select codh, nome, endereco, categoria, codr, codcd from hoteis order by nome");
+            selectHotelCidade = con.prepareStatement("select codh, nome, endereco, categoria, codr from hoteis where codcd = ? order by nome");
         } catch (SQLException e){
             e.printStackTrace();
         }
     }
     
-    public boolean addHotel(Hotel ht){
-        try {
-            insertHotel.setString(1,ht.getNome());
-            insertHotel.setString(2,ht.getEndereco());
-            insertHotel.setInt(3,ht.getCategoria());
-            if (ht.getRestaurante() != null){
-                insertHotel.setInt(4,ht.getRestaurante().getCod());
-            }else{
-                insertHotel.setNull(4, Types.NULL);
+    public int addHotel(Hotel ht) throws SQLException {
+        insertHotel.setString(1,ht.getNome());
+        insertHotel.setString(2,ht.getEndereco());
+        insertHotel.setInt(3,ht.getCategoria());
+        if (ht.getRestaurante() != null){
+            insertHotel.setInt(4,ht.getRestaurante().getCod());
+        }else{
+            insertHotel.setNull(4, Types.NULL);
+        }
+        insertHotel.setInt(5,ht.getCidade().getCod());
+        ResultSet rs = insertHotel.executeQuery();
+        return rs.next() ? rs.getInt("add_hotel") : -1;
+    }
+    
+    public ArrayList<Hotel> loadAllHotel(){
+        ArrayList<Hotel> list = new ArrayList<>();
+        ResultSet rs;
+        try{
+            rs = selectAllHotel.executeQuery();
+            while(rs.next()){
+                list.add(new Hotel(rs.getInt("codh"),
+                rs.getString("nome"),
+                rs.getString("endereco"),
+                null,
+                rs.getInt("categoria")));
             }
-            insertHotel.setInt(5,ht.getCidade().getCod());
-            insertHotel.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
-        return true;
+        return list;
+    }
+    
+    public ArrayList<Hotel> loadHotelCidade(Cidade cd){
+        ArrayList<Hotel> list = new ArrayList<>();
+        ResultSet rs;
+        try{
+           selectHotelCidade.setInt(1, cd.getCod());
+            rs = selectHotelCidade.executeQuery();
+            while(rs.next()){
+                list.add(new Hotel(rs.getInt("codh"),
+                rs.getString("nome"),
+                rs.getString("endereco"),
+                null,
+                rs.getInt("categoria")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
     
 }

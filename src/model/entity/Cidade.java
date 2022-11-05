@@ -17,6 +17,11 @@ public class Cidade extends Entidade {
         this.estado = estado;
         this.populacao = populacao;
     }
+    
+    @Override
+    public String toString(){
+        return "%s, %s".formatted(getNome(),getEstado());
+    }
 
     public String getEstado() {
         return estado;

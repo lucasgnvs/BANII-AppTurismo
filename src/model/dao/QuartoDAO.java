@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import model.entity.Hotel;
 import model.entity.Quarto;
+import java.sql.ResultSet;
 
 /**
  *
@@ -34,18 +35,13 @@ public class QuartoDAO {
         }
     }
     
-    public boolean addQuarto(Hotel ht,Quarto qt){
-        try {
-            insertQuarto.setInt(1,ht.getCod());
-            insertQuarto.setInt(2,qt.getNome());
-            insertQuarto.setFloat(3,qt.getValor());
-            insertQuarto.setInt(4,qt.getNrquartos());
-            insertQuarto.setInt(5,qt.getNrhospedes());
-            insertQuarto.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+    public int addQuarto(Hotel ht,Quarto qt) throws SQLException {
+        insertQuarto.setInt(1,ht.getCod());
+        insertQuarto.setInt(2,qt.getNome());
+        insertQuarto.setFloat(3,qt.getValor());
+        insertQuarto.setInt(4,qt.getNrquartos());
+        insertQuarto.setInt(5,qt.getNrhospedes());
+        ResultSet rs = insertQuarto.executeQuery();
+        return rs.next() ? rs.getInt("add_parque") : -1;
     }
 }

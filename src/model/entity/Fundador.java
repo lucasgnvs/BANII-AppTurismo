@@ -22,6 +22,11 @@ public class Fundador extends Entidade {
         this.nacionalidade = nacionalidade;
         this.ativprof = ativprof;
     }
+    
+    @Override
+    public String toString(){
+        return "%s, %s".formatted(getNome(),getNacionalidade());
+    }    
 
     public LocalDate getDtnasc() {
         return dtnasc;

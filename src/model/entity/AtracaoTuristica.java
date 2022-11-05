@@ -17,6 +17,11 @@ public abstract class AtracaoTuristica extends Entidade {
         this.endereco = endereco;
         this.cidade = cidade;
     }
+    
+    @Override
+    public String toString(){
+        return "%s - %s".formatted(getNome(), getEndereco());
+    }
 
     public String getEndereco() {
         return endereco;

@@ -3,9 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-import model.dao.Conexao;
-import java.sql.SQLException;
-import java.sql.ResultSet;
 
 /**
  *

@@ -4,8 +4,16 @@
  */
 package view;
 
+import controller.CidadeController;
+import controller.PTuristicoController;
+import controller.RestauranteController;
+import controller.FundadorController;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
+import javax.swing.JOptionPane;
+import model.entity.Cidade;
+import model.entity.Restaurante;
+import model.entity.Fundador;
 
 /**
  *
@@ -13,11 +21,44 @@ import javax.swing.ListModel;
  */
 public class AddPTuristico extends javax.swing.JPanel {
 
+    private ArrayList<Cidade> listCidade;
+    private ArrayList<Restaurante> listRestaurante;
+    private ArrayList<Fundador> listFundador;
+
     /**
      * Creates new form AddPTuristico
      */
     public AddPTuristico() {
         initComponents();
+        loadCidade();
+        loadRestaurante();
+        loadFundador();
+    }
+    
+    private void loadCidade(){
+        listCidade = new CidadeController().loadAllCidade();
+        jCBCidade.removeAllItems();
+        for(Cidade item: listCidade){
+            jCBCidade.addItem(item.toString());
+        }
+    }
+    
+    private void loadRestaurante(){
+        int index = jCBCidade.getSelectedIndex();
+        Cidade cd = listCidade.get(index == -1 ? 0 : index);
+        listRestaurante = new RestauranteController().loadAllRestaurante(cd);
+        jCBCasashowRestaurante.removeAllItems();
+        for(Restaurante item: getListRestaurante()){
+            jCBCasashowRestaurante.addItem(item.toString());
+        }
+    }
+    
+    private void loadFundador(){
+        listFundador = new FundadorController().loadAllFundador();
+        jCBMuseuFundadores.removeAllItems();
+        for(Fundador item: getListFundador()){
+            jCBMuseuFundadores.addItem(item.toString());
+        }
     }
 
     /**
@@ -63,7 +104,7 @@ public class AddPTuristico extends javax.swing.JPanel {
         jCBMuseuFundadores = new javax.swing.JComboBox<>();
         jBMuseuAdicionar = new javax.swing.JButton();
         jSPMuseuFundadores = new javax.swing.JScrollPane();
-        jLtMuseuFundadores = new javax.swing.JList(new javax.swing.DefaultListModel());
+        jLtMuseuFundadores = new javax.swing.JList(new javax.swing.DefaultListModel<Fundador>());
         jBMuseuRemover = new javax.swing.JButton();
         jPParque = new javax.swing.JPanel();
         jLParqueNratracoes = new javax.swing.JLabel();
@@ -75,7 +116,7 @@ public class AddPTuristico extends javax.swing.JPanel {
         jLDescricao = new javax.swing.JLabel();
         jLCidade = new javax.swing.JLabel();
         jLEndereco = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jSPDescricao = new javax.swing.JScrollPane();
         jTADescricao = new javax.swing.JTextArea();
         jTFNome = new javax.swing.JTextField();
         jTFEndereco = new javax.swing.JTextField();
@@ -94,6 +135,7 @@ public class AddPTuristico extends javax.swing.JPanel {
         buttonGroup1.add(jRBCasaShow);
         jRBCasaShow.setSelected(true);
         jRBCasaShow.setText("Casa de Show");
+        jRBCasaShow.setActionCommand("casashow");
         jRBCasaShow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRBCasaShowActionPerformed(evt);
@@ -102,6 +144,7 @@ public class AddPTuristico extends javax.swing.JPanel {
 
         buttonGroup1.add(jRBParque);
         jRBParque.setText("Parque");
+        jRBParque.setActionCommand("parque");
         jRBParque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRBParqueActionPerformed(evt);
@@ -110,6 +153,7 @@ public class AddPTuristico extends javax.swing.JPanel {
 
         buttonGroup1.add(jRBMuseu);
         jRBMuseu.setText("Museu");
+        jRBMuseu.setActionCommand("museu");
         jRBMuseu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRBMuseuActionPerformed(evt);
@@ -118,6 +162,7 @@ public class AddPTuristico extends javax.swing.JPanel {
 
         buttonGroup1.add(jRBIgreja);
         jRBIgreja.setText("Igreja");
+        jRBIgreja.setActionCommand("igreja");
         jRBIgreja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRBIgrejaActionPerformed(evt);
@@ -147,6 +192,7 @@ public class AddPTuristico extends javax.swing.JPanel {
 
         jLCasashowPreco.setText("Preço médio:");
 
+        jTFCasashowPreco.setToolTipText("Valor decimal com ponto, como 24.99");
         jTFCasashowPreco.setEnabled(false);
 
         jLCasashowEsp.setText("Especialidade:");
@@ -364,11 +410,16 @@ public class AddPTuristico extends javax.swing.JPanel {
 
         jTADescricao.setColumns(20);
         jTADescricao.setRows(5);
-        jScrollPane1.setViewportView(jTADescricao);
+        jSPDescricao.setViewportView(jTADescricao);
 
         jTFEndereco.setToolTipText("Rua, Número, Bairro");
 
         jCBCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cid 1", "Cid 2", "Cid 3", "Cid 4" }));
+        jCBCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBCidadeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -398,7 +449,7 @@ public class AddPTuristico extends javax.swing.JPanel {
                                         .addGap(18, 18, 18)
                                         .addComponent(jRBParque)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jScrollPane1)
+                                    .addComponent(jSPDescricao)
                                     .addComponent(jTFEndereco)
                                     .addComponent(jCBCidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jTFNome)))
@@ -422,7 +473,7 @@ public class AddPTuristico extends javax.swing.JPanel {
                     .addComponent(jTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSPDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLDescricao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -450,7 +501,19 @@ public class AddPTuristico extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConcluirActionPerformed
-        // TODO add your handling code here:
+        String message = "Ponto Turístico inserido com sucesso!";
+        String title = "Sucesso";
+        int type = JOptionPane.INFORMATION_MESSAGE;
+        try{
+            new PTuristicoController().addPTuristico(this);
+        }catch(Exception e){
+            message = "Ocorreu um erro ao inserir o ponto turístico...\n\n" + e.getMessage().split("\n")[0];
+            title = "Erro";
+            type = JOptionPane.ERROR_MESSAGE;
+            e.printStackTrace();
+        }finally{
+            JOptionPane.showMessageDialog(null,message,title,type);
+        }
     }//GEN-LAST:event_jBConcluirActionPerformed
 
     private void jRBCasaShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBCasaShowActionPerformed
@@ -474,31 +537,41 @@ public class AddPTuristico extends javax.swing.JPanel {
     }//GEN-LAST:event_jRBParqueActionPerformed
 
     private void jCkBCasashowRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCkBCasashowRestauranteActionPerformed
-        boolean value = jCBCasashowRestaurante.isEnabled();
-        jCBCasashowRestaurante.setSelectedIndex(0);
-        jCBCasashowRestaurante.setEnabled(!value);
-        jCBCasashowEsp.setSelectedIndex(0);
-        jCBCasashowEsp.setEnabled(!value);
-        jTFCasashowPreco.setEnabled(!value);
+        boolean value = getjCBCasashowRestaurante().isEnabled();
+        getjCBCasashowRestaurante().setSelectedIndex(0);
+        getjCBCasashowRestaurante().setEnabled(!value);
+        getjCBCasashowEsp().setSelectedIndex(0);
+        getjCBCasashowEsp().setEnabled(!value);
+        getjTFCasashowPreco().setText("");
+        getjTFCasashowPreco().setEnabled(!value);
     }//GEN-LAST:event_jCkBCasashowRestauranteActionPerformed
 
     private void jBMuseuAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMuseuAdicionarActionPerformed
-        String selected = jCBMuseuFundadores.getSelectedItem().toString();
-        DefaultListModel<String> list = (DefaultListModel<String>) jLtMuseuFundadores.getModel();
+        int index = getjCBMuseuFundadores().getSelectedIndex();
+        Fundador selected = getListFundador().get(index);
+        DefaultListModel<Fundador> list = (DefaultListModel<Fundador>) getjLtMuseuFundadores().getModel();
         if(!list.contains(selected)){
             list.addElement(selected);
         }
-        jLtMuseuFundadores.setModel(list);
+        getjLtMuseuFundadores().setModel(list);
     }//GEN-LAST:event_jBMuseuAdicionarActionPerformed
 
     private void jBMuseuRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMuseuRemoverActionPerformed
-        int item = jLtMuseuFundadores.getSelectedIndex();
-        DefaultListModel<String> list = (DefaultListModel<String>) jLtMuseuFundadores.getModel();
-        if (item != -1){
-            list.remove(item);
+        int index = getjLtMuseuFundadores().getSelectedIndex();
+        DefaultListModel<Fundador> list = (DefaultListModel<Fundador>) getjLtMuseuFundadores().getModel();
+        if (index != -1){
+            list.remove(index);
         }
-        jLtMuseuFundadores.setModel(list);
+        getjLtMuseuFundadores().setModel(list);
     }//GEN-LAST:event_jBMuseuRemoverActionPerformed
+
+    private void jCBCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCidadeActionPerformed
+        if(getjCkBCasashowRestaurante().isSelected()){
+            getjCkBCasashowRestaurante().doClick();
+        }
+        loadRestaurante();
+        getjCkBCasashowRestaurante().setEnabled(!getListRestaurante().isEmpty());
+    }//GEN-LAST:event_jCBCidadeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -530,7 +603,7 @@ public class AddPTuristico extends javax.swing.JPanel {
     private javax.swing.JLabel jLParqueCapacidade;
     private javax.swing.JLabel jLParqueNratracoes;
     private javax.swing.JLabel jLTipo;
-    private javax.swing.JList<String> jLtMuseuFundadores;
+    private javax.swing.JList<Fundador> jLtMuseuFundadores;
     private javax.swing.JPanel jPCasashow;
     private javax.swing.JPanel jPIgreja;
     private javax.swing.JPanel jPMuseu;
@@ -540,8 +613,8 @@ public class AddPTuristico extends javax.swing.JPanel {
     private javax.swing.JRadioButton jRBIgreja;
     private javax.swing.JRadioButton jRBMuseu;
     private javax.swing.JRadioButton jRBParque;
+    private javax.swing.JScrollPane jSPDescricao;
     private javax.swing.JScrollPane jSPMuseuFundadores;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTADescricao;
     private javax.swing.JTextField jTFCasashowHrinicio;
@@ -555,4 +628,104 @@ public class AddPTuristico extends javax.swing.JPanel {
     private javax.swing.JTextField jTFParqueCapacidade;
     private javax.swing.JTextField jTFParqueNrAtracoes;
     // End of variables declaration//GEN-END:variables
+
+    public ArrayList<Cidade> getListCidade() {
+        return listCidade;
+    }
+    
+    public javax.swing.ButtonGroup getButtonGroup1() {
+        return buttonGroup1;
+    }
+
+    public javax.swing.JComboBox<String> getjCBCasashowDiafech() {
+        return jCBCasashowDiafech;
+    }
+
+    public javax.swing.JComboBox<String> getjCBCasashowEsp() {
+        return jCBCasashowEsp;
+    }
+
+    public javax.swing.JComboBox<String> getjCBCasashowRestaurante() {
+        return jCBCasashowRestaurante;
+    }
+
+    public javax.swing.JComboBox<String> getjCBCidade() {
+        return jCBCidade;
+    }
+
+    public javax.swing.JComboBox<String> getjCBMuseuFundadores() {
+        return jCBMuseuFundadores;
+    }
+
+    public javax.swing.JCheckBox getjCkBCasashowRestaurante() {
+        return jCkBCasashowRestaurante;
+    }
+
+    public javax.swing.JTextArea getjTADescricao() {
+        return jTADescricao;
+    }
+
+    public javax.swing.JTextField getjTFCasashowHrinicio() {
+        return jTFCasashowHrinicio;
+    }
+
+    public javax.swing.JTextField getjTFCasashowPreco() {
+        return jTFCasashowPreco;
+    }
+
+    public javax.swing.JTextField getjTFEndereco() {
+        return jTFEndereco;
+    }
+
+    public javax.swing.JTextField getjTFIgrejaData() {
+        return jTFIgrejaData;
+    }
+
+    public javax.swing.JTextField getjTFIgrejaEstilo() {
+        return jTFIgrejaEstilo;
+    }
+
+    public javax.swing.JTextField getjTFMuseuData() {
+        return jTFMuseuData;
+    }
+
+    public javax.swing.JTextField getjTFMuseuNrsalas() {
+        return jTFMuseuNrsalas;
+    }
+
+    public javax.swing.JTextField getjTFNome() {
+        return jTFNome;
+    }
+
+    public javax.swing.JTextField getjTFParqueCapacidade() {
+        return jTFParqueCapacidade;
+    }
+
+    public javax.swing.JTextField getjTFParqueNrAtracoes() {
+        return jTFParqueNrAtracoes;
+    }
+
+    public ArrayList<Restaurante> getListRestaurante() {
+        return listRestaurante;
+    }
+
+    public ArrayList<Fundador> getListFundador() {
+        return listFundador;
+    }
+
+    public javax.swing.JList<Fundador> getjLtMuseuFundadores() {
+        return jLtMuseuFundadores;
+    }
+    
+    public java.util.ArrayList<Fundador> getjLtMuseuFundadoresAsList() {
+        DefaultListModel<Fundador> model = (DefaultListModel<Fundador>) getjLtMuseuFundadores().getModel();
+        int size = model.getSize();
+        ArrayList<Fundador> list = new ArrayList<>();
+        for(int i = 0; i < size; i++){
+            list.add(model.elementAt(i));
+        }
+        return list;
+    }
+    
 }
+

@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import model.entity.Pacote;
 import model.entity.Hotel;
 import model.entity.Restaurante;
@@ -24,6 +26,7 @@ public class PacoteDAO {
     private PreparedStatement insertHT;
     private PreparedStatement insertRT;
     private PreparedStatement insertPT;
+    private PreparedStatement selectAllPacote;
     
     public static PacoteDAO getInstance(){
        if (instance == null){
@@ -39,64 +42,61 @@ public class PacoteDAO {
             insertHT = con.prepareStatement("insert into htsinclusos values (?, ?, ?)");
             insertRT = con.prepareStatement("insert into rtsinclusos values (?, ?, ?)");
             insertPT = con.prepareStatement("insert into ptsinclusos values (?, ?, ?)");
+            selectAllPacote = con.prepareStatement("select codp, nome, valor, dtinicio, dtfim, disp, codcd from pacotes");
         } catch (SQLException e){
             e.printStackTrace();
         }
     }
     
-    public boolean addPacote(Pacote pc){
-        try {
-            insertPacote.setString(1,pc.getNome());
-            insertPacote.setFloat(2,pc.getValor());
-            insertPacote.setDate(3,Date.valueOf(pc.getDtinicio()));
-            insertPacote.setDate(4,Date.valueOf(pc.getDtfim()));
-            insertPacote.setInt(5,pc.getDisp());
-            insertPacote.setInt(6,pc.getCidade().getCod());
-            insertPacote.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+    public void addPacote(Pacote pc) throws SQLException {
+        insertPacote.setString(1,pc.getNome());
+        insertPacote.setFloat(2,pc.getValor());
+        insertPacote.setDate(3,Date.valueOf(pc.getDtinicio()));
+        insertPacote.setDate(4,Date.valueOf(pc.getDtfim()));
+        insertPacote.setInt(5,pc.getDisp());
+        insertPacote.setInt(6,pc.getCidade().getCod());
+        insertPacote.executeUpdate();
     }
     
-    public boolean addHotelPacote(Hotel ht, Pacote pc, LocalDate dt){
-        try {
-            insertHT.setInt(1,pc.getCod());
-            insertHT.setInt(2,ht.getCod());
-            insertHT.setDate(3,Date.valueOf(dt));
-            insertHT.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+    public void addHotelPacote(Hotel ht, Pacote pc, LocalDate dt) throws SQLException {
+        insertHT.setInt(1,pc.getCod());
+        insertHT.setInt(2,ht.getCod());
+        insertHT.setDate(3,Date.valueOf(dt));
+        insertHT.executeUpdate();
     }
     
-    public boolean addRestaurantePacote(Restaurante rt, Pacote pc, LocalDate dt){
-        try {
-            insertRT.setInt(1,pc.getCod());
-            insertRT.setInt(2,rt.getCod());
-            insertRT.setDate(3,Date.valueOf(dt));
-            insertRT.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+    public void addRestaurantePacote(Restaurante rt, Pacote pc, LocalDate dt) throws SQLException {
+        insertRT.setInt(1,pc.getCod());
+        insertRT.setInt(2,rt.getCod());
+        insertRT.setDate(3,Date.valueOf(dt));
+        insertRT.executeUpdate();
     }
     
-    public boolean addPontoTuristicoPacote(PontoTuristico pt, Pacote pc, LocalDate dt){
-        try {
-            insertPT.setInt(1,pc.getCod());
-            insertPT.setInt(2,pt.getCod());
-            insertPT.setDate(3,Date.valueOf(dt));
-            insertPT.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+    public void addPontoTuristicoPacote(PontoTuristico pt, Pacote pc, LocalDate dt) throws SQLException {
+        insertPT.setInt(1,pc.getCod());
+        insertPT.setInt(2,pt.getCod());
+        insertPT.setDate(3,Date.valueOf(dt));
+        insertPT.executeUpdate();
     }
         
+    public ArrayList<Pacote> loadAllPacote(){
+        ArrayList<Pacote> list = new ArrayList<>();
+        ResultSet rs;
+        try{
+            rs = selectAllPacote.executeQuery();
+            while(rs.next()){
+                list.add(new Pacote(rs.getInt("codp"),
+                rs.getString("nome"),
+                rs.getFloat("valor"),
+                LocalDate.parse(rs.getDate("dtinicio").toString()),
+                LocalDate.parse(rs.getDate("dtfim").toString()),
+                rs.getInt("disp"),
+                null));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
 }

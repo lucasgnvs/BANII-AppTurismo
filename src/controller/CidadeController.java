@@ -4,6 +4,8 @@
  */
 package controller;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import model.entity.Cidade;
 import model.dao.CidadeDAO;
 import view.AddCidade;
@@ -14,11 +16,19 @@ import view.AddCidade;
  */
 public class CidadeController {
     
-    public void addCidade(AddCidade form){
-        Cidade cd = new Cidade(-1,form.getjTFNome().getText(),
-                form.getjCBEstado().getSelectedItem().toString(),
-                Integer.parseInt(form.getjFTFPopulacao().getText()));
+    public void addCidade(AddCidade form) throws SQLException {
+        String nome = form.getjTFNome().getText();
+        String estado = form.getjCBEstado().getSelectedItem().toString();
+        int populacao = Integer.parseInt(form.getjTFPopulacao().getText());
+        Cidade cd = new Cidade(-1,
+                nome.isBlank() ? null : nome,
+                estado.isBlank() ? null : estado,
+                populacao);
         CidadeDAO.getInstance().addCidade(cd);
+    }
+    
+    public ArrayList<Cidade> loadAllCidade(){
+        return CidadeDAO.getInstance().loadAllCidade();
     }
     
 }

@@ -15,7 +15,7 @@ public class Restaurante extends AtracaoTuristica {
         super(codr,nome,endereco,cidade);
         this.categoria = categoria;
     }
-
+   
     public int getCategoria() {
         return categoria;
     }

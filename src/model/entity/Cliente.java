@@ -23,6 +23,11 @@ public class Cliente extends Entidade {
         this.endereco = endereco;
         this.telefone = telefone;
     }
+    
+    @Override
+    public String toString(){
+        return "%s - %s".formatted(getNome(),getEmail());
+    }
 
     public LocalDate getDtnasc() {
         return dtnasc;

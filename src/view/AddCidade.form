@@ -31,9 +31,12 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTFNome" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jCBEstado" alignment="0" pref="85" max="32767" attributes="0"/>
-                                      <Component id="jFTFPopulacao" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jCBEstado" pref="85" max="32767" attributes="0"/>
+                                          <Component id="jTFPopulacao" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -68,7 +71,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLPopulacao" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFTFPopulacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTFPopulacao" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="109" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -102,15 +105,6 @@
     <Component class="javax.swing.JLabel" name="jLPopulacao">
       <Properties>
         <Property name="text" type="java.lang.String" value="Popula&#xe7;&#xe3;o:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFTFPopulacao">
-      <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format format="#0" subtype="-1" type="0"/>
-        </Property>
-        <Property name="actionCommand" type="java.lang.String" value="&lt;Not Set&gt;"/>
-        <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jBConcluir">
@@ -166,6 +160,8 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTFPopulacao">
     </Component>
   </SubComponents>
 </Form>

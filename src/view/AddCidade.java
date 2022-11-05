@@ -34,10 +34,10 @@ public class AddCidade extends javax.swing.JPanel {
         jLEstado = new javax.swing.JLabel();
         jTFNome = new javax.swing.JTextField();
         jLPopulacao = new javax.swing.JLabel();
-        jFTFPopulacao = new javax.swing.JFormattedTextField();
         jBConcluir = new javax.swing.JButton();
         jBLimpar = new javax.swing.JButton();
         jCBEstado = new javax.swing.JComboBox<>();
+        jTFPopulacao = new javax.swing.JTextField();
 
         jLInserir.setText("Inserir Cidade");
         jLInserir.setToolTipText("");
@@ -47,10 +47,6 @@ public class AddCidade extends javax.swing.JPanel {
         jLEstado.setText("Estado:");
 
         jLPopulacao.setText("População:");
-
-        jFTFPopulacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-        jFTFPopulacao.setActionCommand("<Not Set>");
-        jFTFPopulacao.setVerifyInputWhenFocusTarget(false);
 
         jBConcluir.setText("Concluir");
         jBConcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -86,9 +82,11 @@ public class AddCidade extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTFNome)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jCBEstado, javax.swing.GroupLayout.Alignment.LEADING, 0, 85, Short.MAX_VALUE)
-                                        .addComponent(jFTFPopulacao, javax.swing.GroupLayout.Alignment.LEADING))))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jCBEstado, 0, 85, Short.MAX_VALUE)
+                                            .addComponent(jTFPopulacao))
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(290, Short.MAX_VALUE)
                         .addComponent(jBLimpar)
@@ -112,7 +110,7 @@ public class AddCidade extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLPopulacao)
-                    .addComponent(jFTFPopulacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFPopulacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBLimpar)
@@ -124,22 +122,27 @@ public class AddCidade extends javax.swing.JPanel {
     private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
         getjTFNome().setText("");
         getjCBEstado().setSelectedIndex(0);
-        getjFTFPopulacao().setText("");
+        getjTFPopulacao().setText("");
     }//GEN-LAST:event_jBLimparActionPerformed
 
     private void jBConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConcluirActionPerformed
+        String message = "Cidade inserida com sucesso!";
+        String title = "Sucesso";
+        int type = JOptionPane.INFORMATION_MESSAGE;
         try{
-            getjTFNome().setEnabled(false);
-            getjCBEstado().setEnabled(false);
-            getjFTFPopulacao().setEnabled(false);
+            // getjTFNome().setEnabled(false);
+            // getjCBEstado().setEnabled(false);
+            // getjFTFPopulacao().setEnabled(false);
             new CidadeController().addCidade(this);
-            JOptionPane.showMessageDialog(null,"Cidade inserida com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Ocorreu um erro ao inserir a cidade...","Erro",JOptionPane.ERROR_MESSAGE);
+            message = "Ocorreu um erro ao inserir a cidade...\n\n" + e.getMessage().split("\n")[0];
+            title = "Erro";
+            type = JOptionPane.ERROR_MESSAGE;
         }finally{
-            getjTFNome().setEnabled(true);
-            getjCBEstado().setEnabled(true);
-            getjFTFPopulacao().setEnabled(true);
+            JOptionPane.showMessageDialog(null,message,title,type);
+            // getjTFNome().setEnabled(true);
+            // getjCBEstado().setEnabled(true);
+            // getjFTFPopulacao().setEnabled(true);
         }
     }//GEN-LAST:event_jBConcluirActionPerformed
 
@@ -148,20 +151,20 @@ public class AddCidade extends javax.swing.JPanel {
     private javax.swing.JButton jBConcluir;
     private javax.swing.JButton jBLimpar;
     private javax.swing.JComboBox<String> jCBEstado;
-    private javax.swing.JFormattedTextField jFTFPopulacao;
     private javax.swing.JLabel jLEstado;
     private javax.swing.JLabel jLInserir;
     private javax.swing.JLabel jLNome;
     private javax.swing.JLabel jLPopulacao;
     private javax.swing.JTextField jTFNome;
+    private javax.swing.JTextField jTFPopulacao;
     // End of variables declaration//GEN-END:variables
 
     public javax.swing.JComboBox<String> getjCBEstado() {
         return jCBEstado;
     }
 
-    public javax.swing.JFormattedTextField getjFTFPopulacao() {
-        return jFTFPopulacao;
+    public javax.swing.JTextField getjTFPopulacao() {
+        return jTFPopulacao;
     }
 
     public javax.swing.JTextField getjTFNome() {

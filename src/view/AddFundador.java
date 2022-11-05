@@ -4,6 +4,10 @@
  */
 package view;
 
+import controller.FundadorController;
+import java.time.format.DateTimeParseException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User
@@ -37,7 +41,7 @@ public class AddFundador extends javax.swing.JPanel {
         jTFNome = new javax.swing.JTextField();
         jTFDtnasc = new javax.swing.JTextField();
         jTFDtmorte = new javax.swing.JTextField();
-        jTFNascionalidade = new javax.swing.JTextField();
+        jTFNacionalidade = new javax.swing.JTextField();
         jTFAtivprof = new javax.swing.JTextField();
         jCkBMorte = new javax.swing.JCheckBox();
 
@@ -72,6 +76,8 @@ public class AddFundador extends javax.swing.JPanel {
         jTFDtmorte.setToolTipText("dd/mm/aaaa");
         jTFDtmorte.setEnabled(false);
 
+        jTFNacionalidade.setToolTipText("Três letras do país, como BRA.");
+
         jCkBMorte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCkBMorteActionPerformed(evt);
@@ -83,36 +89,37 @@ public class AddFundador extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLInserir)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLNome)
-                            .addComponent(jLDtmorte)
-                            .addComponent(jLDtnasc)
-                            .addComponent(jLNacionalidade)
-                            .addComponent(jLAtivprof))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFNome, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                            .addComponent(jTFNascionalidade, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTFDtnasc)
-                                    .addComponent(jTFDtmorte, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(jCkBMorte)
+                                .addComponent(jLInserir)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTFAtivprof, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE))))
-                .addGap(95, 95, 95))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBLimpar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBConcluir)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLNome)
+                                    .addComponent(jLDtmorte)
+                                    .addComponent(jLDtnasc)
+                                    .addComponent(jLNacionalidade)
+                                    .addComponent(jLAtivprof))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTFNome, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                    .addComponent(jTFAtivprof, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jTFNacionalidade, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTFDtnasc, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTFDtmorte, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jCkBMorte)
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBLimpar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBConcluir)))
                 .addGap(95, 95, 95))
         );
         layout.setVerticalGroup(
@@ -136,7 +143,7 @@ public class AddFundador extends javax.swing.JPanel {
                         .addComponent(jLDtmorte)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFNascionalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFNacionalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLNacionalidade))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -151,11 +158,32 @@ public class AddFundador extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConcluirActionPerformed
-        // TODO add your handling code here:
+        String message = "Fundador inserido com sucesso!";
+        String title = "Sucesso";
+        int type = JOptionPane.INFORMATION_MESSAGE;
+        try{
+            new FundadorController().addFundador(this);
+        }catch(DateTimeParseException e){
+            message = "O formato da data está incorreto. (dd/mm/aaaa)";
+            title = "Erro";
+            type = JOptionPane.ERROR_MESSAGE;
+        }catch(Exception e){
+            message = "Ocorreu um erro ao inserir o fundador...\n\n" + e.getMessage().split("\n")[0];
+            title = "Erro";
+            type = JOptionPane.ERROR_MESSAGE;
+        }finally{
+            JOptionPane.showMessageDialog(null,message,title,type);
+        }
     }//GEN-LAST:event_jBConcluirActionPerformed
 
     private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
-        // TODO add your handling code here:
+        getjTFNome().setText("");
+        getjTFDtnasc().setText("");
+        if(getjTFDtmorte().isEnabled()){
+            getjCkBMorte().doClick();
+        }
+        getjTFNacionalidade().setText("");
+        getjTFAtivprof().setText("");
     }//GEN-LAST:event_jBLimparActionPerformed
 
     private void jCkBMorteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCkBMorteActionPerformed
@@ -178,7 +206,7 @@ public class AddFundador extends javax.swing.JPanel {
     private javax.swing.JTextField jTFAtivprof;
     private javax.swing.JTextField jTFDtmorte;
     private javax.swing.JTextField jTFDtnasc;
-    private javax.swing.JTextField jTFNascionalidade;
+    private javax.swing.JTextField jTFNacionalidade;
     private javax.swing.JTextField jTFNome;
     // End of variables declaration//GEN-END:variables
 
@@ -194,11 +222,15 @@ public class AddFundador extends javax.swing.JPanel {
         return jTFDtnasc;
     }
 
-    public javax.swing.JTextField getjTFNascionalidade() {
-        return jTFNascionalidade;
+    public javax.swing.JTextField getjTFNacionalidade() {
+        return jTFNacionalidade;
     }
 
     public javax.swing.JTextField getjTFNome() {
         return jTFNome;
+    }
+
+    public javax.swing.JCheckBox getjCkBMorte() {
+        return jCkBMorte;
     }
 }

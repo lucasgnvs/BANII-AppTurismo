@@ -17,45 +17,48 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="70" pref="70" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLInserir" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="70" pref="70" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLDtmorte" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLDtnasc" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLNacionalidade" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLAtivprof" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTFNome" pref="240" max="32767" attributes="0"/>
-                          <Component id="jTFNascionalidade" pref="240" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jTFDtnasc" max="32767" attributes="0"/>
-                                  <Component id="jTFDtmorte" min="-2" pref="100" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jCkBMorte" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLInserir" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jTFAtivprof" pref="240" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLNome" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLDtmorte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLDtnasc" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLNacionalidade" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLAtivprof" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jTFNome" pref="240" max="32767" attributes="0"/>
+                                  <Component id="jTFAtivprof" pref="240" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jTFNacionalidade" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jTFDtnasc" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jTFDtmorte" alignment="0" pref="100" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jCkBMorte" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jBLimpar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jBConcluir" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jBLimpar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jBConcluir" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+              <EmptySpace min="95" pref="95" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -84,7 +87,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTFNascionalidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTFNacionalidade" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLNacionalidade" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -162,7 +165,10 @@
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTFNascionalidade">
+    <Component class="javax.swing.JTextField" name="jTFNacionalidade">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Tr&#xea;s letras do pa&#xed;s, como BRA."/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFAtivprof">
     </Component>

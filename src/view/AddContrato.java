@@ -4,17 +4,47 @@
  */
 package view;
 
+import controller.PacoteController;
+import controller.ClienteController;
+import controller.ContratoController;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import model.entity.Pacote;
+import model.entity.Cliente;
+
 /**
  *
  * @author User
  */
 public class AddContrato extends javax.swing.JPanel {
 
+    private ArrayList<Pacote> listPacote;
+    private ArrayList<Cliente> listCliente;
+
     /**
      * Creates new form AddVenda
      */
     public AddContrato() {
         initComponents();
+        loadPacote();
+        loadCliente();
+       
+    }
+    
+    private void loadPacote(){
+        listPacote = new PacoteController().loadAllPacote();
+        jCBPacote.removeAllItems();
+        for(Pacote item: getListPacote()){
+            jCBPacote.addItem(item.toString());
+        }
+    }
+    
+    private void loadCliente(){
+        listCliente = new ClienteController().loadAllCliente();
+        jCBCliente.removeAllItems();
+        for(Cliente item: getListCliente()){
+            jCBCliente.addItem(item.toString());
+        }
     }
 
     /**
@@ -107,7 +137,19 @@ public class AddContrato extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConcluirActionPerformed
-        // TODO add your handling code here:
+        String message = "Venda inserida com sucesso!";
+        String title = "Sucesso";
+        int type = JOptionPane.INFORMATION_MESSAGE;
+        try{
+            new ContratoController().addContrato(this);
+        }catch(Exception e){
+            message = "Ocorreu um erro ao inserir a venda...\n\n" + e.getMessage().split("\n")[0];
+            title = "Erro";
+            type = JOptionPane.ERROR_MESSAGE;
+            e.printStackTrace();
+        }finally{
+            JOptionPane.showMessageDialog(null,message,title,type);
+        }
     }//GEN-LAST:event_jBConcluirActionPerformed
 
     private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
@@ -133,4 +175,13 @@ public class AddContrato extends javax.swing.JPanel {
     public javax.swing.JComboBox<String> getjCBPacote() {
         return jCBPacote;
     }
+    
+    public ArrayList<Pacote> getListPacote() {
+        return listPacote;
+    }
+
+    public ArrayList<Cliente> getListCliente() {
+        return listCliente;
+    }
+    
 }

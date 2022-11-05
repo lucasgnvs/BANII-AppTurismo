@@ -4,16 +4,6 @@
  */
 package view;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalTime;
-import java.time.LocalDate;
-
-import model.dao.Conexao;
-import model.dao.PacoteDAO;
-import model.entity.Pacote;
-import model.entity.Cidade;
-
 /**
  *
  * @author User

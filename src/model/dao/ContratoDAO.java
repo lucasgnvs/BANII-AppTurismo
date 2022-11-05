@@ -34,15 +34,9 @@ public class ContratoDAO {
         }
     }
     
-    public boolean addContrato(Pacote pc, Cliente cl){
-        try {
-            insertContrato.setInt(1,pc.getCod());
-            insertContrato.setInt(2,cl.getCod());
-            insertContrato.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+    public void addContrato(Pacote pc, Cliente cl) throws SQLException {
+        insertContrato.setInt(1,pc.getCod());
+        insertContrato.setInt(2,cl.getCod());
+        insertContrato.executeUpdate();
     }
 }
