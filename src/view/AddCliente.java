@@ -44,6 +44,12 @@ public class AddCliente extends javax.swing.JPanel {
         jTFTelefone = new javax.swing.JTextField();
         jTFDtnasc = new javax.swing.JTextField();
 
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+        });
+
         jLInserir.setText("Inserir Cliente");
 
         jBConcluir.setText("Concluir");
@@ -173,6 +179,10 @@ public class AddCliente extends javax.swing.JPanel {
         getjTFEndereco().setText("");
         getjTFTelefone().setText("");
     }//GEN-LAST:event_jBLimparActionPerformed
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        jBLimpar.doClick();
+    }//GEN-LAST:event_formComponentHidden
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

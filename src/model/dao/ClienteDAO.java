@@ -11,7 +11,6 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import model.entity.Cliente;
 
 /**
@@ -55,8 +54,6 @@ public class ClienteDAO {
         try{
             rs = selectAllCliente.executeQuery();
             while(rs.next()){
-                //codc, nome, dtnasc, email, endereco, telefone
-                //int codc, String nome, String endereco, LocalDate dtnasc, String email, String telefone
                 list.add(new Cliente(rs.getInt("codc"),
                 rs.getString("nome"),
                 rs.getString("endereco"),

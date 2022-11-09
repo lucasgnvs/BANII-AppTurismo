@@ -8,6 +8,7 @@ import controller.CidadeController;
 import controller.RestauranteController;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.DefaultComboBoxModel;
 import model.entity.Cidade;
 
 /**
@@ -16,20 +17,22 @@ import model.entity.Cidade;
  */
 public class AddRestaurante extends javax.swing.JPanel {
 
-    private ArrayList<Cidade> listCidade;
+    private final ArrayList<Cidade> listCidade;
     
     /**
      * Creates new form AddRestaurante
      */
     public AddRestaurante() {
         initComponents();
-        loadCidade();
+        listCidade = new ArrayList<>();
+        jCBCidade.setModel(new DefaultComboBoxModel<>());
     }
     
     private void loadCidade(){
-        listCidade = new CidadeController().loadAllCidade();
+        getListCidade().clear();
+        getListCidade().addAll(new CidadeController().loadAllCidade());
         jCBCidade.removeAllItems();
-        for(Cidade item: listCidade){
+        for(Cidade item: getListCidade()){
             jCBCidade.addItem(item.toString());
         }
     }
@@ -58,6 +61,14 @@ public class AddRestaurante extends javax.swing.JPanel {
         jBLimpar = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(544, 480));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jLInserir.setText("Inserir Restaurante");
 
@@ -178,9 +189,20 @@ public class AddRestaurante extends javax.swing.JPanel {
     private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
         getjTFNome().setText("");
         getjTFEndereco().setText("");
-        getjCBCidade().setSelectedIndex(0);
+        try{
+            getjCBCidade().setSelectedIndex(0);
+        }catch(IllegalArgumentException e){}
         getButtonGroup1().clearSelection();
     }//GEN-LAST:event_jBLimparActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        loadCidade();
+    }//GEN-LAST:event_formComponentShown
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        getListCidade().clear();
+        jBLimpar.doClick();
+    }//GEN-LAST:event_formComponentHidden
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -214,8 +236,9 @@ public class AddRestaurante extends javax.swing.JPanel {
     public javax.swing.JTextField getjTFNome() {
         return jTFNome;
     }
-
+    
     public ArrayList<Cidade> getListCidade() {
         return listCidade;
     }
+    
 }

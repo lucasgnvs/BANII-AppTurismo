@@ -39,6 +39,12 @@ public class AddCidade extends javax.swing.JPanel {
         jCBEstado = new javax.swing.JComboBox<>();
         jTFPopulacao = new javax.swing.JTextField();
 
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+        });
+
         jLInserir.setText("Inserir Cidade");
         jLInserir.setToolTipText("");
 
@@ -145,6 +151,10 @@ public class AddCidade extends javax.swing.JPanel {
             // getjFTFPopulacao().setEnabled(true);
         }
     }//GEN-LAST:event_jBConcluirActionPerformed
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        jBLimpar.doClick();
+    }//GEN-LAST:event_formComponentHidden
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

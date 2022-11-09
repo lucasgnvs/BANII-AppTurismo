@@ -11,6 +11,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.DefaultListModel;
+import model.dao.CidadeDAO;
 import model.dao.PacoteDAO;
 import model.entity.AtracaoInclusa;
 import model.entity.AtracaoTuristica;

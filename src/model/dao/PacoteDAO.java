@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Date;
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -46,7 +45,7 @@ public class PacoteDAO {
             insertHT = con.prepareStatement("insert into htsinclusos values (?, ?, ?)");
             insertRT = con.prepareStatement("insert into rtsinclusos values (?, ?, ?)");
             insertPT = con.prepareStatement("insert into ptsinclusos values (?, ?, ?)");
-            selectAllPacote = con.prepareStatement("select codp, nome, valor, dtinicio, dtfim, disp, codcd from pacotes");
+            selectAllPacote = con.prepareStatement("select codp, nome, valor, dtinicio, dtfim, disp, codcd from pacotes order by dtinicio desc");
         } catch (SQLException e){
             e.printStackTrace();
         }

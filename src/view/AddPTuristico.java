@@ -9,6 +9,7 @@ import controller.PTuristicoController;
 import controller.RestauranteController;
 import controller.FundadorController;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import model.entity.Cidade;
@@ -21,42 +22,50 @@ import model.entity.Fundador;
  */
 public class AddPTuristico extends javax.swing.JPanel {
 
-    private ArrayList<Cidade> listCidade;
-    private ArrayList<Restaurante> listRestaurante;
-    private ArrayList<Fundador> listFundador;
+    private final ArrayList<Cidade> listCidade;
+    private final ArrayList<Restaurante> listRestaurante;
+    private final ArrayList<Fundador> listFundador;
 
     /**
      * Creates new form AddPTuristico
      */
     public AddPTuristico() {
         initComponents();
-        loadCidade();
-        loadRestaurante();
-        loadFundador();
+        listCidade = new ArrayList<>();
+        listRestaurante = new ArrayList<>();
+        listFundador = new ArrayList<>();
+        jCBCidade.setModel(new DefaultComboBoxModel<>());
+        jCBCasashowRestaurante.setModel(new DefaultComboBoxModel<>());
+        jCBMuseuFundadores.setModel(new DefaultComboBoxModel<>());
     }
     
     private void loadCidade(){
-        listCidade = new CidadeController().loadAllCidade();
+        getListCidade().clear();
+        getListCidade().addAll(new CidadeController().loadAllCidade());
         jCBCidade.removeAllItems();
-        for(Cidade item: listCidade){
+        for(Cidade item: getListCidade()){
             jCBCidade.addItem(item.toString());
         }
     }
     
     private void loadRestaurante(){
         int index = jCBCidade.getSelectedIndex();
-        Cidade cd = listCidade.get(index == -1 ? 0 : index);
-        listRestaurante = new RestauranteController().loadAllRestaurante(cd);
-        jCBCasashowRestaurante.removeAllItems();
-        for(Restaurante item: getListRestaurante()){
-            jCBCasashowRestaurante.addItem(item.toString());
-        }
+        try{
+            Cidade cd = getListCidade().get(index == -1 ? 0 : index);
+            getListRestaurante().clear();
+            getListRestaurante().addAll( new RestauranteController().loadAllRestaurante(cd));
+            jCBCasashowRestaurante.removeAllItems();
+            for(Restaurante item: getListRestaurante()){
+                jCBCasashowRestaurante.addItem(item.toString());
+            }
+        }catch(IndexOutOfBoundsException e){}
     }
     
     private void loadFundador(){
-        listFundador = new FundadorController().loadAllFundador();
+        getListFundador().clear();
+        getListFundador().addAll(new FundadorController().loadAllFundador());
         jCBMuseuFundadores.removeAllItems();
-        for(Fundador item: getListFundador()){
+        for(Fundador item: listFundador){
             jCBMuseuFundadores.addItem(item.toString());
         }
     }
@@ -122,6 +131,15 @@ public class AddPTuristico extends javax.swing.JPanel {
         jTFEndereco = new javax.swing.JTextField();
         jCBCidade = new javax.swing.JComboBox<>();
         jSeparator1 = new javax.swing.JSeparator();
+
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jLInserir.setText("Inserir Ponto Turístico");
 
@@ -573,6 +591,17 @@ public class AddPTuristico extends javax.swing.JPanel {
         getjCkBCasashowRestaurante().setEnabled(!getListRestaurante().isEmpty());
     }//GEN-LAST:event_jCBCidadeActionPerformed
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        loadCidade();
+        loadFundador();
+    }//GEN-LAST:event_formComponentShown
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        getListCidade().clear();
+        getListRestaurante().clear();
+        getListFundador().clear();
+    }//GEN-LAST:event_formComponentHidden
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -628,10 +657,6 @@ public class AddPTuristico extends javax.swing.JPanel {
     private javax.swing.JTextField jTFParqueCapacidade;
     private javax.swing.JTextField jTFParqueNrAtracoes;
     // End of variables declaration//GEN-END:variables
-
-    public ArrayList<Cidade> getListCidade() {
-        return listCidade;
-    }
     
     public javax.swing.ButtonGroup getButtonGroup1() {
         return buttonGroup1;
@@ -704,15 +729,19 @@ public class AddPTuristico extends javax.swing.JPanel {
     public javax.swing.JTextField getjTFParqueNrAtracoes() {
         return jTFParqueNrAtracoes;
     }
+    
+    public ArrayList<Cidade> getListCidade() {
+        return listCidade;
+    }
 
     public ArrayList<Restaurante> getListRestaurante() {
         return listRestaurante;
     }
-
+    
     public ArrayList<Fundador> getListFundador() {
         return listFundador;
     }
-
+    
     public javax.swing.JList<Fundador> getjLtMuseuFundadores() {
         return jLtMuseuFundadores;
     }

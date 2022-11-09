@@ -8,6 +8,7 @@ import controller.PacoteController;
 import controller.ClienteController;
 import controller.ContratoController;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import model.entity.Pacote;
 import model.entity.Cliente;
@@ -18,21 +19,23 @@ import model.entity.Cliente;
  */
 public class AddContrato extends javax.swing.JPanel {
 
-    private ArrayList<Pacote> listPacote;
-    private ArrayList<Cliente> listCliente;
-
+    private final ArrayList<Pacote> listPacote;
+    private final ArrayList<Cliente> listCliente;
+    
     /**
      * Creates new form AddVenda
      */
     public AddContrato() {
         initComponents();
-        loadPacote();
-        loadCliente();
-       
+        listPacote = new ArrayList<>();
+        listCliente = new ArrayList<>();
+        jCBPacote.setModel(new DefaultComboBoxModel<>());
+        jCBCliente.setModel(new DefaultComboBoxModel<>());
     }
     
     private void loadPacote(){
-        listPacote = new PacoteController().loadAllPacote();
+        getListPacote().clear();
+        getListPacote().addAll(new PacoteController().loadAllPacote());
         jCBPacote.removeAllItems();
         for(Pacote item: getListPacote()){
             jCBPacote.addItem(item.toString());
@@ -40,7 +43,8 @@ public class AddContrato extends javax.swing.JPanel {
     }
     
     private void loadCliente(){
-        listCliente = new ClienteController().loadAllCliente();
+        getListCliente().clear();
+        getListCliente().addAll(new ClienteController().loadAllCliente());
         jCBCliente.removeAllItems();
         for(Cliente item: getListCliente()){
             jCBCliente.addItem(item.toString());
@@ -63,6 +67,15 @@ public class AddContrato extends javax.swing.JPanel {
         jLCliente = new javax.swing.JLabel();
         jCBCliente = new javax.swing.JComboBox<>();
         jCBPacote = new javax.swing.JComboBox<>();
+
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jLInserir.setText("Inserir Venda");
 
@@ -153,9 +166,22 @@ public class AddContrato extends javax.swing.JPanel {
     }//GEN-LAST:event_jBConcluirActionPerformed
 
     private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
-        getjCBPacote().setSelectedIndex(0);
-        getjCBCliente().setSelectedIndex(0);
+        try{
+            getjCBPacote().setSelectedIndex(0);
+            getjCBCliente().setSelectedIndex(0);
+        }catch(IllegalArgumentException e){}
     }//GEN-LAST:event_jBLimparActionPerformed
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        getListPacote().clear();
+        getListCliente().clear();
+        jBLimpar.doClick();
+    }//GEN-LAST:event_formComponentHidden
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        loadPacote();
+        loadCliente();
+    }//GEN-LAST:event_formComponentShown
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -168,20 +194,20 @@ public class AddContrato extends javax.swing.JPanel {
     private javax.swing.JLabel jLPacote;
     // End of variables declaration//GEN-END:variables
 
+    public ArrayList<Pacote> getListPacote() {
+        return listPacote;
+    }
+    
+    public ArrayList<Cliente> getListCliente() {
+        return listCliente;
+    }
+    
     public javax.swing.JComboBox<String> getjCBCliente() {
         return jCBCliente;
     }
 
     public javax.swing.JComboBox<String> getjCBPacote() {
         return jCBPacote;
-    }
-    
-    public ArrayList<Pacote> getListPacote() {
-        return listPacote;
-    }
-
-    public ArrayList<Cliente> getListCliente() {
-        return listCliente;
     }
     
 }

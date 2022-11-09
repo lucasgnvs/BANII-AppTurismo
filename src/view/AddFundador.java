@@ -45,6 +45,12 @@ public class AddFundador extends javax.swing.JPanel {
         jTFAtivprof = new javax.swing.JTextField();
         jCkBMorte = new javax.swing.JCheckBox();
 
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+        });
+
         jLInserir.setText("Inserir Fundador");
 
         jBConcluir.setText("Concluir");
@@ -191,6 +197,10 @@ public class AddFundador extends javax.swing.JPanel {
         getjTFDtmorte().setText("");
         getjTFDtmorte().setEnabled(!value);
     }//GEN-LAST:event_jCkBMorteActionPerformed
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        jBLimpar.doClick();
+    }//GEN-LAST:event_formComponentHidden
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

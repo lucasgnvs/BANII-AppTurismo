@@ -15,6 +15,7 @@ import controller.PacoteController;
 import controller.AtracaoInclusaController;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import model.entity.Cidade;
@@ -33,31 +34,32 @@ import model.entity.AtracaoInclusa;
  */
 public class AddPacote extends javax.swing.JPanel {
 
-    private ArrayList<Cidade> listCidade;
-    private ArrayList<Hotel> listHotel;
-    private ArrayList<Restaurante> listRestaurante;
-    private ArrayList<CasaShow> listCasaShow;
-    private ArrayList<Igreja> listIgreja;
-    private ArrayList<Museu> listMuseu;
-    private ArrayList<Parque> listParque;
+    private final ArrayList<Cidade> listCidade;
+    private final ArrayList<Hotel> listHotel;
+    private final ArrayList<Restaurante> listRestaurante;
+    private final ArrayList<CasaShow> listCasaShow;
+    private final ArrayList<Igreja> listIgreja;
+    private final ArrayList<Museu> listMuseu;
+    private final ArrayList<Parque> listParque;
 
     /**
      * Creates new form AddPacote
      */
     public AddPacote() {
         initComponents();
-        loadCidade();
-        loadHotel();
-        loadRestaurante();
-        loadCasaShow();
-        loadIgreja();
-        loadMuseu();
-        loadParque();
-        jRBTipoHotel.doClick();
+        listCidade = new ArrayList<>();
+        listHotel = new ArrayList<>();
+        listRestaurante = new ArrayList<>();
+        listCasaShow = new ArrayList<>();
+        listIgreja = new ArrayList<>();
+        listMuseu = new ArrayList<>();
+        listParque = new ArrayList<>();
+        jCBCidade.setModel(new DefaultComboBoxModel<>());
     }
     
     private void loadCidade(){
-        listCidade = new CidadeController().loadAllCidade();
+        getListCidade().clear();
+        getListCidade().addAll(new CidadeController().loadAllCidade());
         getjCBCidade().removeAllItems();
         for(Cidade item: getListCidade()){
             getjCBCidade().addItem(item.toString());
@@ -66,38 +68,44 @@ public class AddPacote extends javax.swing.JPanel {
 
     private void loadHotel(){
         int index = getjCBCidade().getSelectedIndex();
-        Cidade cd = getListCidade().get(index == -1 ? 0 : index);
-        listHotel = new HotelController().loadAllHotel(cd);
+        Cidade cd = new CidadeController().loadAllCidade().get(index == -1 ? 0 : index);
+        getListHotel().clear();
+        getListHotel().addAll(new HotelController().loadAllHotel(cd));
     }
     
     private void loadRestaurante(){
         int index = getjCBCidade().getSelectedIndex();
-        Cidade cd = getListCidade().get(index == -1 ? 0 : index);
-        listRestaurante = new RestauranteController().loadAllRestaurante(cd);
+        Cidade cd = new CidadeController().loadAllCidade().get(index == -1 ? 0 : index);
+        getListRestaurante().clear();
+        getListRestaurante().addAll(new RestauranteController().loadAllRestaurante(cd));
     }
     
     private void loadCasaShow(){
         int index = getjCBCidade().getSelectedIndex();
-        Cidade cd = getListCidade().get(index == -1 ? 0 : index);
-        listCasaShow = new CasaShowController().loadAllCasaShow(cd);
+        Cidade cd = new CidadeController().loadAllCidade().get(index == -1 ? 0 : index);
+        getListCasaShow().clear();
+        getListCasaShow().addAll(new CasaShowController().loadAllCasaShow(cd));
     }
     
     private void loadIgreja(){
         int index = getjCBCidade().getSelectedIndex();
-        Cidade cd = getListCidade().get(index == -1 ? 0 : index);
-        listIgreja = new IgrejaController().loadAllIgreja(cd);
+        Cidade cd = new CidadeController().loadAllCidade().get(index == -1 ? 0 : index);
+        getListIgreja().clear();
+        getListIgreja().addAll(new IgrejaController().loadAllIgreja(cd));
     }
     
     private void loadMuseu(){
         int index = getjCBCidade().getSelectedIndex();
-        Cidade cd = getListCidade().get(index == -1 ? 0 : index);
-        listMuseu = new MuseuController().loadAllMuseu(cd);
+        Cidade cd = new CidadeController().loadAllCidade().get(index == -1 ? 0 : index);
+        getListMuseu().clear();
+        getListMuseu().addAll(new MuseuController().loadAllMuseu(cd));
     }
     
     private void loadParque(){
         int index = getjCBCidade().getSelectedIndex();
-        Cidade cd = getListCidade().get(index == -1 ? 0 : index);
-        listParque = new ParqueController().loadAllParque(cd);
+        Cidade cd = new CidadeController().loadAllCidade().get(index == -1 ? 0 : index);
+        getListParque().clear();
+        getListParque().addAll(new ParqueController().loadAllParque(cd));
     }
     
     private void updateCB(ArrayList<?> list){
@@ -147,6 +155,15 @@ public class AddPacote extends javax.swing.JPanel {
         jRBTipoIgreja = new javax.swing.JRadioButton();
         jRBTipoMuseu = new javax.swing.JRadioButton();
         jRBTipoParque = new javax.swing.JRadioButton();
+
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jLInserir.setText("Inserir Pacote");
 
@@ -460,6 +477,21 @@ public class AddPacote extends javax.swing.JPanel {
         jBAdicionar.setEnabled(getjCBAtracoes().isEnabled() && !getjTFData().getText().isBlank());
     }//GEN-LAST:event_jTFDataCaretUpdate
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        loadCidade();
+        jRBTipoHotel.doClick();
+    }//GEN-LAST:event_formComponentShown
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        getListCidade().clear();
+        getListHotel().clear();
+        getListRestaurante().clear();
+        getListCasaShow().clear();
+        getListIgreja().clear();
+        getListMuseu().clear();
+        getListParque().clear();
+    }//GEN-LAST:event_formComponentHidden
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -498,7 +530,7 @@ public class AddPacote extends javax.swing.JPanel {
     public ArrayList<Cidade> getListCidade() {
         return listCidade;
     }
-
+    
     public ArrayList<Hotel> getListHotel() {
         return listHotel;
     }

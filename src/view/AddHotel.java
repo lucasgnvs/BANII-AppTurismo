@@ -8,6 +8,7 @@ import controller.RestauranteController;
 import controller.CidadeController;
 import controller.HotelController;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import model.entity.Cidade;
 import model.entity.Restaurante;
@@ -18,34 +19,40 @@ import model.entity.Restaurante;
  */
 public class AddHotel extends javax.swing.JPanel {
 
-    private ArrayList<Cidade> listCidade;
-    private ArrayList<Restaurante> listRestaurante;
+    private final ArrayList<Cidade> listCidade;
+    private final ArrayList<Restaurante> listRestaurante;
     
     /**
      * Creates new form AddHotel
      */
     public AddHotel() {
         initComponents();
-        loadCidade();
-        loadRestaurante();
+        listCidade = new ArrayList<>();
+        listRestaurante = new ArrayList<>();
+        jCBCidade.setModel(new DefaultComboBoxModel<>());
+        jCBRestaurante.setModel(new DefaultComboBoxModel<>());
     }
     
     private void loadCidade(){
-        listCidade = new CidadeController().loadAllCidade();
+        getListCidade().clear();
+        getListCidade().addAll(new CidadeController().loadAllCidade());
         jCBCidade.removeAllItems();
-        for(Cidade item: getListCidade()){
+        for(Cidade item: listCidade){
             jCBCidade.addItem(item.toString());
         }
     }
     
     private void loadRestaurante(){
         int index = jCBCidade.getSelectedIndex();
-        Cidade cd = getListCidade().get(index == -1 ? 0 : index);
-        listRestaurante = new RestauranteController().loadAllRestaurante(cd);
-        jCBRestaurante.removeAllItems();
-        for(Restaurante item: getListRestaurante()){
-            jCBRestaurante.addItem(item.toString());
-        }
+        try{
+            Cidade cd = getListCidade().get(index == -1 ? 0 : index);
+            getListRestaurante().clear();
+            getListRestaurante().addAll( new RestauranteController().loadAllRestaurante(cd));
+            jCBRestaurante.removeAllItems();
+            for(Restaurante item: getListRestaurante()){
+                jCBRestaurante.addItem(item.toString());
+            }
+        }catch(IndexOutOfBoundsException e){}
     }
 
     /**
@@ -93,6 +100,15 @@ public class AddHotel extends javax.swing.JPanel {
         jTFValor1 = new javax.swing.JTextField();
         jTFValor2 = new javax.swing.JTextField();
         jTFValor3 = new javax.swing.JTextField();
+
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jLInserir.setText("Inserir Hotel");
 
@@ -371,16 +387,16 @@ public class AddHotel extends javax.swing.JPanel {
 
     private void jCkBRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCkBRestauranteActionPerformed
         boolean value = getjCBRestaurante().isEnabled();
-        getjCBRestaurante().setSelectedIndex(0);
+        try{
+            getjCBRestaurante().setSelectedIndex(0);
+        }catch(IllegalArgumentException e){}
         getjCBRestaurante().setEnabled(!value);
     }//GEN-LAST:event_jCkBRestauranteActionPerformed
 
     private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
         getjTFNome().setText("");
-        getjCBCidade().setSelectedIndex(0);
         getjTFEndereco().setText("");
         getButtonGroup1().clearSelection();
-        getjCBRestaurante().setSelectedIndex(0);
         getjCkBRestaurante().setSelected(false);
         getjCBRestaurante().setEnabled(false);
         getjCkBQuartos1().setSelected(false);
@@ -404,6 +420,10 @@ public class AddHotel extends javax.swing.JPanel {
         getjTFNrhospedes3().setEnabled(false);
         getjTFValor3().setText("");
         getjTFValor3().setEnabled(false);
+        try{
+            getjCBCidade().setSelectedIndex(0);
+            getjCBRestaurante().setSelectedIndex(0);
+        }catch(IllegalArgumentException e){}
     }//GEN-LAST:event_jBLimparActionPerformed
 
     private void jBConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConcluirActionPerformed
@@ -459,6 +479,16 @@ public class AddHotel extends javax.swing.JPanel {
         loadRestaurante();
         getjCkBRestaurante().setEnabled(!getListRestaurante().isEmpty());
     }//GEN-LAST:event_jCBCidadeActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        loadCidade();
+    }//GEN-LAST:event_formComponentShown
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        getListCidade().clear();
+        getListRestaurante().clear();
+        jBLimpar.doClick();
+    }//GEN-LAST:event_formComponentHidden
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -523,11 +553,11 @@ public class AddHotel extends javax.swing.JPanel {
     public javax.swing.JCheckBox getjCkBRestaurante() {
         return jCkBRestaurante;
     }
-
+    
     public ArrayList<Cidade> getListCidade() {
         return listCidade;
     }
-
+    
     public ArrayList<Restaurante> getListRestaurante() {
         return listRestaurante;
     }
