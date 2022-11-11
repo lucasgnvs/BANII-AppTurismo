@@ -11,7 +11,9 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import model.dao.FundadorDAO;
 import model.entity.Fundador;
+import model.entity.Museu;
 import view.AddFundador;
+import view.UpFundador;
 
 /**
  *
@@ -35,8 +37,56 @@ public class FundadorController {
         FundadorDAO.getInstance().addFundador(fd);
     }
 
+    public void updateFundador(UpFundador form) throws SQLException {
+        int index = form.getjCBFundadores().getSelectedIndex();
+        Fundador fd = form.getListFundador().get(index);
+        String nome = form.getjTFNome().getText();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+        String nacionalidade = form.getjTFNacionalidade().getText();
+        String ativprof = form.getjTFAtivprof().getText();
+        fd.setNome(nome.isBlank() ? null : nome);
+        fd.setDtnasc(LocalDate.parse(form.getjTFDtnasc().getText(),format));
+        fd.setNacionalidade(nacionalidade.isBlank() ? null : nacionalidade);
+        fd.setAtivprof(ativprof.isBlank() ? null : ativprof);
+        if(form.getjCkBMorte().isSelected()){
+            fd.setDtmorte(LocalDate.parse(form.getjTFDtmorte().getText(),format));
+        }
+        FundadorDAO.getInstance().updateFundador(fd);
+    }
+
+    public void deleteFundador(UpFundador form){
+        int index = form.getjCBFundadores().getSelectedIndex();
+        Fundador fd = form.getListFundador().get(index);
+        FundadorDAO.getInstance().deleteFundador(fd);
+    }
+     
+    public void showFundador(UpFundador form){
+        int index = form.getjCBFundadores().getSelectedIndex();
+        if(index == -1){
+            index = 0;
+        }
+        Fundador fd = form.getListFundador().get(index);
+        form.getjTFNome().setText(fd.getNome());
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+        form.getjTFDtnasc().setText(fd.getDtnasc().format(format));
+        if(fd.getDtmorte() != null){
+            form.getjCkBMorte().setSelected(true);
+            form.getjTFDtmorte().setText(fd.getDtmorte().format(format));
+        }else{
+            form.getjCkBMorte().setSelected(false);
+            form.getjTFDtmorte().setText("");
+        }
+        form.getjTFNacionalidade().setText(fd.getNacionalidade());
+        form.getjTFAtivprof().setText(fd.getAtivprof());
+    }
+    
     public ArrayList<Fundador> loadAllFundador(){
         return FundadorDAO.getInstance().loadAllFundador();
     }
+    
+    public ArrayList<Fundador> loadAllFundador(Museu ms){
+        return FundadorDAO.getInstance().loadAllFundador(ms);
+    }
+    
 }
 

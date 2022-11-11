@@ -18,6 +18,8 @@ import model.entity.Cidade;
 public class CidadeDAO {
     private static CidadeDAO instance;
     private PreparedStatement insertCidade;
+    private PreparedStatement updateCidade;
+    private PreparedStatement deleteCidade;
     private PreparedStatement selectAllCidade;
     
     public static CidadeDAO getInstance(){
@@ -31,6 +33,8 @@ public class CidadeDAO {
         Connection con = Conexao.getConnection();
         try{
             insertCidade = con.prepareStatement("insert into cidades (nome, estado, populacao) values (?, ?, ?)");
+            updateCidade = con.prepareStatement("update cidades set nome = ?, estado = ?, populacao = ? where codcd = ?");
+            deleteCidade = con.prepareStatement("delete from cidades where codcd = ?");
             selectAllCidade = con.prepareStatement("select codcd, nome, estado, populacao from cidades order by estado, nome");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -42,6 +46,23 @@ public class CidadeDAO {
         insertCidade.setString(2,cd.getEstado());
         insertCidade.setInt(3,cd.getPopulacao());
         insertCidade.executeUpdate();
+    }
+    
+    public void updateCidade(Cidade cd) throws SQLException {
+        updateCidade.setString(1,cd.getNome());
+        updateCidade.setString(2,cd.getEstado());
+        updateCidade.setInt(3,cd.getPopulacao());
+        updateCidade.setInt(4,cd.getCod());
+        updateCidade.executeUpdate();
+    }
+    
+    public void deleteCidade(Cidade cd){
+        try{
+            deleteCidade.setInt(1,cd.getCod());
+            deleteCidade.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
     
     public ArrayList<Cidade> loadAllCidade(){

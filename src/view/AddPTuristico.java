@@ -69,6 +69,43 @@ public class AddPTuristico extends javax.swing.JPanel {
             jCBMuseuFundadores.addItem(item.toString());
         }
     }
+    
+    private void limparCasaShow(){
+        getjTFCasashowHrinicio().setText("");
+        try{
+            getjCBCasashowRestaurante().setSelectedIndex(0);
+        }catch(IllegalArgumentException e){}
+        try{
+            getjCBCasashowDiafech().setSelectedIndex(0);
+        }catch(IllegalArgumentException e){}
+        try{
+            getjCBCasashowEsp().setSelectedIndex(0);
+        }catch(IllegalArgumentException e){}
+        jCkBCasashowRestaurante.setSelected(false);
+        getjTFCasashowPreco().setText("");
+        getjTFCasashowPreco().setEnabled(false);
+        getjCBCasashowEsp().setEnabled(false);
+        getjCBCasashowRestaurante().setEnabled(false);
+    }
+    
+    private void limparIgreja(){
+        getjTFIgrejaEstilo().setText("");
+        getjTFIgrejaData().setText("");
+    }
+    
+    private void limparMuseu(){
+        getjTFMuseuData().setText("");
+        getjTFMuseuNrsalas().setText("");
+        getjLtMuseuFundadores().setModel(new DefaultListModel<>());
+        try{
+            getjCBMuseuFundadores().setSelectedIndex(0);
+        }catch(IllegalArgumentException e){}
+    }
+    
+    private void limparParque(){
+        getjTFParqueNrAtracoes().setText("");
+        getjTFParqueCapacidade().setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -131,6 +168,7 @@ public class AddPTuristico extends javax.swing.JPanel {
         jTFEndereco = new javax.swing.JTextField();
         jCBCidade = new javax.swing.JComboBox<>();
         jSeparator1 = new javax.swing.JSeparator();
+        jBLimpar = new javax.swing.JButton();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
@@ -188,6 +226,12 @@ public class AddPTuristico extends javax.swing.JPanel {
         });
 
         jPPturistico.setLayout(new java.awt.CardLayout());
+
+        jPCasashow.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                jPCasashowComponentHidden(evt);
+            }
+        });
 
         jLCasashowHrinicio.setText("Hora de início:");
 
@@ -274,6 +318,12 @@ public class AddPTuristico extends javax.swing.JPanel {
 
         jPPturistico.add(jPCasashow, "addcasashow");
 
+        jPIgreja.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                jPIgrejaComponentHidden(evt);
+            }
+        });
+
         jLIgrejaData.setText("Data de Fundação:");
 
         jLIgrejaEstilo.setText("Estilo de Construção:");
@@ -307,6 +357,12 @@ public class AddPTuristico extends javax.swing.JPanel {
         );
 
         jPPturistico.add(jPIgreja, "addigreja");
+
+        jPMuseu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                jPMuseuComponentHidden(evt);
+            }
+        });
 
         jLMuseuData.setText("Data de Fundação:");
 
@@ -384,6 +440,12 @@ public class AddPTuristico extends javax.swing.JPanel {
 
         jPPturistico.add(jPMuseu, "addmuseu");
 
+        jPParque.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                jPParqueComponentHidden(evt);
+            }
+        });
+
         jLParqueNratracoes.setText("Número de Atrações:");
 
         jLParqueCapacidade.setText("Capacidade:");
@@ -439,6 +501,13 @@ public class AddPTuristico extends javax.swing.JPanel {
             }
         });
 
+        jBLimpar.setText("Limpar");
+        jBLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimparActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -477,6 +546,8 @@ public class AddPTuristico extends javax.swing.JPanel {
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBLimpar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBConcluir)))
                 .addGap(95, 95, 95))
         );
@@ -513,7 +584,9 @@ public class AddPTuristico extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPPturistico, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jBConcluir)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBConcluir)
+                    .addComponent(jBLimpar))
                 .addGap(130, 130, 130))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -602,10 +675,38 @@ public class AddPTuristico extends javax.swing.JPanel {
         getListFundador().clear();
     }//GEN-LAST:event_formComponentHidden
 
+    private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
+        getjTFNome().setText("");
+        getjTADescricao().setText("");
+        getjTFEndereco().setText("");
+        jRBCasaShow.doClick();
+        limparCasaShow();
+        try{
+            getjCBCidade().setSelectedIndex(0);
+        }catch(IllegalArgumentException e){}
+    }//GEN-LAST:event_jBLimparActionPerformed
+
+    private void jPCasashowComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPCasashowComponentHidden
+        limparCasaShow();
+    }//GEN-LAST:event_jPCasashowComponentHidden
+
+    private void jPIgrejaComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPIgrejaComponentHidden
+        limparIgreja();
+    }//GEN-LAST:event_jPIgrejaComponentHidden
+
+    private void jPMuseuComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPMuseuComponentHidden
+        limparMuseu();
+    }//GEN-LAST:event_jPMuseuComponentHidden
+
+    private void jPParqueComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPParqueComponentHidden
+        limparParque();
+    }//GEN-LAST:event_jPParqueComponentHidden
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBConcluir;
+    private javax.swing.JButton jBLimpar;
     private javax.swing.JButton jBMuseuAdicionar;
     private javax.swing.JButton jBMuseuRemover;
     private javax.swing.JComboBox<String> jCBCasashowDiafech;

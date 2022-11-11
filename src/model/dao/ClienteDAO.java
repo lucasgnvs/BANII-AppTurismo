@@ -20,6 +20,8 @@ import model.entity.Cliente;
 public class ClienteDAO {
     private static ClienteDAO instance;
     private PreparedStatement insertCliente;
+    private PreparedStatement updateCliente;
+    private PreparedStatement deleteCliente;
     private PreparedStatement selectAllCliente;
     
     public static ClienteDAO getInstance(){
@@ -33,19 +35,40 @@ public class ClienteDAO {
         Connection con = Conexao.getConnection();
         try{
             insertCliente = con.prepareStatement("insert into clientes (nome, dtnasc, email, endereco, telefone) values (?, ?, ?, ?, ?)");
+            updateCliente = con.prepareStatement("update clientes set nome = ?, dtnasc = ?, email = ?, endereco = ?, telefone = ? where codc = ?");
+            deleteCliente = con.prepareStatement("delete from clientes where codc = ?");
             selectAllCliente = con.prepareStatement("select codc, nome, dtnasc, email, endereco, telefone from clientes order by nome");
         } catch (SQLException e){
             e.printStackTrace();
         }
     }
     
-    public void addCliente(Cliente cl)throws SQLException {
+    public void addCliente(Cliente cl) throws SQLException {
         insertCliente.setString(1,cl.getNome());
         insertCliente.setDate(2,Date.valueOf(cl.getDtnasc()));
         insertCliente.setString(3,cl.getEmail());
         insertCliente.setString(4,cl.getEndereco());
         insertCliente.setString(5,cl.getTelefone());
         insertCliente.executeUpdate();
+    }
+    
+    public void updateCliente(Cliente cl) throws SQLException {
+        updateCliente.setString(1,cl.getNome());
+        updateCliente.setDate(2,Date.valueOf(cl.getDtnasc()));
+        updateCliente.setString(3,cl.getEmail());
+        updateCliente.setString(4,cl.getEndereco());
+        updateCliente.setString(5,cl.getTelefone());
+        updateCliente.setInt(6,cl.getCod());
+        updateCliente.executeUpdate();
+    }
+    
+    public void deleteCliente(Cliente cl){
+        try{
+            deleteCliente.setInt(1,cl.getCod());
+            deleteCliente.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
     
     public ArrayList<Cliente> loadAllCliente(){

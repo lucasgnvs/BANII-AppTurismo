@@ -27,13 +27,15 @@ import model.entity.Museu;
 import model.entity.Parque;
 import model.entity.AtracaoTuristica;
 import model.entity.AtracaoInclusa;
+import model.entity.Pacote;
 
 /**
  *
  * @author User
  */
-public class AddPacote extends javax.swing.JPanel {
+public class UpPacote extends javax.swing.JPanel {
 
+    private final ArrayList<Pacote> listPacote;
     private final ArrayList<Cidade> listCidade;
     private final ArrayList<Hotel> listHotel;
     private final ArrayList<Restaurante> listRestaurante;
@@ -45,8 +47,9 @@ public class AddPacote extends javax.swing.JPanel {
     /**
      * Creates new form AddPacote
      */
-    public AddPacote() {
+    public UpPacote() {
         initComponents();
+        listPacote = new ArrayList<>();
         listCidade = new ArrayList<>();
         listHotel = new ArrayList<>();
         listRestaurante = new ArrayList<>();
@@ -55,6 +58,16 @@ public class AddPacote extends javax.swing.JPanel {
         listMuseu = new ArrayList<>();
         listParque = new ArrayList<>();
         jCBCidade.setModel(new DefaultComboBoxModel<>());
+        jCBPacotes.setModel(new DefaultComboBoxModel<>());
+    }
+    
+    private void loadPacote(){
+        getListPacote().clear();
+        getListPacote().addAll(new PacoteController().loadAllPacote());
+        getjCBPacotes().removeAllItems();
+        for(Pacote item: getListPacote()){
+            getjCBPacotes().addItem(item.toString());
+        }
     }
     
     private void loadCidade(){
@@ -125,10 +138,8 @@ public class AddPacote extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jLInserir = new javax.swing.JLabel();
         jLNome = new javax.swing.JLabel();
         jTFNome = new javax.swing.JTextField();
-        jBConcluir = new javax.swing.JButton();
         jLValor = new javax.swing.JLabel();
         jLDtinicio = new javax.swing.JLabel();
         jLCidade = new javax.swing.JLabel();
@@ -155,7 +166,10 @@ public class AddPacote extends javax.swing.JPanel {
         jRBTipoIgreja = new javax.swing.JRadioButton();
         jRBTipoMuseu = new javax.swing.JRadioButton();
         jRBTipoParque = new javax.swing.JRadioButton();
-        jBLimpar = new javax.swing.JButton();
+        jBSalvar = new javax.swing.JButton();
+        jBEditar = new javax.swing.JButton();
+        jBExcluir = new javax.swing.JButton();
+        jCBPacotes = new javax.swing.JComboBox<>();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
@@ -166,16 +180,9 @@ public class AddPacote extends javax.swing.JPanel {
             }
         });
 
-        jLInserir.setText("Inserir Pacote");
-
         jLNome.setText("Nome:");
 
-        jBConcluir.setText("Concluir");
-        jBConcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBConcluirActionPerformed(evt);
-            }
-        });
+        jTFNome.setEnabled(false);
 
         jLValor.setText("Preço:");
 
@@ -183,11 +190,20 @@ public class AddPacote extends javax.swing.JPanel {
 
         jLCidade.setText("Cidade:");
 
+        jTFDtinicio.setEnabled(false);
+
+        jTFDtfim.setEnabled(false);
+
         jLDtfim.setText("Data fim:");
 
         jLDisp.setText("Vagas:");
 
+        jTFValor.setEnabled(false);
+
+        jTFDisp.setEnabled(false);
+
         jCBCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cid 1", "Cid 2", "Cid 3", "Cid 4" }));
+        jCBCidade.setEnabled(false);
         jCBCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBCidadeActionPerformed(evt);
@@ -201,6 +217,7 @@ public class AddPacote extends javax.swing.JPanel {
         jLTipo.setText("Tipo:");
 
         jTFData.setToolTipText("dd/mm/aaaa");
+        jTFData.setEnabled(false);
         jTFData.setPreferredSize(new java.awt.Dimension(65, 22));
         jTFData.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -211,13 +228,17 @@ public class AddPacote extends javax.swing.JPanel {
         buttonGroup1.add(jRBTipoHotel);
         jRBTipoHotel.setSelected(true);
         jRBTipoHotel.setText("Hotel");
+        jRBTipoHotel.setEnabled(false);
         jRBTipoHotel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRBTipoHotelActionPerformed(evt);
             }
         });
 
+        jCBAtracoes.setEnabled(false);
+
         jBAdicionar.setText("Adicionar");
+        jBAdicionar.setEnabled(false);
         jBAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBAdicionarActionPerformed(evt);
@@ -225,10 +246,12 @@ public class AddPacote extends javax.swing.JPanel {
         });
 
         jLtAtracoes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jLtAtracoes.setEnabled(false);
         jScrollPane1.setViewportView(jLtAtracoes);
         jLtAtracoes.getAccessibleContext().setAccessibleName("");
 
         jBRemover.setText("Remover");
+        jBRemover.setEnabled(false);
         jBRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBRemoverActionPerformed(evt);
@@ -237,6 +260,7 @@ public class AddPacote extends javax.swing.JPanel {
 
         buttonGroup1.add(jRBTipoRestaurante);
         jRBTipoRestaurante.setText("Restaurante");
+        jRBTipoRestaurante.setEnabled(false);
         jRBTipoRestaurante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRBTipoRestauranteActionPerformed(evt);
@@ -245,6 +269,7 @@ public class AddPacote extends javax.swing.JPanel {
 
         buttonGroup1.add(jRBTipoCasashow);
         jRBTipoCasashow.setText("Casa de Show");
+        jRBTipoCasashow.setEnabled(false);
         jRBTipoCasashow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRBTipoCasashowActionPerformed(evt);
@@ -253,6 +278,7 @@ public class AddPacote extends javax.swing.JPanel {
 
         buttonGroup1.add(jRBTipoIgreja);
         jRBTipoIgreja.setText("Igreja");
+        jRBTipoIgreja.setEnabled(false);
         jRBTipoIgreja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRBTipoIgrejaActionPerformed(evt);
@@ -261,6 +287,7 @@ public class AddPacote extends javax.swing.JPanel {
 
         buttonGroup1.add(jRBTipoMuseu);
         jRBTipoMuseu.setText("Museu");
+        jRBTipoMuseu.setEnabled(false);
         jRBTipoMuseu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRBTipoMuseuActionPerformed(evt);
@@ -269,16 +296,38 @@ public class AddPacote extends javax.swing.JPanel {
 
         buttonGroup1.add(jRBTipoParque);
         jRBTipoParque.setText("Parque");
+        jRBTipoParque.setEnabled(false);
         jRBTipoParque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRBTipoParqueActionPerformed(evt);
             }
         });
 
-        jBLimpar.setText("Limpar");
-        jBLimpar.addActionListener(new java.awt.event.ActionListener() {
+        jBSalvar.setText("Salvar");
+        jBSalvar.setEnabled(false);
+        jBSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBLimparActionPerformed(evt);
+                jBSalvarActionPerformed(evt);
+            }
+        });
+
+        jBEditar.setText("Editar");
+        jBEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEditarActionPerformed(evt);
+            }
+        });
+
+        jBExcluir.setText("Excluir");
+        jBExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBExcluirActionPerformed(evt);
+            }
+        });
+
+        jCBPacotes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBPacotesActionPerformed(evt);
             }
         });
 
@@ -286,75 +335,83 @@ public class AddPacote extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCBPacotes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLNome)
                         .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCBCidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTFNome)))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLCidade, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLInserir, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jTFNome))
+                        .addContainerGap())
+                    .addComponent(jSeparator1)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLAtracoes)
+                            .addComponent(jLData)
+                            .addComponent(jTFData, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLDtinicio)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTFValor, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                                    .addComponent(jTFDtinicio)))
-                            .addComponent(jLValor))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLDtfim)
-                            .addComponent(jLDisp))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFDtfim, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFDisp, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLAtracoes)
-                                    .addComponent(jLData)
-                                    .addComponent(jTFData, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(8, 8, 8)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1)
-                                    .addComponent(jCBAtracoes, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLTipo)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jRBTipoHotel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jRBTipoRestaurante)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jRBTipoCasashow)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jRBTipoIgreja)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jRBTipoMuseu)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jRBTipoParque))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jBLimpar)))
+                                .addComponent(jLTipo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRBTipoHotel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRBTipoRestaurante)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRBTipoCasashow)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRBTipoIgreja)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRBTipoMuseu)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRBTipoParque))
+                            .addComponent(jCBAtracoes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jBAdicionar)
-                            .addComponent(jBRemover)
-                            .addComponent(jBConcluir, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addGap(95, 95, 95))
+                            .addComponent(jBRemover))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jBSalvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBEditar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBExcluir)
+                        .addGap(35, 35, 35))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLCidade)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLDtinicio)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jTFValor)
+                                            .addComponent(jTFDtinicio, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLValor))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLDtfim)
+                                    .addComponent(jLDisp))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTFDtfim, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTFDisp, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jLInserir)
+                .addContainerGap()
+                .addComponent(jCBPacotes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLNome)
@@ -400,39 +457,24 @@ public class AddPacote extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBConcluir)
-                    .addComponent(jBLimpar))
-                .addGap(130, 130, 130))
+                    .addComponent(jBEditar)
+                    .addComponent(jBExcluir)
+                    .addComponent(jBSalvar))
+                .addGap(40, 40, 40))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConcluirActionPerformed
-        String message = "Pacote inserido com sucesso!";
-        String title = "Sucesso";
-        int type = JOptionPane.INFORMATION_MESSAGE;
-        try{
-            new PacoteController().addPacote(this);
-        }catch(Exception e){
-            message = "Ocorreu um erro ao inserir o pacote...\n\n" + e.getMessage().split("\n")[0];
-            title = "Erro";
-            type = JOptionPane.ERROR_MESSAGE;
-            e.printStackTrace();
-        }finally{
-            JOptionPane.showMessageDialog(null,message,title,type);
-        }
-    }//GEN-LAST:event_jBConcluirActionPerformed
-
     private void jBAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAdicionarActionPerformed
-        try{
-            new AtracaoInclusaController().addAtracao(this);
-            getjTFData().setText("");
-        }catch(DateTimeParseException e){
-            JOptionPane.showMessageDialog(null,"O formato da data está incorreto. (dd/mm/aaaa)","Erro",JOptionPane.ERROR_MESSAGE);
-        }
+//        try{
+//            new AtracaoInclusaController().addAtracao(this);
+//            getjTFData().setText("");
+//        }catch(DateTimeParseException e){
+//            JOptionPane.showMessageDialog(null,"O formato da data está incorreto. (dd/mm/aaaa)","Erro",JOptionPane.ERROR_MESSAGE);
+//        }
     }//GEN-LAST:event_jBAdicionarActionPerformed
 
     private void jBRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRemoverActionPerformed
-        new AtracaoInclusaController().removeAtracao(this);
+//        new AtracaoInclusaController().removeAtracao(this);
     }//GEN-LAST:event_jBRemoverActionPerformed
 
     private void jRBTipoHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTipoHotelActionPerformed
@@ -494,7 +536,7 @@ public class AddPacote extends javax.swing.JPanel {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         loadCidade();
-        jRBTipoHotel.doClick();
+        loadPacote();
     }//GEN-LAST:event_formComponentShown
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
@@ -507,39 +549,73 @@ public class AddPacote extends javax.swing.JPanel {
         getListParque().clear();
     }//GEN-LAST:event_formComponentHidden
 
-    private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
-        getjTFNome().setText("");
-        getjTFDtinicio().setText("");
-        getjTFDtfim().setText("");
-        getjTFValor().setText("");
-        getjTFDisp().setText("");
-        jRBTipoHotel.setSelected(true);
-        getjTFData().setText("");
-        getjLtAtracoes().setModel(new DefaultListModel<>());
-        try{
-            getjCBCidade().setSelectedIndex(0);
-        }catch(IllegalArgumentException e){}
-        try{
-            getjCBAtracoes().setSelectedIndex(0);
-        }catch(IllegalArgumentException e){}
-    }//GEN-LAST:event_jBLimparActionPerformed
+    private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
+//        String message = "Dados do cliente atualizados com sucesso!";
+//        String title = "Sucesso";
+//        int type = JOptionPane.INFORMATION_MESSAGE;
+//        try{
+//            new ClienteController().updateCliente(this);
+//            jBEditar.setText("Editar");
+//            toggleEnabled();
+//        }catch(DateTimeParseException e){
+//            message = "O formato da data está incorreto. (dd/mm/aaaa)";
+//            title = "Erro";
+//            type = JOptionPane.ERROR_MESSAGE;
+//        }catch(Exception e){
+//            message = "Ocorreu um erro ao atualizar os dados do cliente...\n\n" + e.getMessage().split("\n")[0];
+//            title = "Erro";
+//            type = JOptionPane.ERROR_MESSAGE;
+//        }finally{
+//            JOptionPane.showMessageDialog(null,message,title,type);
+//        }
+    }//GEN-LAST:event_jBSalvarActionPerformed
+
+    private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
+//        toggleEnabled();
+//        if(jBEditar.getText() == "Editar"){
+//            jBEditar.setText("Cancelar");
+//        }else{
+//            jBEditar.setText("Editar");
+//            new ClienteController().showCliente(this);
+//        }
+    }//GEN-LAST:event_jBEditarActionPerformed
+
+    private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
+//        String message = "Confirmar exclusão do cliente";
+//        String title = "Exclusão";
+//        int type = JOptionPane.OK_CANCEL_OPTION;
+//        int response = JOptionPane.showConfirmDialog(null, message, title, type);
+//        if(response == 0){
+//            new ClienteController().deleteCliente(this);
+//            loadCliente();
+//        }
+    }//GEN-LAST:event_jBExcluirActionPerformed
+
+    private void jCBPacotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBPacotesActionPerformed
+//        if(jBEditar.getText() == "Cancelar"){
+//            toggleEnabled();
+//            jBEditar.setText("Editar");
+//        }
+        new PacoteController().showPacote(this);
+    }//GEN-LAST:event_jCBPacotesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBAdicionar;
-    private javax.swing.JButton jBConcluir;
-    private javax.swing.JButton jBLimpar;
+    private javax.swing.JButton jBEditar;
+    private javax.swing.JButton jBExcluir;
     private javax.swing.JButton jBRemover;
+    private javax.swing.JButton jBSalvar;
     private javax.swing.JComboBox<AtracaoTuristica> jCBAtracoes;
     private javax.swing.JComboBox<String> jCBCidade;
+    private javax.swing.JComboBox<String> jCBPacotes;
     private javax.swing.JLabel jLAtracoes;
     private javax.swing.JLabel jLCidade;
     private javax.swing.JLabel jLData;
     private javax.swing.JLabel jLDisp;
     private javax.swing.JLabel jLDtfim;
     private javax.swing.JLabel jLDtinicio;
-    private javax.swing.JLabel jLInserir;
     private javax.swing.JLabel jLNome;
     private javax.swing.JLabel jLTipo;
     private javax.swing.JLabel jLValor;
@@ -624,8 +700,12 @@ public class AddPacote extends javax.swing.JPanel {
         return jCBAtracoes;
     }
 
-    public javax.swing.ButtonGroup getButtonGroup1() {
-        return buttonGroup1;
+    public javax.swing.JComboBox<String> getjCBPacotes() {
+        return jCBPacotes;
+    }
+
+    public ArrayList<Pacote> getListPacote() {
+        return listPacote;
     }
 
 }

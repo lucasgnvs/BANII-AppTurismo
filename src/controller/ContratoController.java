@@ -5,6 +5,7 @@
 package controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import model.dao.ContratoDAO;
 import model.entity.Cliente;
 import model.entity.Pacote;
@@ -20,6 +21,10 @@ public class ContratoController {
         Pacote pc = form.getListPacote().get(form.getjCBPacote().getSelectedIndex());
         Cliente cl = form.getListCliente().get(form.getjCBCliente().getSelectedIndex());
         ContratoDAO.getInstance().addContrato(pc, cl);
+    }
+    
+    public ArrayList<Pacote> loadAllPacote(Cliente cl) {
+        return ContratoDAO.getInstance().loadAllPacote(cl);
     }
     
 }

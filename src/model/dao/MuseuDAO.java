@@ -21,6 +21,9 @@ import model.entity.Cidade;
 public class MuseuDAO {
     private static MuseuDAO instance;
     private PreparedStatement insertMuseu;
+    private PreparedStatement updatePTuristico;
+    private PreparedStatement updateMuseu;
+    private PreparedStatement deleteMuseu;
     private PreparedStatement selectAllMuseu;
     private PreparedStatement selectMuseuCidade;
     
@@ -35,6 +38,9 @@ public class MuseuDAO {
         Connection con = Conexao.getConnection();
         try{
             insertMuseu = con.prepareStatement("select add_museu(?, ?, ?, ?, ?, ?)");
+            updatePTuristico = con.prepareStatement("update pturisticos set nome = ?, descricao = ?, endereco = ?, codcd = ? where codpt = ?");
+            updateMuseu = con.prepareStatement("update museus set dtfundacao = ?, nrsalas = ? where codpt = ?");
+            deleteMuseu = con.prepareStatement("delete from pturisticos where codpt = ?");
             selectAllMuseu = con.prepareStatement("select codpt, nome, descricao, endereco, codcd, dtfundacao, nrsalas from pturisticos join museus using(codpt) order by nome");
             selectMuseuCidade = con.prepareStatement("select codpt, nome, descricao, endereco, dtfundacao, nrsalas from pturisticos join museus using(codpt) where codcd = ? order by nome");
         } catch (SQLException e){
@@ -53,6 +59,28 @@ public class MuseuDAO {
         return rs.next() ? rs.getInt("add_museu") : -1;
     }
     
+    public void updateMuseu(Museu ms) throws SQLException {
+        updatePTuristico.setString(1,ms.getNome());
+        updatePTuristico.setString(2,ms.getDescricao());
+        updatePTuristico.setString(3,ms.getEndereco());
+        updatePTuristico.setInt(4,ms.getCidade().getCod());
+        updatePTuristico.setInt(5,ms.getCod());
+        updateMuseu.setDate(1, Date.valueOf(ms.getDtfundacao()));
+        updateMuseu.setInt(2, ms.getNrsalas());
+        updateMuseu.setInt(3, ms.getCod());
+        updatePTuristico.executeUpdate();
+        updateMuseu.executeUpdate();
+    }
+    
+    public void deleteMuseu(Museu ms){
+        try{
+            deleteMuseu.setInt(1,ms.getCod());
+            deleteMuseu.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
     public ArrayList<Museu> loadAllMuseu(){
         ArrayList<Museu> list = new ArrayList<>();
         ResultSet rs;
@@ -62,7 +90,7 @@ public class MuseuDAO {
                 list.add(new Museu(rs.getInt("codpt"),
                 rs.getString("nome"),
                 rs.getString("endereco"),
-                null,
+                new Cidade(rs.getInt("codcd"),"","",0),
                 rs.getString("descricao"),
                 LocalDate.parse(rs.getDate("dtfundacao").toString()),
                 rs.getInt("nrsalas")));
@@ -83,7 +111,7 @@ public class MuseuDAO {
                 list.add(new Museu(rs.getInt("codpt"),
                 rs.getString("nome"),
                 rs.getString("endereco"),
-                null,
+                cd,
                 rs.getString("descricao"),
                 LocalDate.parse(rs.getDate("dtfundacao").toString()),
                 rs.getInt("nrsalas")));

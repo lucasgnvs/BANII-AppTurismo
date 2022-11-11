@@ -27,6 +27,12 @@ public class Home extends javax.swing.JPanel {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        upPacote1 = new view.UpPacote();
+        upAtracoes1 = new view.UpAtracoes();
+        upCliente1 = new view.UpCliente();
+        upCidade1 = new view.UpCidade();
+        upFundador1 = new view.UpFundador();
 
         setBackground(new java.awt.Color(255, 255, 204));
 
@@ -37,21 +43,37 @@ public class Home extends javax.swing.JPanel {
             }
         });
 
+        jTabbedPane1.setName(""); // NOI18N
+        jTabbedPane1.addTab("Pacotes", upPacote1);
+        jTabbedPane1.addTab("Atrações", upAtracoes1);
+
+        upCliente1.setName("Clientes"); // NOI18N
+        jTabbedPane1.addTab("Clientes", upCliente1);
+        jTabbedPane1.addTab("Cidades", upCidade1);
+        jTabbedPane1.addTab("Fundadores", upFundador1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(170, 170, 170)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(225, 225, 225)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(222, 222, 222)
+                .addGap(43, 43, 43)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(jTabbedPane1)
+                .addGap(50, 50, 50))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -71,5 +93,11 @@ public class Home extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private view.UpAtracoes upAtracoes1;
+    private view.UpCidade upCidade1;
+    private view.UpCliente upCliente1;
+    private view.UpFundador upFundador1;
+    private view.UpPacote upPacote1;
     // End of variables declaration//GEN-END:variables
 }

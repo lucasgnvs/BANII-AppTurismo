@@ -22,8 +22,11 @@ import model.entity.Museu;
 public class FundadorDAO {
     private static FundadorDAO instance;
     private PreparedStatement insertFundador;
+    private PreparedStatement updateFundador;
+    private PreparedStatement deleteFundador;
     private PreparedStatement insertFundacao;
     private PreparedStatement selectAllFundador;
+    private PreparedStatement selectFundadorMuseu;
     
     public static FundadorDAO getInstance(){
        if (instance == null){
@@ -36,8 +39,11 @@ public class FundadorDAO {
         Connection con = Conexao.getConnection();
         try{
             insertFundador = con.prepareStatement("insert into fundadores (nome, dtnasc, dtmorte, nacionalidade, ativprof) values (?, ?, ?, ?, ?)");
+            updateFundador = con.prepareStatement("update fundadores set nome = ?, dtnasc = ?, dtmorte = ?, nacionalidade = ?, ativprof = ? where codf = ?");
+            deleteFundador = con.prepareStatement("delete from fundadores where codf = ?");
             insertFundacao = con.prepareStatement("insert into fundacao values (?, ?)");
             selectAllFundador = con.prepareStatement("select codf, nome, dtnasc, dtmorte, nacionalidade, ativprof from fundadores order by nome, dtnasc");
+            selectFundadorMuseu = con.prepareStatement("select codf, nome, nacionalidade from fundacao join fundadores using(codf) where codpt = ?");
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -57,6 +63,28 @@ public class FundadorDAO {
             
     }
     
+    public void updateFundador(Fundador fd) throws SQLException {
+        updateFundador.setString(1,fd.getNome());
+        updateFundador.setDate(2,Date.valueOf(fd.getDtnasc()));
+        if (fd.getDtmorte() != null){
+            updateFundador.setDate(3,Date.valueOf(fd.getDtmorte()));
+        }else{
+            updateFundador.setNull(3,Types.NULL);
+        }
+        updateFundador.setString(4,fd.getNacionalidade());
+        updateFundador.setString(5,fd.getAtivprof());
+        updateFundador.setInt(6, fd.getCod());
+        updateFundador.executeUpdate();
+    }
+    
+    public void deleteFundador(Fundador fd){
+        try{
+            deleteFundador.setInt(1,fd.getCod());
+            deleteFundador.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
     public void addFundacao(Fundador fd, Museu ms) throws SQLException {
         insertFundacao.setInt(1,fd.getCod());
         insertFundacao.setInt(2,ms.getCod());
@@ -76,8 +104,27 @@ public class FundadorDAO {
                 rs.getString("ativprof"));
                 try{
                     fd.setDtmorte(LocalDate.parse(rs.getDate("dtmorte").toString()));
-                }catch(Exception e){}//java.lang.NullPointerException
+                }catch(NullPointerException e){}
                 list.add(fd);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+    public ArrayList<Fundador> loadAllFundador(Museu ms){
+        ArrayList<Fundador> list = new ArrayList<>();
+        ResultSet rs;
+        try{
+            selectFundadorMuseu.setInt(1, ms.getCod());
+            rs = selectFundadorMuseu.executeQuery();
+            while(rs.next()){
+                list.add( new Fundador(rs.getInt("codf"),
+                rs.getString("nome"),
+                null,
+                rs.getString("nacionalidade"),
+                ""));
             }
         } catch (SQLException e) {
             e.printStackTrace();

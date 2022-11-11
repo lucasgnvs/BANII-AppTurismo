@@ -25,6 +25,7 @@ import model.entity.Igreja;
 import model.entity.Museu;
 import model.entity.Parque;
 import view.AddPacote;
+import view.UpPacote;
 
 /**
  *
@@ -82,6 +83,48 @@ public class PacoteController {
                   className == Parque.class.getName()){
             PacoteDAO.getInstance().addPontoTuristicoPacote((PontoTuristico)at, pc, data);
         }
+    }
+    
+    
+    public void updatePacote(UpPacote form) throws DateTimeParseException, SQLException {
+        int index = form.getjCBPacotes().getSelectedIndex();
+        Pacote pc = form.getListPacote().get(index);
+//        cp.set();
+//        PacoteDAO.getInstance().updatePacote(pc);
+    }
+
+    public void deletePacote(UpPacote form){
+        int index = form.getjCBPacotes().getSelectedIndex();
+        Pacote pc = form.getListPacote().get(index);
+//        PacoteDAO.getInstance().deletePacote(pc);
+    }
+     
+    public void showPacote(UpPacote form){
+        int index = form.getjCBPacotes().getSelectedIndex();
+        if(index == -1){
+            index = 0;
+        }
+        Pacote pc = form.getListPacote().get(index);
+        form.getjTFNome().setText(pc.getNome());
+        int indexcd = -1;
+        for (Cidade cd : form.getListCidade()) {
+            if (cd.getCod() == pc.getCidade().getCod()){
+                indexcd = form.getListCidade().indexOf(cd);
+                break;
+            }
+        }
+        form.getjCBCidade().setSelectedIndex(indexcd);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+        form.getjTFDtinicio().setText(pc.getDtinicio().format(format));
+        form.getjTFDtfim().setText(pc.getDtfim().format(format));
+        form.getjTFValor().setText("%.2f".formatted(pc.getValor()));
+        form.getjTFDisp().setText("%d".formatted(pc.getDisp()));
+        DefaultListModel<AtracaoInclusa> listmodel = new DefaultListModel<>();
+        ArrayList<AtracaoInclusa> listai = PacoteDAO.getInstance().loadAllAtracoes(pc);
+        for(AtracaoInclusa item : listai){
+            listmodel.addElement(item);
+        }
+        form.getjLtAtracoes().setModel(listmodel);
     }
     
     public ArrayList<Pacote> loadAllPacote(){

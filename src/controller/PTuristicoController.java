@@ -15,7 +15,6 @@ public class PTuristicoController {
     
     public void addPTuristico(AddPTuristico form) throws SQLException {
         String value = form.getButtonGroup1().getSelection().getActionCommand();
-        System.out.println(value);
         switch(value){
             case "casashow" -> new CasaShowController().addCasaShow(form);
             case "igreja" -> new IgrejaController().addIgreja(form);

@@ -20,6 +20,8 @@ import model.entity.Cidade;
 public class RestauranteDAO {
     private static RestauranteDAO instance;
     private PreparedStatement insertRestaurante;
+    private PreparedStatement updateRestaurante;
+    private PreparedStatement deleteRestaurante;
     private PreparedStatement selectAllRestaurante;
     private PreparedStatement selectRestauranteCidade;
 
@@ -34,6 +36,8 @@ public class RestauranteDAO {
         Connection con = Conexao.getConnection();
         try{
             insertRestaurante = con.prepareStatement("select add_restaurante(?, ?, ?, ?)");
+            updateRestaurante = con.prepareStatement("update restaurantes set nome = ?, endereco = ?, categoria = ?, codcd = ? where codr = ?");
+            deleteRestaurante = con.prepareStatement("delete from restaurantes where codr = ?");
             selectAllRestaurante = con.prepareStatement("select codr, nome, endereco, categoria, codcd from restaurantes order by nome");
             selectRestauranteCidade = con.prepareStatement("select codr, nome, endereco, categoria from restaurantes where codcd = ? order by nome");
         } catch (SQLException e){
@@ -50,17 +54,35 @@ public class RestauranteDAO {
         return rs.next() ? rs.getInt("add_restaurante") : -1;
     }
     
+    public void updateRestaurante(Restaurante rt) throws SQLException {
+        updateRestaurante.setString(1,rt.getNome());
+        updateRestaurante.setString(2,rt.getEndereco());
+        updateRestaurante.setInt(3,rt.getCategoria());
+        updateRestaurante.setInt(4,rt.getCidade().getCod());
+        updateRestaurante.setInt(5,rt.getCod());
+        updateRestaurante.executeUpdate();
+    }
+    
+    public void deleteRestaurante(Restaurante rt){
+        try{
+            deleteRestaurante.setInt(1,rt.getCod());
+            deleteRestaurante.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
     public ArrayList<Restaurante> loadAllRestaurante(){
         ArrayList<Restaurante> list = new ArrayList<>();
         ResultSet rs;
         try{
             rs = selectAllRestaurante.executeQuery();
-            ArrayList<String> categorias = new ArrayList<>(Arrays.asList("SIMPLES", "LUXO"));
+            ArrayList<String> categorias = new ArrayList<>(Arrays.asList("0","SIMPLES", "LUXO"));
             while(rs.next()){
                 list.add(new Restaurante(rs.getInt("codr"),
                 rs.getString("nome"),
                 rs.getString("endereco"),
-                null,
+                new Cidade(rs.getInt("codcd"),"","",0),
                 categorias.indexOf(rs.getString("categoria"))));
             }
         } catch (SQLException e) {
@@ -80,7 +102,7 @@ public class RestauranteDAO {
                 list.add(new Restaurante(rs.getInt("codr"),
                 rs.getString("nome"),
                 rs.getString("endereco"),
-                null,
+                cd,
                 categorias.indexOf(rs.getString("categoria"))));
             }
         } catch (SQLException e) {

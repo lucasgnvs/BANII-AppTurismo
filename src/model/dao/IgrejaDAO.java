@@ -21,6 +21,9 @@ import model.entity.Cidade;
 public class IgrejaDAO {
     private static IgrejaDAO instance;
     private PreparedStatement insertIgreja;
+    private PreparedStatement updatePTuristico;
+    private PreparedStatement updateIgreja;
+    private PreparedStatement deleteIgreja;
     private PreparedStatement selectAllIgreja;
     private PreparedStatement selectIgrejaCidade;
     
@@ -35,6 +38,9 @@ public class IgrejaDAO {
         Connection con = Conexao.getConnection();
         try{
             insertIgreja = con.prepareStatement("select add_igreja(?, ?, ?, ?, ?, ?)");
+            updatePTuristico = con.prepareStatement("update pturisticos set nome = ?, descricao = ?, endereco = ?, codcd = ? where codpt = ?");
+            updateIgreja = con.prepareStatement("update igrejas set data = ?, estilo = ? where codpt = ?");
+            deleteIgreja = con.prepareStatement("delete from pturisticos where codpt = ?");
             selectAllIgreja = con.prepareStatement("select codpt, nome, descricao, endereco, codcd, data, estilo from pturisticos join igrejas using(codpt) order by nome");
             selectIgrejaCidade = con.prepareStatement("select codpt, nome, descricao, endereco, data, estilo from pturisticos join igrejas using(codpt) where codcd = ? order by nome");
         } catch (SQLException e){
@@ -53,6 +59,29 @@ public class IgrejaDAO {
         return rs.next() ? rs.getInt("add_igreja") : -1;
     }
     
+    public void updateIgreja(Igreja ig) throws SQLException {
+        updatePTuristico.setString(1,ig.getNome());
+        updatePTuristico.setString(2,ig.getDescricao());
+        updatePTuristico.setString(3,ig.getEndereco());
+        updatePTuristico.setInt(4,ig.getCidade().getCod());
+        updatePTuristico.setInt(5,ig.getCod());
+        updateIgreja.setDate(1, Date.valueOf(ig.getData()));
+        updateIgreja.setString(2, ig.getEstilo());
+        updateIgreja.setInt(3,ig.getCod());
+        updatePTuristico.executeUpdate();
+        updateIgreja.executeUpdate();
+    }
+    
+    public void deleteIgreja(Igreja ig){
+        try{
+            deleteIgreja.setInt(1,ig.getCod());
+            deleteIgreja.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    
     public ArrayList<Igreja> loadAllIgreja(){
         ArrayList<Igreja> list = new ArrayList<>();
         ResultSet rs;
@@ -62,7 +91,7 @@ public class IgrejaDAO {
                 list.add(new Igreja(rs.getInt("codpt"),
                 rs.getString("nome"),
                 rs.getString("endereco"),
-                null,
+                new Cidade(rs.getInt("codcd"),"","",0),
                 rs.getString("descricao"),
                 LocalDate.parse(rs.getDate("data").toString()),
                 rs.getString("estilo")));
@@ -83,7 +112,7 @@ public class IgrejaDAO {
                 list.add(new Igreja(rs.getInt("codpt"),
                 rs.getString("nome"),
                 rs.getString("endereco"),
-                null,
+                cd,
                 rs.getString("descricao"),
                 LocalDate.parse(rs.getDate("data").toString()),
                 rs.getString("estilo")));

@@ -11,7 +11,9 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import model.dao.ClienteDAO;
 import model.entity.Cliente;
+import model.entity.Pacote;
 import view.AddCliente;
+import view.UpCliente;
 
 /**
  *
@@ -32,6 +34,48 @@ public class ClienteController {
                 email.isBlank() ? null : email,
                 telefone.isBlank() ? null : telefone);
         ClienteDAO.getInstance().addCliente(cl);
+    }
+    
+    public void updateCliente(UpCliente form) throws DateTimeParseException, SQLException {
+        int index = form.getjCBClientes().getSelectedIndex();
+        Cliente cl = form.getListCliente().get(index);
+        String nome = form.getjTFNome().getText();
+        String endereco = form.getjTFEndereco().getText();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+        String email = form.getjTFEmail().getText();
+        String telefone = form.getjTFTelefone().getText();
+        cl.setNome(nome.isBlank() ? null : nome);
+        cl.setEndereco(endereco.isBlank() ? null : endereco);
+        cl.setDtnasc(LocalDate.parse(form.getjTFDtnasc().getText(),format));
+        cl.setEmail(email.isBlank() ? null : email);
+        cl.setTelefone(telefone.isBlank() ? null : telefone);
+        ClienteDAO.getInstance().updateCliente(cl);
+    }
+
+    public void deleteCliente(UpCliente form){
+        int index = form.getjCBClientes().getSelectedIndex();
+        Cliente cl = form.getListCliente().get(index);
+        ClienteDAO.getInstance().deleteCliente(cl);
+    }
+     
+    public void showCliente(UpCliente form){
+        int index = form.getjCBClientes().getSelectedIndex();
+        if(index == -1){
+            index = 0;
+        }
+        Cliente cl = form.getListCliente().get(index);
+        form.getjTFNome().setText(cl.getNome());
+        form.getjTFEndereco().setText(cl.getEndereco());
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+        form.getjTFDtnasc().setText(cl.getDtnasc().format(format));
+        form.getjTFEmail().setText(cl.getEmail());
+        form.getjTFEmail().setText(cl.getEmail());
+        form.getjTFTelefone().setText(cl.getTelefone());
+        form.getjCBPacotes().removeAllItems();
+        ArrayList<Pacote> list = new ContratoController().loadAllPacote(cl);
+        for(Pacote item : list){
+            form.getjCBPacotes().addItem(item.toString());
+        }
     }
     
     public ArrayList<Cliente> loadAllCliente(){

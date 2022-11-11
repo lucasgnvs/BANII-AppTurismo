@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import model.entity.Hotel;
 import model.entity.Quarto;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -18,6 +20,7 @@ import java.sql.ResultSet;
 public class QuartoDAO {
     private static QuartoDAO instance;
     private PreparedStatement insertQuarto;
+    private PreparedStatement selectQuartoHotel;
     
     public static QuartoDAO getInstance(){
        if (instance == null){
@@ -30,6 +33,7 @@ public class QuartoDAO {
         Connection con = Conexao.getConnection();
         try{
             insertQuarto = con.prepareStatement("select add_quarto(?, ?, ?, ?, ?)");
+            selectQuartoHotel = con.prepareStatement("select nome, valor, nrquatos, nrhospedes from tipoquarto where codh = ?");
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -44,4 +48,25 @@ public class QuartoDAO {
         ResultSet rs = insertQuarto.executeQuery();
         return rs.next() ? rs.getInt("add_parque") : -1;
     }
+    
+    public ArrayList<Quarto> loadAllQuarto(Hotel ht){
+        ArrayList<Quarto> list = new ArrayList<>();
+        ResultSet rs;
+        try{
+            selectQuartoHotel.setInt(1, ht.getCod());
+            rs = selectQuartoHotel.executeQuery();
+            while(rs.next()){
+                ArrayList<String> nome = new ArrayList<>(Arrays.asList("0","SIMPLES", "LUXO", "SUPERLUXO"));
+                list.add(new Quarto(-1,
+                nome.indexOf(rs.getString("nome")),
+                rs.getFloat("valor"),
+                rs.getInt("nrquatos"),
+                rs.getInt("nrhospedes")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
 }
