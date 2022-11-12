@@ -27,6 +27,8 @@ import model.entity.Parque;
 import view.AddPacote;
 import view.UpPacote;
 
+enum ExecuteTipo{ADD,UPDATE,DELETE}
+
 /**
  *
  * @author User
@@ -38,7 +40,7 @@ public class PacoteController {
         float valor = Float.parseFloat(form.getjTFValor().getText());
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         int disp = Integer.parseInt(form.getjTFDisp().getText());
-        Cidade cidade = form.getListCidade().get(form.getjCBCidade().getSelectedIndex());
+        Cidade cidade = (Cidade) form.getjCBCidade().getSelectedItem();
         Pacote pc = new Pacote(-1,
                 nome.isBlank() ? null : nome,
                 valor,
@@ -70,54 +72,80 @@ public class PacoteController {
         PacoteDAO.getInstance().addPacoteInclusos(pc, datas);
     }
     
-    @Deprecated
-    private void addAtracaoPacote(AtracaoTuristica at, Pacote pc, LocalDate data) throws SQLException {
+    private void addAtracaoPacote(AtracaoTuristica at, Pacote pc, LocalDate data, ExecuteTipo opcao) throws SQLException {
         String className = at.getClass().getName();
         if(className == Hotel.class.getName()){
-            PacoteDAO.getInstance().addHotelPacote((Hotel)at, pc, data);
+            switch(opcao){
+                case ADD -> PacoteDAO.getInstance().addHotelPacote((Hotel)at, pc, data);
+                case UPDATE -> PacoteDAO.getInstance().updateHotelPacote((Hotel)at, pc, data);
+                case DELETE -> PacoteDAO.getInstance().deleteHotelPacote((Hotel)at, pc, data);
+            }
         } else if(className == Restaurante.class.getName()){
-            PacoteDAO.getInstance().addRestaurantePacote((Restaurante)at, pc, data);
+            switch(opcao){
+                case ADD -> PacoteDAO.getInstance().addRestaurantePacote((Restaurante)at, pc, data);
+                case UPDATE -> PacoteDAO.getInstance().updateRestaurantePacote((Restaurante)at, pc, data);
+                case DELETE -> PacoteDAO.getInstance().deleteRestaurantePacote((Restaurante)at, pc, data);
+            }
         } else if(className == CasaShow.class.getName() ||
                   className == Igreja.class.getName() ||
                   className == Museu.class.getName() ||
                   className == Parque.class.getName()){
-            PacoteDAO.getInstance().addPontoTuristicoPacote((PontoTuristico)at, pc, data);
+            switch(opcao){
+                case ADD -> PacoteDAO.getInstance().addPontoTuristicoPacote((PontoTuristico)at, pc, data);
+                case UPDATE -> PacoteDAO.getInstance().updatePontoTuristicoPacote((PontoTuristico)at, pc, data);
+                case DELETE -> PacoteDAO.getInstance().deletePontoTuristicoPacote((PontoTuristico)at, pc, data);
+            }
         }
     }
     
-    
     public void updatePacote(UpPacote form) throws DateTimeParseException, SQLException {
-        int index = form.getjCBPacotes().getSelectedIndex();
-        Pacote pc = form.getListPacote().get(index);
-//        cp.set();
-//        PacoteDAO.getInstance().updatePacote(pc);
+        Pacote pc = (Pacote) form.getjCBPacotes().getSelectedItem();
+        String nome = form.getjTFNome().getText();
+        float valor = Float.parseFloat(form.getjTFValor().getText());
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+        int disp = Integer.parseInt(form.getjTFDisp().getText());
+        Cidade cidade = (Cidade) form.getjCBCidade().getSelectedItem();
+        pc.setNome(nome.isBlank() ? null : nome);
+        pc.setValor(valor);
+        pc.setDtinicio(LocalDate.parse(form.getjTFDtinicio().getText(),format));
+        pc.setDtfim(LocalDate.parse(form.getjTFDtfim().getText(),format));
+        pc.setDisp(disp);
+        pc.setCidade(cidade);
+        PacoteDAO.getInstance().updatePacote(pc);
+        ArrayList<AtracaoInclusa> list = form.getjLtAtracoesAsList();
+        ArrayList<AtracaoInclusa> listdb = PacoteDAO.getInstance().loadAllAtracoes(pc);
+        for(AtracaoInclusa ai : new ArrayList<>(list)){
+            for(AtracaoInclusa aidb : new ArrayList<>(listdb)){
+                if(ai.getAtracaoTuristica().getCod() == aidb.getAtracaoTuristica().getCod()){
+                    list.remove(ai);
+                    listdb.remove(aidb);
+                    addAtracaoPacote(ai.getAtracaoTuristica(), pc, ai.getData(), ExecuteTipo.UPDATE);
+                }
+            }
+        }
+        for(AtracaoInclusa ai : list){
+            addAtracaoPacote(ai.getAtracaoTuristica(), pc, ai.getData(), ExecuteTipo.ADD);
+        }
+        for(AtracaoInclusa aidb : listdb){
+            addAtracaoPacote(aidb.getAtracaoTuristica(), pc, aidb.getData(), ExecuteTipo.DELETE);
+        }
+        
     }
 
     public void deletePacote(UpPacote form){
-        int index = form.getjCBPacotes().getSelectedIndex();
-        Pacote pc = form.getListPacote().get(index);
-//        PacoteDAO.getInstance().deletePacote(pc);
+        Pacote pc = (Pacote) form.getjCBPacotes().getSelectedItem();
+        PacoteDAO.getInstance().deletePacote(pc);
     }
      
     public void showPacote(UpPacote form){
-        int index = form.getjCBPacotes().getSelectedIndex();
-        if(index == -1){
-            index = 0;
-        }
-        Pacote pc = form.getListPacote().get(index);
+        Pacote pc = (Pacote) form.getjCBPacotes().getSelectedItem();
         form.getjTFNome().setText(pc.getNome());
-        int indexcd = -1;
-        for (Cidade cd : form.getListCidade()) {
-            if (cd.getCod() == pc.getCidade().getCod()){
-                indexcd = form.getListCidade().indexOf(cd);
-                break;
-            }
-        }
-        form.getjCBCidade().setSelectedIndex(indexcd);
+        Cidade cidade = form.getjCBCidadeAsList().stream().filter(cd -> cd.getCod() == pc.getCidade().getCod()).findFirst().get();
+        form.getjCBCidade().setSelectedItem(cidade);
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         form.getjTFDtinicio().setText(pc.getDtinicio().format(format));
         form.getjTFDtfim().setText(pc.getDtfim().format(format));
-        form.getjTFValor().setText("%.2f".formatted(pc.getValor()));
+        form.getjTFValor().setText(Float.toString(pc.getValor()));
         form.getjTFDisp().setText("%d".formatted(pc.getDisp()));
         DefaultListModel<AtracaoInclusa> listmodel = new DefaultListModel<>();
         ArrayList<AtracaoInclusa> listai = PacoteDAO.getInstance().loadAllAtracoes(pc);

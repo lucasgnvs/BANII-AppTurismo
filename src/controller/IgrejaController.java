@@ -24,7 +24,7 @@ public class IgrejaController {
     public void addIgreja(AddPTuristico form) throws SQLException {
         String nome = form.getjTFNome().getText();
         String endereco = form.getjTFEndereco().getText();
-        Cidade cidade = form.getListCidade().get(form.getjCBCidade().getSelectedIndex());
+        Cidade cidade = (Cidade) form.getjCBCidade().getSelectedItem();
         String descricao = form.getjTADescricao().getText();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         String estilo = form.getjTFIgrejaEstilo().getText();
@@ -41,14 +41,25 @@ public class IgrejaController {
     public void updateIgreja(UpAtracoes form) throws DateTimeParseException, SQLException {
         int index = form.getjCBAtracoes().getSelectedIndex();
         Igreja ig = form.getListIgreja().get(index);
-//        ig.set();
-//        IgrejaDAO.getInstance().updateIgreja(ig);
+        String nome = form.getjTFNome().getText();
+        String endereco = form.getjTFEndereco().getText();
+        Cidade cidade = (Cidade) form.getjCBCidade().getSelectedItem();
+        String descricao = form.getjTAIgrejaDescricao().getText();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+        String estilo = form.getjTFIgrejaEstilo().getText();
+        ig.setNome(nome.isBlank() ? null : nome);
+        ig.setEndereco(endereco.isBlank() ? null : endereco);
+        ig.setCidade(cidade);
+        ig.setDescricao(descricao.isBlank() ? null : descricao);
+        ig.setData(LocalDate.parse(form.getjTFIgrejaData().getText(),format));
+        ig.setEstilo(estilo.isBlank() ? null : estilo);
+        IgrejaDAO.getInstance().updateIgreja(ig);
     }
 
     public void deleteIgreja(UpAtracoes form){
         int index = form.getjCBAtracoes().getSelectedIndex();
         Igreja ig = form.getListIgreja().get(index);
-//        IgrejaDAO.getInstance().deleteIgreja(ig);
+        IgrejaDAO.getInstance().deleteIgreja(ig);
     }
      
     public void showIgreja(UpAtracoes form){
@@ -59,14 +70,8 @@ public class IgrejaController {
         Igreja ig = form.getListIgreja().get(index);
         form.getjTFNome().setText(ig.getNome());
         form.getjTFEndereco().setText(ig.getEndereco());
-        int indexcd = -1;
-        for (Cidade cd : form.getListCidade()) {
-            if (cd.getCod() == ig.getCidade().getCod()){
-                indexcd = form.getListCidade().indexOf(cd);
-                break;
-            }
-        }
-        form.getjCBCidade().setSelectedIndex(indexcd);
+        Cidade cidade = form.getjCBCidadeAsList().stream().filter(cd -> cd.getCod() == ig.getCidade().getCod()).findFirst().get();
+        form.getjCBCidade().setSelectedItem(cidade);
         form.getjTAIgrejaDescricao().setText(ig.getDescricao());
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         form.getjTFIgrejaData().setText(ig.getData().format(format));

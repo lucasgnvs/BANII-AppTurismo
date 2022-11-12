@@ -6,7 +6,6 @@ package view;
 
 import controller.CidadeController;
 import controller.RestauranteController;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.DefaultComboBoxModel;
 import model.entity.Cidade;
@@ -17,23 +16,18 @@ import model.entity.Cidade;
  */
 public class AddRestaurante extends javax.swing.JPanel {
 
-    private final ArrayList<Cidade> listCidade;
-    
     /**
      * Creates new form AddRestaurante
      */
     public AddRestaurante() {
         initComponents();
-        listCidade = new ArrayList<>();
         jCBCidade.setModel(new DefaultComboBoxModel<>());
     }
     
     private void loadCidade(){
-        getListCidade().clear();
-        getListCidade().addAll(new CidadeController().loadAllCidade());
-        jCBCidade.removeAllItems();
-        for(Cidade item: getListCidade()){
-            jCBCidade.addItem(item.toString());
+        getjCBCidade().removeAllItems();
+        for(Cidade item: new CidadeController().loadAllCidade()){
+            getjCBCidade().addItem(item);
         }
     }
 
@@ -85,8 +79,6 @@ public class AddRestaurante extends javax.swing.JPanel {
         jRBCat1.setActionCommand("1");
 
         jTFEndereco.setToolTipText("Rua, Número, Bairro");
-
-        jCBCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cid 1", "Cid 2", "Cid 3", "Cid 4" }));
 
         buttonGroup1.add(jRBCat2);
         jRBCat2.setText("Luxo");
@@ -200,7 +192,7 @@ public class AddRestaurante extends javax.swing.JPanel {
     }//GEN-LAST:event_formComponentShown
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        getListCidade().clear();
+        getjCBCidade().removeAllItems();
         jBLimpar.doClick();
     }//GEN-LAST:event_formComponentHidden
 
@@ -209,7 +201,7 @@ public class AddRestaurante extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBConcluir;
     private javax.swing.JButton jBLimpar;
-    private javax.swing.JComboBox<String> jCBCidade;
+    private javax.swing.JComboBox<Cidade> jCBCidade;
     private javax.swing.JLabel jLCategoria;
     private javax.swing.JLabel jLCidade;
     private javax.swing.JLabel jLEndereco;
@@ -225,7 +217,7 @@ public class AddRestaurante extends javax.swing.JPanel {
         return buttonGroup1;
     }
 
-    public javax.swing.JComboBox<String> getjCBCidade() {
+    public javax.swing.JComboBox<Cidade> getjCBCidade() {
         return jCBCidade;
     }
 
@@ -235,10 +227,6 @@ public class AddRestaurante extends javax.swing.JPanel {
 
     public javax.swing.JTextField getjTFNome() {
         return jTFNome;
-    }
-    
-    public ArrayList<Cidade> getListCidade() {
-        return listCidade;
     }
     
 }

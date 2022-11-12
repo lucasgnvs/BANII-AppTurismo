@@ -7,7 +7,6 @@ package view;
 import controller.RestauranteController;
 import controller.CidadeController;
 import controller.HotelController;
-import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import model.entity.Cidade;
@@ -19,40 +18,31 @@ import model.entity.Restaurante;
  */
 public class AddHotel extends javax.swing.JPanel {
 
-    private final ArrayList<Cidade> listCidade;
-    private final ArrayList<Restaurante> listRestaurante;
-    
     /**
      * Creates new form AddHotel
      */
     public AddHotel() {
         initComponents();
-        listCidade = new ArrayList<>();
-        listRestaurante = new ArrayList<>();
         jCBCidade.setModel(new DefaultComboBoxModel<>());
         jCBRestaurante.setModel(new DefaultComboBoxModel<>());
     }
     
     private void loadCidade(){
-        getListCidade().clear();
-        getListCidade().addAll(new CidadeController().loadAllCidade());
-        jCBCidade.removeAllItems();
-        for(Cidade item: listCidade){
-            jCBCidade.addItem(item.toString());
+        getjCBCidade().removeAllItems();
+        for(Cidade item: new CidadeController().loadAllCidade()){
+            getjCBCidade().addItem(item);
         }
     }
     
     private void loadRestaurante(){
-        int index = jCBCidade.getSelectedIndex();
-        try{
-            Cidade cd = getListCidade().get(index == -1 ? 0 : index);
-            getListRestaurante().clear();
-            getListRestaurante().addAll( new RestauranteController().loadAllRestaurante(cd));
-            jCBRestaurante.removeAllItems();
-            for(Restaurante item: getListRestaurante()){
-                jCBRestaurante.addItem(item.toString());
-            }
-        }catch(IndexOutOfBoundsException e){}
+        Cidade cd = (Cidade) getjCBCidade().getSelectedItem();
+        if(cd == null){
+            cd = getjCBCidade().getItemAt(0);
+        }
+        getjCBRestaurante().removeAllItems();
+        for(Restaurante item: new RestauranteController().loadAllRestaurante(cd)){
+            getjCBRestaurante().addItem(item);
+        }
     }
 
     /**
@@ -134,7 +124,6 @@ public class AddHotel extends javax.swing.JPanel {
 
         jLRestaurante.setText("Restaurante:");
 
-        jCBRestaurante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Res 1", "Res 2" }));
         jCBRestaurante.setEnabled(false);
 
         jCkBRestaurante.addActionListener(new java.awt.event.ActionListener() {
@@ -145,10 +134,9 @@ public class AddHotel extends javax.swing.JPanel {
 
         jLCidade.setText("Cidade:");
 
-        jCBCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cid 1", "Cid 2" }));
-        jCBCidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBCidadeActionPerformed(evt);
+        jCBCidade.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBCidadeItemStateChanged(evt);
             }
         });
 
@@ -472,31 +460,33 @@ public class AddHotel extends javax.swing.JPanel {
         getjTFValor3().setEnabled(!value);
     }//GEN-LAST:event_jCkBQuartos3ActionPerformed
 
-    private void jCBCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCidadeActionPerformed
-        if(getjCkBRestaurante().isSelected()){
-            getjCkBRestaurante().doClick();
-        }
-        loadRestaurante();
-        getjCkBRestaurante().setEnabled(!getListRestaurante().isEmpty());
-    }//GEN-LAST:event_jCBCidadeActionPerformed
-
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         loadCidade();
     }//GEN-LAST:event_formComponentShown
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        getListCidade().clear();
-        getListRestaurante().clear();
+        getjCBCidade().removeAllItems();
+        getjCBRestaurante().removeAllItems();
         jBLimpar.doClick();
     }//GEN-LAST:event_formComponentHidden
+
+    private void jCBCidadeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBCidadeItemStateChanged
+        if(evt.getStateChange() == java.awt.event.ItemEvent.SELECTED){
+            if(getjCkBRestaurante().isSelected()){
+                getjCkBRestaurante().doClick();
+            }
+            loadRestaurante();
+            getjCkBRestaurante().setEnabled(getjCBRestaurante().getModel().getSize() != 0);
+        }
+    }//GEN-LAST:event_jCBCidadeItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBConcluir;
     private javax.swing.JButton jBLimpar;
-    private javax.swing.JComboBox<String> jCBCidade;
-    private javax.swing.JComboBox<String> jCBRestaurante;
+    private javax.swing.JComboBox<Cidade> jCBCidade;
+    private javax.swing.JComboBox<Restaurante> jCBRestaurante;
     private javax.swing.JCheckBox jCkBQuartos1;
     private javax.swing.JCheckBox jCkBQuartos2;
     private javax.swing.JCheckBox jCkBQuartos3;
@@ -534,11 +524,11 @@ public class AddHotel extends javax.swing.JPanel {
         return buttonGroup1;
     }
 
-    public javax.swing.JComboBox<String> getjCBCidade() {
+    public javax.swing.JComboBox<Cidade> getjCBCidade() {
         return jCBCidade;
     }
 
-    public javax.swing.JComboBox<String> getjCBRestaurante() {
+    public javax.swing.JComboBox<Restaurante> getjCBRestaurante() {
         return jCBRestaurante;
     }
 
@@ -554,14 +544,6 @@ public class AddHotel extends javax.swing.JPanel {
         return jCkBRestaurante;
     }
     
-    public ArrayList<Cidade> getListCidade() {
-        return listCidade;
-    }
-    
-    public ArrayList<Restaurante> getListRestaurante() {
-        return listRestaurante;
-    }
-
     public javax.swing.JCheckBox getjCkBQuartos1() {
         return jCkBQuartos1;
     }

@@ -6,7 +6,6 @@ package view;
 
 import controller.ClienteController;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.entity.Cliente;
 
@@ -16,22 +15,18 @@ import model.entity.Cliente;
  */
 public class UpCliente extends javax.swing.JPanel {
 
-    private final ArrayList<Cliente> listCliente;
     
     /**
      * Creates new form addCliente
      */
     public UpCliente() {
         initComponents();
-        listCliente = new ArrayList<>();
     }
     
     private void loadCliente(){
-        getListCliente().clear();
-        getListCliente().addAll(new ClienteController().loadAllCliente());
         getjCBClientes().removeAllItems();
-        for(Cliente item: getListCliente()){
-            getjCBClientes().addItem(item.toString());
+        for(Cliente item: new ClienteController().loadAllCliente()){
+            getjCBClientes().addItem(item);
         }
     }
     
@@ -118,9 +113,9 @@ public class UpCliente extends javax.swing.JPanel {
         jTFDtnasc.setToolTipText("dd/mm/aaaa");
         jTFDtnasc.setEnabled(false);
 
-        jCBClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBClientesActionPerformed(evt);
+        jCBClientes.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBClientesItemStateChanged(evt);
             }
         });
 
@@ -235,20 +230,12 @@ public class UpCliente extends javax.swing.JPanel {
     }//GEN-LAST:event_jBExcluirActionPerformed
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        getListCliente().clear();
+        getjCBClientes().removeAllItems();
     }//GEN-LAST:event_formComponentHidden
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         loadCliente();
     }//GEN-LAST:event_formComponentShown
-
-    private void jCBClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBClientesActionPerformed
-        if(jBEditar.getText() == "Cancelar"){
-            toggleEnabled();
-            jBEditar.setText("Editar");
-        }
-        new ClienteController().showCliente(this);
-    }//GEN-LAST:event_jCBClientesActionPerformed
 
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
         String message = "Dados do cliente atualizados com sucesso!";
@@ -271,12 +258,22 @@ public class UpCliente extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jBSalvarActionPerformed
 
+    private void jCBClientesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBClientesItemStateChanged
+        if(evt.getStateChange() == java.awt.event.ItemEvent.SELECTED){
+            if(jBEditar.getText() == "Cancelar"){
+                toggleEnabled();
+                jBEditar.setText("Editar");
+            }
+            new ClienteController().showCliente(this);
+        }
+    }//GEN-LAST:event_jCBClientesItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBEditar;
     private javax.swing.JButton jBExcluir;
     private javax.swing.JButton jBSalvar;
-    private javax.swing.JComboBox<String> jCBClientes;
+    private javax.swing.JComboBox<Cliente> jCBClientes;
     private javax.swing.JComboBox<String> jCBPacotes;
     private javax.swing.JLabel jLDtnasc;
     private javax.swing.JLabel jLEmail;
@@ -290,10 +287,6 @@ public class UpCliente extends javax.swing.JPanel {
     private javax.swing.JTextField jTFNome;
     private javax.swing.JTextField jTFTelefone;
     // End of variables declaration//GEN-END:variables
-
-    public ArrayList<Cliente> getListCliente() {
-        return listCliente;
-    }
     
     public javax.swing.JTextField getjTFDtnasc() {
         return jTFDtnasc;
@@ -315,7 +308,7 @@ public class UpCliente extends javax.swing.JPanel {
         return jTFTelefone;
     }
 
-    public javax.swing.JComboBox<String> getjCBClientes() {
+    public javax.swing.JComboBox<Cliente> getjCBClientes() {
         return jCBClientes;
     }
 

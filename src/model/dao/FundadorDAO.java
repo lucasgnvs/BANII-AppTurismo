@@ -25,6 +25,7 @@ public class FundadorDAO {
     private PreparedStatement updateFundador;
     private PreparedStatement deleteFundador;
     private PreparedStatement insertFundacao;
+    private PreparedStatement deleteFundacao;
     private PreparedStatement selectAllFundador;
     private PreparedStatement selectFundadorMuseu;
     
@@ -42,6 +43,7 @@ public class FundadorDAO {
             updateFundador = con.prepareStatement("update fundadores set nome = ?, dtnasc = ?, dtmorte = ?, nacionalidade = ?, ativprof = ? where codf = ?");
             deleteFundador = con.prepareStatement("delete from fundadores where codf = ?");
             insertFundacao = con.prepareStatement("insert into fundacao values (?, ?)");
+            deleteFundacao = con.prepareStatement("delete from fundacao where codf = ? and codpt = ?");
             selectAllFundador = con.prepareStatement("select codf, nome, dtnasc, dtmorte, nacionalidade, ativprof from fundadores order by nome, dtnasc");
             selectFundadorMuseu = con.prepareStatement("select codf, nome, nacionalidade from fundacao join fundadores using(codf) where codpt = ?");
         } catch (SQLException e){
@@ -85,10 +87,21 @@ public class FundadorDAO {
             e.printStackTrace();
         }
     }
+    
     public void addFundacao(Fundador fd, Museu ms) throws SQLException {
         insertFundacao.setInt(1,fd.getCod());
         insertFundacao.setInt(2,ms.getCod());
         insertFundacao.executeUpdate();
+    }
+    
+    public void deleteFundacao(Fundador fd, Museu ms){
+        try{
+            deleteFundacao.setInt(1,fd.getCod());
+            deleteFundacao.setInt(2,ms.getCod());
+            deleteFundacao.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
     
     public ArrayList<Fundador> loadAllFundador(){

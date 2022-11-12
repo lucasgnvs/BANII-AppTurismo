@@ -29,8 +29,7 @@ public class CidadeController {
     }
     
     public void updateCidade(UpCidade form) throws SQLException {
-        int index = form.getjCBCidades().getSelectedIndex();
-        Cidade cd = form.getListCidade().get(index);
+        Cidade cd = (Cidade) form.getjCBCidades().getSelectedItem();
         String nome = form.getjTFNome().getText();
         String estado = form.getjCBEstado().getSelectedItem().toString();
         int populacao = Integer.parseInt(form.getjTFPopulacao().getText());
@@ -41,17 +40,12 @@ public class CidadeController {
     }
 
     public void deleteCidade(UpCidade form){
-        int index = form.getjCBCidades().getSelectedIndex();
-        Cidade cd = form.getListCidade().get(index);
+        Cidade cd = (Cidade) form.getjCBCidades().getSelectedItem();
         CidadeDAO.getInstance().deleteCidade(cd);
     }
      
     public void showCidade(UpCidade form){
-        int index = form.getjCBCidades().getSelectedIndex();
-        if(index == -1){
-            index = 0;
-        }
-        Cidade cd = form.getListCidade().get(index);
+        Cidade cd = (Cidade) form.getjCBCidades().getSelectedItem();
         form.getjTFNome().setText(cd.getNome());
         form.getjCBEstado().setSelectedItem(cd.getEstado());
         form.getjTFPopulacao().setText("%d".formatted(cd.getPopulacao()));

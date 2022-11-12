@@ -37,9 +37,8 @@ public class FundadorController {
         FundadorDAO.getInstance().addFundador(fd);
     }
 
-    public void updateFundador(UpFundador form) throws SQLException {
-        int index = form.getjCBFundadores().getSelectedIndex();
-        Fundador fd = form.getListFundador().get(index);
+    public void updateFundador(UpFundador form) throws DateTimeParseException, SQLException {
+        Fundador fd = (Fundador) form.getjCBFundadores().getSelectedItem();
         String nome = form.getjTFNome().getText();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         String nacionalidade = form.getjTFNacionalidade().getText();
@@ -50,22 +49,19 @@ public class FundadorController {
         fd.setAtivprof(ativprof.isBlank() ? null : ativprof);
         if(form.getjCkBMorte().isSelected()){
             fd.setDtmorte(LocalDate.parse(form.getjTFDtmorte().getText(),format));
+        }else{
+            fd.setDtmorte(null);
         }
         FundadorDAO.getInstance().updateFundador(fd);
     }
 
     public void deleteFundador(UpFundador form){
-        int index = form.getjCBFundadores().getSelectedIndex();
-        Fundador fd = form.getListFundador().get(index);
+        Fundador fd = (Fundador) form.getjCBFundadores().getSelectedItem();
         FundadorDAO.getInstance().deleteFundador(fd);
     }
      
     public void showFundador(UpFundador form){
-        int index = form.getjCBFundadores().getSelectedIndex();
-        if(index == -1){
-            index = 0;
-        }
-        Fundador fd = form.getListFundador().get(index);
+        Fundador fd = (Fundador) form.getjCBFundadores().getSelectedItem();
         form.getjTFNome().setText(fd.getNome());
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         form.getjTFDtnasc().setText(fd.getDtnasc().format(format));

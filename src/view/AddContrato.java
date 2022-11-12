@@ -7,7 +7,6 @@ package view;
 import controller.PacoteController;
 import controller.ClienteController;
 import controller.ContratoController;
-import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import model.entity.Pacote;
@@ -19,35 +18,26 @@ import model.entity.Cliente;
  */
 public class AddContrato extends javax.swing.JPanel {
 
-    private final ArrayList<Pacote> listPacote;
-    private final ArrayList<Cliente> listCliente;
-    
     /**
      * Creates new form AddVenda
      */
     public AddContrato() {
         initComponents();
-        listPacote = new ArrayList<>();
-        listCliente = new ArrayList<>();
         jCBPacote.setModel(new DefaultComboBoxModel<>());
         jCBCliente.setModel(new DefaultComboBoxModel<>());
     }
     
-    private void loadPacote(){
-        getListPacote().clear();
-        getListPacote().addAll(new PacoteController().loadAllPacote());
-        jCBPacote.removeAllItems();
-        for(Pacote item: getListPacote()){
-            jCBPacote.addItem(item.toString());
+    private void loadPacote(){      
+        getjCBPacote().removeAllItems();
+        for(Pacote item: new PacoteController().loadAllPacote()){
+            getjCBPacote().addItem(item);
         }
     }
     
     private void loadCliente(){
-        getListCliente().clear();
-        getListCliente().addAll(new ClienteController().loadAllCliente());
-        jCBCliente.removeAllItems();
-        for(Cliente item: getListCliente()){
-            jCBCliente.addItem(item.toString());
+        getjCBCliente().removeAllItems();
+        for(Cliente item: new ClienteController().loadAllCliente()){
+            getjCBCliente().addItem(item);
         }
     }
 
@@ -96,10 +86,6 @@ public class AddContrato extends javax.swing.JPanel {
         jLPacote.setText("Pacote:");
 
         jLCliente.setText("Cliente:");
-
-        jCBCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cli 1", "Cli 2", "Cli 3", "Cli 4" }));
-
-        jCBPacote.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pac 1", "Pac 2", "Pac 3", "Pac 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -173,8 +159,8 @@ public class AddContrato extends javax.swing.JPanel {
     }//GEN-LAST:event_jBLimparActionPerformed
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        getListPacote().clear();
-        getListCliente().clear();
+        getjCBPacote().removeAllItems();
+        getjCBCliente().removeAllItems();
         jBLimpar.doClick();
     }//GEN-LAST:event_formComponentHidden
 
@@ -187,26 +173,18 @@ public class AddContrato extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBConcluir;
     private javax.swing.JButton jBLimpar;
-    private javax.swing.JComboBox<String> jCBCliente;
-    private javax.swing.JComboBox<String> jCBPacote;
+    private javax.swing.JComboBox<Cliente> jCBCliente;
+    private javax.swing.JComboBox<Pacote> jCBPacote;
     private javax.swing.JLabel jLCliente;
     private javax.swing.JLabel jLInserir;
     private javax.swing.JLabel jLPacote;
     // End of variables declaration//GEN-END:variables
-
-    public ArrayList<Pacote> getListPacote() {
-        return listPacote;
-    }
     
-    public ArrayList<Cliente> getListCliente() {
-        return listCliente;
-    }
-    
-    public javax.swing.JComboBox<String> getjCBCliente() {
+    public javax.swing.JComboBox<Cliente> getjCBCliente() {
         return jCBCliente;
     }
 
-    public javax.swing.JComboBox<String> getjCBPacote() {
+    public javax.swing.JComboBox<Pacote> getjCBPacote() {
         return jCBPacote;
     }
     

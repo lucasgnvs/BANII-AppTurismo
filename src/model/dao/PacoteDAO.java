@@ -30,10 +30,18 @@ import model.entity.Cidade;
 public class PacoteDAO {
     private static PacoteDAO instance;
     private PreparedStatement insertPacote;
+    private PreparedStatement updatePacote;
+    private PreparedStatement deletePacote;
     private PreparedStatement insertPacoteFunc;
     private PreparedStatement insertHT;
+    private PreparedStatement updateHT;
+    private PreparedStatement deleteHT;
     private PreparedStatement insertRT;
+    private PreparedStatement updateRT;
+    private PreparedStatement deleteRT;
     private PreparedStatement insertPT;
+    private PreparedStatement updatePT;
+    private PreparedStatement deletePT;
     private PreparedStatement selectHT;
     private PreparedStatement selectRT;
     private PreparedStatement selectPTCS;
@@ -53,10 +61,18 @@ public class PacoteDAO {
         Connection con = Conexao.getConnection();
         try{
             insertPacote = con.prepareStatement("insert into pacotes (nome, valor, dtinicio, dtfim, disp, codcd) values (?, ?, ?, ?, ?, ?) returning codp");
+            updatePacote = con.prepareStatement("update pacotes set nome = ?, valor = ?, dtinicio = ?, dtfim = ?, disp = ?, codcd = ? where codp = ?");
+            deletePacote = con.prepareStatement("delete from pacotes where codp = ?");
             insertPacoteFunc = con.prepareStatement("select add_pacote(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             insertHT = con.prepareStatement("insert into htsinclusos values (?, ?, ?)");
+            updateHT = con.prepareStatement("update htsinclusos set dia = ? where codp = ? and codh = ?");
+            deleteHT = con.prepareStatement("delete from htsinclusos where codp = ? and codh = ?");
             insertRT = con.prepareStatement("insert into rtsinclusos values (?, ?, ?)");
+            updateRT = con.prepareStatement("update rtsinclusos set dia = ? where codp = ? and codr = ?");
+            deleteRT = con.prepareStatement("delete from rtsinclusos where codp = ? and codr = ?");
             insertPT = con.prepareStatement("insert into ptsinclusos values (?, ?, ?)");
+            updatePT = con.prepareStatement("update ptsinclusos set dia = ? where codp = ? and codpt = ?");
+            deletePT = con.prepareStatement("delete from ptsinclusos where codp = ? and codpt = ?");
             selectHT = con.prepareStatement("select codh, nome, endereco, dia from htsinclusos join hoteis using (codh) where codp = ?");
             selectRT = con.prepareStatement("select codr, nome, endereco, dia from rtsinclusos join restaurantes using (codr) where codp = ?");
             selectPTCS = con.prepareStatement("select codpt, nome, endereco, dia from ptsinclusos join pturisticos using (codpt) join casashow using(codpt) where codp = ?");
@@ -108,6 +124,23 @@ public class PacoteDAO {
         insertHT.executeUpdate();
     }
     
+    public void updateHotelPacote(Hotel ht, Pacote pc, LocalDate dt) throws SQLException {
+        updateHT.setDate(1,Date.valueOf(dt));
+        updateHT.setInt(2,pc.getCod());
+        updateHT.setInt(3,ht.getCod());
+        updateHT.executeUpdate();
+    }
+    
+    public void deleteHotelPacote(Hotel ht, Pacote pc, LocalDate dt){
+        try{
+            deleteHT.setInt(1,pc.getCod());
+            deleteHT.setInt(2,ht.getCod());
+            deleteHT.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
     public void addRestaurantePacote(Restaurante rt, Pacote pc, LocalDate dt) throws SQLException {
         insertRT.setInt(1,pc.getCod());
         insertRT.setInt(2,rt.getCod());
@@ -115,11 +148,65 @@ public class PacoteDAO {
         insertRT.executeUpdate();
     }
     
+    public void updateRestaurantePacote(Restaurante rt, Pacote pc, LocalDate dt) throws SQLException {
+        updateRT.setDate(1,Date.valueOf(dt));
+        updateRT.setInt(2,pc.getCod());
+        updateRT.setInt(3,rt.getCod());
+        updateRT.executeUpdate();
+    }
+    
+    public void deleteRestaurantePacote(Restaurante rt, Pacote pc, LocalDate dt){
+        try{
+            deleteRT.setInt(1,pc.getCod());
+            deleteRT.setInt(2,rt.getCod());
+            deleteRT.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
     public void addPontoTuristicoPacote(PontoTuristico pt, Pacote pc, LocalDate dt) throws SQLException {
         insertPT.setInt(1,pc.getCod());
         insertPT.setInt(2,pt.getCod());
         insertPT.setDate(3,Date.valueOf(dt));
         insertPT.executeUpdate();
+    }
+    
+    public void updatePontoTuristicoPacote(PontoTuristico pt, Pacote pc, LocalDate dt) throws SQLException {
+        updatePT.setDate(1,Date.valueOf(dt));
+        updatePT.setInt(2,pc.getCod());
+        updatePT.setInt(3,pt.getCod());
+        updatePT.executeUpdate();
+    }
+    
+    public void deletePontoTuristicoPacote(PontoTuristico pt, Pacote pc, LocalDate dt){
+        try{
+            deletePT.setInt(1,pc.getCod());
+            deletePT.setInt(2,pt.getCod());
+            deletePT.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void updatePacote(Pacote pc) throws SQLException {
+        updatePacote.setString(1,pc.getNome());
+        updatePacote.setFloat(2,pc.getValor());
+        updatePacote.setDate(3,Date.valueOf(pc.getDtinicio()));
+        updatePacote.setDate(4,Date.valueOf(pc.getDtfim()));
+        updatePacote.setInt(5,pc.getDisp());
+        updatePacote.setInt(6,pc.getCidade().getCod());
+        updatePacote.setInt(7,pc.getCod());
+        updatePacote.executeUpdate();
+    }
+    
+    public void deletePacote(Pacote pc){
+        try{
+            deletePacote.setInt(1,pc.getCod());
+            deletePacote.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
         
     public ArrayList<Pacote> loadAllPacote(){

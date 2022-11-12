@@ -37,8 +37,7 @@ public class ClienteController {
     }
     
     public void updateCliente(UpCliente form) throws DateTimeParseException, SQLException {
-        int index = form.getjCBClientes().getSelectedIndex();
-        Cliente cl = form.getListCliente().get(index);
+        Cliente cl = (Cliente) form.getjCBClientes().getSelectedItem();
         String nome = form.getjTFNome().getText();
         String endereco = form.getjTFEndereco().getText();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
@@ -53,17 +52,12 @@ public class ClienteController {
     }
 
     public void deleteCliente(UpCliente form){
-        int index = form.getjCBClientes().getSelectedIndex();
-        Cliente cl = form.getListCliente().get(index);
+        Cliente cl = (Cliente) form.getjCBClientes().getSelectedItem();
         ClienteDAO.getInstance().deleteCliente(cl);
     }
      
     public void showCliente(UpCliente form){
-        int index = form.getjCBClientes().getSelectedIndex();
-        if(index == -1){
-            index = 0;
-        }
-        Cliente cl = form.getListCliente().get(index);
+        Cliente cl = (Cliente) form.getjCBClientes().getSelectedItem();
         form.getjTFNome().setText(cl.getNome());
         form.getjTFEndereco().setText(cl.getEndereco());
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");

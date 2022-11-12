@@ -18,8 +18,8 @@ import view.AddContrato;
 public class ContratoController {
     
     public void addContrato(AddContrato form) throws SQLException {
-        Pacote pc = form.getListPacote().get(form.getjCBPacote().getSelectedIndex());
-        Cliente cl = form.getListCliente().get(form.getjCBCliente().getSelectedIndex());
+        Pacote pc = (Pacote) form.getjCBPacote().getSelectedItem();
+        Cliente cl = (Cliente) form.getjCBCliente().getSelectedItem();
         ContratoDAO.getInstance().addContrato(pc, cl);
     }
     

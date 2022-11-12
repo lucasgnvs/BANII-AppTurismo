@@ -21,7 +21,7 @@ public class ParqueController {
     public void addParque(AddPTuristico form) throws SQLException {
         String nome = form.getjTFNome().getText();
         String endereco = form.getjTFEndereco().getText();
-        Cidade cidade = form.getListCidade().get(form.getjCBCidade().getSelectedIndex());
+        Cidade cidade = (Cidade) form.getjCBCidade().getSelectedItem();
         String descricao = form.getjTADescricao().getText();
         int nratracoes = Integer.parseInt(form.getjTFParqueNrAtracoes().getText());
         int capacidade = Integer.parseInt(form.getjTFParqueCapacidade().getText());
@@ -38,14 +38,25 @@ public class ParqueController {
     public void updateParque(UpAtracoes form) throws SQLException {
         int index = form.getjCBAtracoes().getSelectedIndex();
         Parque pq = form.getListParque().get(index);
-//        pq.set();
-//        ParqueDAO.getInstance().updateParque(pq);
+        String nome = form.getjTFNome().getText();
+        String endereco = form.getjTFEndereco().getText();
+        Cidade cidade = (Cidade) form.getjCBCidade().getSelectedItem();
+        String descricao = form.getjTAParqueDescricao().getText();
+        int nratracoes = Integer.parseInt(form.getjTFParqueNrAtracoes().getText());
+        int capacidade = Integer.parseInt(form.getjTFParqueCapacidade().getText());
+        pq.setNome(nome.isBlank() ? null : nome);
+        pq.setEndereco(endereco.isBlank() ? null : endereco);
+        pq.setCidade(cidade);
+        pq.setDescricao(descricao.isBlank() ? null : descricao);
+        pq.setNratracoes(nratracoes);
+        pq.setCapacidade(capacidade);
+        ParqueDAO.getInstance().updateParque(pq);
     }
 
     public void deleteParque(UpAtracoes form){
         int index = form.getjCBAtracoes().getSelectedIndex();
         Parque pq = form.getListParque().get(index);
-//        ParqueDAO.getInstance().deleteParque(pq);
+        ParqueDAO.getInstance().deleteParque(pq);
     }
      
     public void showParque(UpAtracoes form){
@@ -56,14 +67,8 @@ public class ParqueController {
         Parque pq = form.getListParque().get(index);
         form.getjTFNome().setText(pq.getNome());
         form.getjTFEndereco().setText(pq.getEndereco());
-        int indexcd = -1;
-        for (Cidade cd : form.getListCidade()) {
-            if (cd.getCod() == pq.getCidade().getCod()){
-                indexcd = form.getListCidade().indexOf(cd);
-                break;
-            }
-        }
-        form.getjCBCidade().setSelectedIndex(indexcd);
+        Cidade cidade = form.getjCBCidadeAsList().stream().filter(cd -> cd.getCod() == pq.getCidade().getCod()).findFirst().get();
+        form.getjCBCidade().setSelectedItem(cidade);
         form.getjTAParqueDescricao().setText(pq.getDescricao());
         form.getjTFParqueNrAtracoes().setText("%d".formatted(pq.getNratracoes()));
         form.getjTFParqueCapacidade().setText("%d".formatted(pq.getCapacidade()));

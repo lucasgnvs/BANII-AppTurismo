@@ -113,31 +113,21 @@
     <Component class="javax.swing.JComboBox" name="jCBCliente">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Cli 1"/>
-            <StringItem index="1" value="Cli 2"/>
-            <StringItem index="2" value="Cli 3"/>
-            <StringItem index="3" value="Cli 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Cliente&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="jCBPacote">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Pac 1"/>
-            <StringItem index="1" value="Pac 2"/>
-            <StringItem index="2" value="Pac 3"/>
-            <StringItem index="3" value="Pac 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Pacote&gt;"/>
       </AuxValues>
     </Component>
   </SubComponents>

@@ -34,7 +34,6 @@ import model.entity.AtracaoInclusa;
  */
 public class AddPacote extends javax.swing.JPanel {
 
-    private final ArrayList<Cidade> listCidade;
     private final ArrayList<Hotel> listHotel;
     private final ArrayList<Restaurante> listRestaurante;
     private final ArrayList<CasaShow> listCasaShow;
@@ -47,7 +46,6 @@ public class AddPacote extends javax.swing.JPanel {
      */
     public AddPacote() {
         initComponents();
-        listCidade = new ArrayList<>();
         listHotel = new ArrayList<>();
         listRestaurante = new ArrayList<>();
         listCasaShow = new ArrayList<>();
@@ -58,11 +56,9 @@ public class AddPacote extends javax.swing.JPanel {
     }
     
     private void loadCidade(){
-        getListCidade().clear();
-        getListCidade().addAll(new CidadeController().loadAllCidade());
         getjCBCidade().removeAllItems();
-        for(Cidade item: getListCidade()){
-            getjCBCidade().addItem(item.toString());
+        for(Cidade item: new CidadeController().loadAllCidade()){
+            getjCBCidade().addItem(item);
         }
     }
 
@@ -187,10 +183,9 @@ public class AddPacote extends javax.swing.JPanel {
 
         jLDisp.setText("Vagas:");
 
-        jCBCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cid 1", "Cid 2", "Cid 3", "Cid 4" }));
-        jCBCidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBCidadeActionPerformed(evt);
+        jCBCidade.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBCidadeItemStateChanged(evt);
             }
         });
 
@@ -477,17 +472,6 @@ public class AddPacote extends javax.swing.JPanel {
         getjCBAtracoes().setEnabled(enable);
     }//GEN-LAST:event_jRBTipoParqueActionPerformed
 
-    private void jCBCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCidadeActionPerformed
-        getjLtAtracoes().setModel(new DefaultListModel<>());
-        loadHotel();
-        loadRestaurante();
-        loadCasaShow();
-        loadIgreja();
-        loadMuseu();
-        loadParque();
-        jRBTipoHotel.doClick();
-    }//GEN-LAST:event_jCBCidadeActionPerformed
-
     private void jTFDataCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTFDataCaretUpdate
         jBAdicionar.setEnabled(getjCBAtracoes().isEnabled() && !getjTFData().getText().isBlank());
     }//GEN-LAST:event_jTFDataCaretUpdate
@@ -498,7 +482,7 @@ public class AddPacote extends javax.swing.JPanel {
     }//GEN-LAST:event_formComponentShown
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        getListCidade().clear();
+        getjCBCidade().removeAllItems();
         getListHotel().clear();
         getListRestaurante().clear();
         getListCasaShow().clear();
@@ -524,6 +508,19 @@ public class AddPacote extends javax.swing.JPanel {
         }catch(IllegalArgumentException e){}
     }//GEN-LAST:event_jBLimparActionPerformed
 
+    private void jCBCidadeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBCidadeItemStateChanged
+        if(evt.getStateChange() == java.awt.event.ItemEvent.SELECTED){
+            getjLtAtracoes().setModel(new DefaultListModel<>());
+            loadHotel();
+            loadRestaurante();
+            loadCasaShow();
+            loadIgreja();
+            loadMuseu();
+            loadParque();
+            jRBTipoHotel.doClick();
+        }
+    }//GEN-LAST:event_jCBCidadeItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -532,7 +529,7 @@ public class AddPacote extends javax.swing.JPanel {
     private javax.swing.JButton jBLimpar;
     private javax.swing.JButton jBRemover;
     private javax.swing.JComboBox<AtracaoTuristica> jCBAtracoes;
-    private javax.swing.JComboBox<String> jCBCidade;
+    private javax.swing.JComboBox<Cidade> jCBCidade;
     private javax.swing.JLabel jLAtracoes;
     private javax.swing.JLabel jLCidade;
     private javax.swing.JLabel jLData;
@@ -560,10 +557,6 @@ public class AddPacote extends javax.swing.JPanel {
     private javax.swing.JTextField jTFValor;
     // End of variables declaration//GEN-END:variables
 
-    public ArrayList<Cidade> getListCidade() {
-        return listCidade;
-    }
-    
     public ArrayList<Hotel> getListHotel() {
         return listHotel;
     }
@@ -588,7 +581,7 @@ public class AddPacote extends javax.swing.JPanel {
         return listParque;
     }
 
-    public javax.swing.JComboBox<String> getjCBCidade() {
+    public javax.swing.JComboBox<Cidade> getjCBCidade() {
         return jCBCidade;
     }
 

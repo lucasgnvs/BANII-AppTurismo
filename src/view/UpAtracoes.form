@@ -49,25 +49,21 @@
                           </Group>
                           <Component id="jLEndereco" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Component id="jPAtracoes" max="32767" attributes="0"/>
+                  <Component id="jCBAtracoes" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLNome" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPAtracoes" max="32767" attributes="0"/>
-                          <Component id="jCBAtracoes" alignment="1" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLNome" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jCBCidade" max="32767" attributes="0"/>
-                                  <Component id="jTFNome" max="32767" attributes="0"/>
-                                  <Component id="jTFEndereco" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="jCBCidade" max="32767" attributes="0"/>
+                          <Component id="jTFNome" max="32767" attributes="0"/>
+                          <Component id="jTFEndereco" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -141,17 +137,12 @@
     <Component class="javax.swing.JComboBox" name="jCBCidade">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Cid 1"/>
-            <StringItem index="1" value="Cid 2"/>
-            <StringItem index="2" value="Cid 3"/>
-            <StringItem index="3" value="Cid 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Cidade&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRBTipoHotel">
@@ -169,6 +160,7 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="jCBAtracoes">
       <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCBAtracoesItemStateChanged"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBAtracoesActionPerformed"/>
       </Events>
       <AuxValues>
@@ -422,15 +414,12 @@
             <Component class="javax.swing.JComboBox" name="jCBHotelRestaurante">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
-                    <StringItem index="0" value="Res 1"/>
-                    <StringItem index="1" value="Res 2"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Restaurante&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JCheckBox" name="jCkBHotelRestaurante">
@@ -821,17 +810,12 @@
             <Component class="javax.swing.JComboBox" name="jCBCasashowRestaurante">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Res 1"/>
-                    <StringItem index="1" value="Res 2"/>
-                    <StringItem index="2" value="Res 3"/>
-                    <StringItem index="3" value="Res 4"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Restaurante&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JCheckBox" name="jCkBCasashowRestaurante">
@@ -915,14 +899,13 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jSPDescricao1" max="32767" attributes="0"/>
+                          <Component id="jSPDescricao1" pref="588" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="jTFIgrejaData" min="-2" pref="75" max="-2" attributes="0"/>
                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                               <Component id="jLIgrejaEstilo" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jTFIgrejaEstilo" min="-2" pref="90" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="276" max="32767" attributes="0"/>
+                              <Component id="jTFIgrejaEstilo" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -1099,17 +1082,12 @@
             <Component class="javax.swing.JComboBox" name="jCBMuseuFundadores">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Fund 1"/>
-                    <StringItem index="1" value="Fund 2"/>
-                    <StringItem index="2" value="Fund 3"/>
-                    <StringItem index="3" value="Fund 4"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Fundador&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="jBMuseuAdicionar">

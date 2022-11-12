@@ -307,17 +307,12 @@
             <Component class="javax.swing.JComboBox" name="jCBCasashowRestaurante">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Res 1"/>
-                    <StringItem index="1" value="Res 2"/>
-                    <StringItem index="2" value="Res 3"/>
-                    <StringItem index="3" value="Res 4"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Restaurante&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JCheckBox" name="jCkBCasashowRestaurante">
@@ -515,16 +510,11 @@
             <Component class="javax.swing.JComboBox" name="jCBMuseuFundadores">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Fund 1"/>
-                    <StringItem index="1" value="Fund 2"/>
-                    <StringItem index="2" value="Fund 3"/>
-                    <StringItem index="3" value="Fund 4"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Fundador&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="jBMuseuAdicionar">
@@ -675,19 +665,14 @@
     <Component class="javax.swing.JComboBox" name="jCBCidade">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Cid 1"/>
-            <StringItem index="1" value="Cid 2"/>
-            <StringItem index="2" value="Cid 3"/>
-            <StringItem index="3" value="Cid 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBCidadeActionPerformed"/>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCBCidadeItemStateChanged"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Cidade&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">

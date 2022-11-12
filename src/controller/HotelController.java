@@ -27,7 +27,7 @@ public class HotelController {
     public void addHotel(AddHotel form) throws SQLException {
         String nome = form.getjTFNome().getText();
         String endereco = form.getjTFEndereco().getText();
-        Cidade cidade = form.getListCidade().get(form.getjCBCidade().getSelectedIndex());
+        Cidade cidade = (Cidade) form.getjCBCidade().getSelectedItem();
         int categoria = Integer.parseInt(form.getButtonGroup1().getSelection().getActionCommand());
         Hotel ht = new Hotel(-1,
                 nome.isBlank() ? null : nome,
@@ -35,7 +35,7 @@ public class HotelController {
                 cidade,
                 categoria);
         if (form.getjCkBRestaurante().isSelected()){
-            Restaurante rt = form.getListRestaurante().get(form.getjCBRestaurante().getSelectedIndex());
+            Restaurante rt = (Restaurante) form.getjCBRestaurante().getSelectedItem();
             ht.setRestaurante(rt);
         }
         int codh = HotelDAO.getInstance().addHotel(ht);
@@ -69,14 +69,82 @@ public class HotelController {
     public void updateHotel(UpAtracoes form) throws DateTimeParseException, SQLException {
         int index = form.getjCBAtracoes().getSelectedIndex();
         Hotel ht = form.getListHotel().get(index);
-//        ht.setCategoria();
-//        HotelDAO.getInstance().updateHotel(ht);
+        String nome = form.getjTFNome().getText();
+        String endereco = form.getjTFEndereco().getText();
+        Cidade cidade = (Cidade) form.getjCBCidade().getSelectedItem();
+        int categoria = Integer.parseInt(form.getButtonGroupHotelCat().getSelection().getActionCommand());
+        ht.setNome(nome.isBlank() ? null : nome);
+        ht.setEndereco(endereco.isBlank() ? null : endereco);
+        ht.setCidade(cidade);
+        ht.setCategoria(categoria);
+        if (form.getjCkBHotelRestaurante().isSelected()){
+            Restaurante rt = (Restaurante) form.getjCBHotelRestaurante().getSelectedItem();
+            ht.setRestaurante(rt);
+        }else{
+            ht.setRestaurante(null);
+        }
+        HotelDAO.getInstance().updateHotel(ht);
+        ArrayList<Quarto> listq = QuartoDAO.getInstance().loadAllQuarto(ht);
+        boolean[] listqa = {false,false,false,false};
+        int[] listqcod = {-1,-1,-1,-1};
+        for(Quarto qt : listq){
+            listqa[qt.getNome()] = true;
+            listqcod[qt.getNome()] = qt.getCod();
+        }
+        if(form.getjCkBHotelQuartos1().isSelected()){
+            Quarto qt1 = new Quarto(listqcod[1],
+            1,
+            Float.parseFloat(form.getjTFValor1().getText()),
+            Integer.parseInt(form.getjTFNrquartos1().getText()),
+            Integer.parseInt(form.getjTFNrhospedes1().getText()));
+            if(listqa[1]){
+                QuartoDAO.getInstance().updateQuarto(qt1);
+            }else{
+                QuartoDAO.getInstance().addQuarto(ht, qt1);
+            }
+        }else{
+            if(listqa[1]){
+                QuartoDAO.getInstance().deleteQuarto(new Quarto(listqcod[1],-1,0,0,0));
+            }
+        }
+        if(form.getjCkBHotelQuartos2().isSelected()){
+            Quarto qt2 = new Quarto(listqcod[2],
+            2,
+            Float.parseFloat(form.getjTFValor2().getText()),
+            Integer.parseInt(form.getjTFNrquartos2().getText()),
+            Integer.parseInt(form.getjTFNrhospedes2().getText()));
+            if(listqa[2]){
+                QuartoDAO.getInstance().updateQuarto(qt2);
+            }else{
+                QuartoDAO.getInstance().addQuarto(ht, qt2);
+            }
+        }else{
+            if(listqa[2]){
+                QuartoDAO.getInstance().deleteQuarto(new Quarto(listqcod[2],-1,0,0,0));
+            }
+        }
+        if(form.getjCkBHotelQuartos3().isSelected()){
+            Quarto qt3 = new Quarto(listqcod[3],
+            3,
+            Float.parseFloat(form.getjTFValor3().getText()),
+            Integer.parseInt(form.getjTFNrquartos3().getText()),
+            Integer.parseInt(form.getjTFNrhospedes3().getText()));
+            if(listqa[3]){
+                QuartoDAO.getInstance().updateQuarto(qt3);
+            }else{
+                QuartoDAO.getInstance().addQuarto(ht, qt3);
+            }
+        }else{
+            if(listqa[3]){
+                QuartoDAO.getInstance().deleteQuarto(new Quarto(listqcod[3],-1,0,0,0));
+            }
+        }
     }
 
     public void deleteHotel(UpAtracoes form){
         int index = form.getjCBAtracoes().getSelectedIndex();
         Hotel ht = form.getListHotel().get(index);
-//        HotelDAO.getInstance().deleteHotel(ht);
+        HotelDAO.getInstance().deleteHotel(ht);
     }
      
     public void showHotel(UpAtracoes form){
@@ -87,22 +155,16 @@ public class HotelController {
         Hotel ht = form.getListHotel().get(index);
         form.getjTFNome().setText(ht.getNome());
         form.getjTFEndereco().setText(ht.getEndereco());
-        int indexcd = -1;
-        for (Cidade cd : form.getListCidade()) {
-            if (cd.getCod() == ht.getCidade().getCod()){
-                indexcd = form.getListCidade().indexOf(cd);
-                break;
-            }
-        }
-        form.getjCBCidade().setSelectedIndex(indexcd);
+        Cidade cidade = form.getjCBCidadeAsList().stream().filter(cd -> cd.getCod() == ht.getCidade().getCod()).findFirst().get();
+        form.getjCBCidade().setSelectedItem(cidade);
         ArrayList<JRadioButton> botao = new ArrayList<>(Arrays.asList(null,form.getjRBCat1(), form.getjRBCat2(), form.getjRBCat3(), form.getjRBCat4(), form.getjRBCat5()));
         form.getButtonGroupHotelCat().setSelected(botao.get(ht.getCategoria()).getModel(),true);
         form.getjCkBHotelRestaurante().setSelected(false);
         form.getjCBHotelRestaurante().removeAllItems();
         if(ht.getRestaurante() != null){    
-            ArrayList<Restaurante> listRestaurante = new RestauranteController().loadAllRestaurante(form.getListCidade().get(indexcd));
+            ArrayList<Restaurante> listRestaurante = new RestauranteController().loadAllRestaurante(cidade);
             for(Restaurante item : listRestaurante){
-                form.getjCBHotelRestaurante().addItem(item.toString());
+                form.getjCBHotelRestaurante().addItem(item);
             }
             int indexr = -1;
             for (Restaurante rt : listRestaurante) {
@@ -133,19 +195,19 @@ public class HotelController {
                     form.getjCkBHotelQuartos1().setSelected(true);
                     form.getjTFNrquartos1().setText("%d".formatted(qt.getNrquartos()));
                     form.getjTFNrhospedes1().setText("%d".formatted(qt.getNrhospedes()));
-                    form.getjTFValor1().setText("%.2f".formatted(qt.getValor()));
+                    form.getjTFValor1().setText(Float.toString(qt.getValor()));
                 }
                 case 2 -> {
                     form.getjCkBHotelQuartos2().setSelected(true);
                     form.getjTFNrquartos2().setText("%d".formatted(qt.getNrquartos()));
                     form.getjTFNrhospedes2().setText("%d".formatted(qt.getNrhospedes()));
-                    form.getjTFValor2().setText("%.2f".formatted(qt.getValor()));
+                    form.getjTFValor2().setText(Float.toString(qt.getValor()));
                 }
                 case 3 -> {
                     form.getjCkBHotelQuartos3().setSelected(true);
                     form.getjTFNrquartos3().setText("%d".formatted(qt.getNrquartos()));
                     form.getjTFNrhospedes3().setText("%d".formatted(qt.getNrhospedes()));
-                    form.getjTFValor3().setText("%.2f".formatted(qt.getValor()));
+                    form.getjTFValor3().setText(Float.toString(qt.getValor()));
                 }
             }
         }

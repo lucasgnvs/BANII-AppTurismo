@@ -55,9 +55,10 @@ public class RestauranteDAO {
     }
     
     public void updateRestaurante(Restaurante rt) throws SQLException {
+        ArrayList<String> categorias = new ArrayList<>(Arrays.asList("0","SIMPLES", "LUXO"));
         updateRestaurante.setString(1,rt.getNome());
         updateRestaurante.setString(2,rt.getEndereco());
-        updateRestaurante.setInt(3,rt.getCategoria());
+        updateRestaurante.setString(3,categorias.get(rt.getCategoria()));
         updateRestaurante.setInt(4,rt.getCidade().getCod());
         updateRestaurante.setInt(5,rt.getCod());
         updateRestaurante.executeUpdate();

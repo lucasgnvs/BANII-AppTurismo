@@ -11,6 +11,7 @@ import java.time.format.DateTimeParseException;
 import model.entity.AtracaoInclusa;
 import model.entity.AtracaoTuristica;
 import view.AddPacote;
+import view.UpPacote;
 
 /**
  *
@@ -26,7 +27,23 @@ public class AtracaoInclusaController {
         DefaultListModel<AtracaoInclusa> list = (DefaultListModel<AtracaoInclusa>) form.getjLtAtracoes().getModel();
         for(int index = 0; index < list.getSize(); index++){
             AtracaoInclusa item = list.get(index);
-            if(item.getData() == data || item.getAtracaoTuristica()==atracaoTuristica){
+            if(item.getAtracaoTuristica() == atracaoTuristica){
+                return;
+            }
+        }
+        list.addElement(atracaoInclusa);
+        form.getjLtAtracoes().setModel(list);
+    }
+    
+    public void addAtracao(UpPacote form) throws DateTimeParseException {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+        LocalDate data = LocalDate.parse(form.getjTFData().getText(),format);
+        AtracaoTuristica atracaoTuristica = (AtracaoTuristica) form.getjCBAtracoes().getSelectedItem();
+        AtracaoInclusa atracaoInclusa = new AtracaoInclusa(data, atracaoTuristica);
+        DefaultListModel<AtracaoInclusa> list = (DefaultListModel<AtracaoInclusa>) form.getjLtAtracoes().getModel();
+        for(int index = 0; index < list.getSize(); index++){
+            AtracaoInclusa item = list.get(index);
+            if(item.getAtracaoTuristica() == atracaoTuristica){
                 return;
             }
         }
@@ -35,6 +52,15 @@ public class AtracaoInclusaController {
     }
     
     public void removeAtracao(AddPacote form){
+        int index = form.getjLtAtracoes().getSelectedIndex();
+        DefaultListModel<AtracaoInclusa> list = (DefaultListModel<AtracaoInclusa>) form.getjLtAtracoes().getModel();
+        if (index != -1){
+            list.remove(index);
+        }
+        form.getjLtAtracoes().setModel(list);
+    }
+    
+    public void removeAtracao(UpPacote form){
         int index = form.getjLtAtracoes().getSelectedIndex();
         DefaultListModel<AtracaoInclusa> list = (DefaultListModel<AtracaoInclusa>) form.getjLtAtracoes().getModel();
         if (index != -1){

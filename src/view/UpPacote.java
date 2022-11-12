@@ -35,8 +35,6 @@ import model.entity.Pacote;
  */
 public class UpPacote extends javax.swing.JPanel {
 
-    private final ArrayList<Pacote> listPacote;
-    private final ArrayList<Cidade> listCidade;
     private final ArrayList<Hotel> listHotel;
     private final ArrayList<Restaurante> listRestaurante;
     private final ArrayList<CasaShow> listCasaShow;
@@ -49,8 +47,6 @@ public class UpPacote extends javax.swing.JPanel {
      */
     public UpPacote() {
         initComponents();
-        listPacote = new ArrayList<>();
-        listCidade = new ArrayList<>();
         listHotel = new ArrayList<>();
         listRestaurante = new ArrayList<>();
         listCasaShow = new ArrayList<>();
@@ -62,61 +58,69 @@ public class UpPacote extends javax.swing.JPanel {
     }
     
     private void loadPacote(){
-        getListPacote().clear();
-        getListPacote().addAll(new PacoteController().loadAllPacote());
         getjCBPacotes().removeAllItems();
-        for(Pacote item: getListPacote()){
-            getjCBPacotes().addItem(item.toString());
+        for(Pacote item: new PacoteController().loadAllPacote()){
+            getjCBPacotes().addItem(item);
         }
     }
     
     private void loadCidade(){
-        getListCidade().clear();
-        getListCidade().addAll(new CidadeController().loadAllCidade());
         getjCBCidade().removeAllItems();
-        for(Cidade item: getListCidade()){
-            getjCBCidade().addItem(item.toString());
+        for(Cidade item: new CidadeController().loadAllCidade()){
+            getjCBCidade().addItem(item);
         }
     }
 
     private void loadHotel(){
-        int index = getjCBCidade().getSelectedIndex();
-        Cidade cd = new CidadeController().loadAllCidade().get(index == -1 ? 0 : index);
+        Cidade cd = (Cidade) getjCBCidade().getSelectedItem();
+        if(cd == null){
+            cd = getjCBCidade().getItemAt(0);
+        }
         getListHotel().clear();
         getListHotel().addAll(new HotelController().loadAllHotel(cd));
     }
     
     private void loadRestaurante(){
-        int index = getjCBCidade().getSelectedIndex();
-        Cidade cd = new CidadeController().loadAllCidade().get(index == -1 ? 0 : index);
+        Cidade cd = (Cidade) getjCBCidade().getSelectedItem();
+        if(cd == null){
+            cd = getjCBCidade().getItemAt(0);
+        }
         getListRestaurante().clear();
         getListRestaurante().addAll(new RestauranteController().loadAllRestaurante(cd));
     }
     
     private void loadCasaShow(){
-        int index = getjCBCidade().getSelectedIndex();
-        Cidade cd = new CidadeController().loadAllCidade().get(index == -1 ? 0 : index);
+       Cidade cd = (Cidade) getjCBCidade().getSelectedItem();
+        if(cd == null){
+            cd = getjCBCidade().getItemAt(0);
+        }
         getListCasaShow().clear();
         getListCasaShow().addAll(new CasaShowController().loadAllCasaShow(cd));
     }
     
     private void loadIgreja(){
-        int index = getjCBCidade().getSelectedIndex();
-        Cidade cd = new CidadeController().loadAllCidade().get(index == -1 ? 0 : index);
+        Cidade cd = (Cidade) getjCBCidade().getSelectedItem();
+        if(cd == null){
+            cd = getjCBCidade().getItemAt(0);
+        }
         getListIgreja().clear();
         getListIgreja().addAll(new IgrejaController().loadAllIgreja(cd));
     }
     
     private void loadMuseu(){
-        int index = getjCBCidade().getSelectedIndex();
-        Cidade cd = new CidadeController().loadAllCidade().get(index == -1 ? 0 : index);
+        Cidade cd = (Cidade) getjCBCidade().getSelectedItem();
+        if(cd == null){
+            cd = getjCBCidade().getItemAt(0);
+        }
         getListMuseu().clear();
         getListMuseu().addAll(new MuseuController().loadAllMuseu(cd));
     }
     
     private void loadParque(){
-        int index = getjCBCidade().getSelectedIndex();
-        Cidade cd = new CidadeController().loadAllCidade().get(index == -1 ? 0 : index);
+        Cidade cd = (Cidade) getjCBCidade().getSelectedItem();
+        if(cd == null){
+            cd = getjCBCidade().getItemAt(0);
+        }
         getListParque().clear();
         getListParque().addAll(new ParqueController().loadAllParque(cd));
     }
@@ -126,6 +130,28 @@ public class UpPacote extends javax.swing.JPanel {
         for(Object item : list){
             getjCBAtracoes().addItem((AtracaoTuristica)item);
         }
+    }
+    
+    private void toggleEnabled(){
+        boolean enabled = !getjTFNome().isEnabled();
+        getjTFNome().setEnabled(enabled);
+        getjCBCidade().setEnabled(enabled);
+        getjTFDtinicio().setEnabled(enabled);
+        getjTFDtfim().setEnabled(enabled);
+        getjTFValor().setEnabled(enabled);
+        getjTFDisp().setEnabled(enabled);
+        getjTFData().setEnabled(enabled);
+        jRBTipoHotel.setEnabled(enabled);
+        jRBTipoRestaurante.setEnabled(enabled);
+        jRBTipoCasashow.setEnabled(enabled);
+        jRBTipoIgreja.setEnabled(enabled);
+        jRBTipoMuseu.setEnabled(enabled);
+        jRBTipoParque.setEnabled(enabled);
+        getjCBAtracoes().setEnabled(enabled);
+        getjLtAtracoes().setEnabled(enabled);
+        jBAdicionar.setEnabled(enabled);
+        jBRemover.setEnabled(enabled);
+        jBSalvar.setEnabled(enabled);
     }
     
     /**
@@ -202,11 +228,10 @@ public class UpPacote extends javax.swing.JPanel {
 
         jTFDisp.setEnabled(false);
 
-        jCBCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cid 1", "Cid 2", "Cid 3", "Cid 4" }));
         jCBCidade.setEnabled(false);
-        jCBCidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBCidadeActionPerformed(evt);
+        jCBCidade.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBCidadeItemStateChanged(evt);
             }
         });
 
@@ -325,6 +350,11 @@ public class UpPacote extends javax.swing.JPanel {
             }
         });
 
+        jCBPacotes.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBPacotesItemStateChanged(evt);
+            }
+        });
         jCBPacotes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBPacotesActionPerformed(evt);
@@ -465,16 +495,16 @@ public class UpPacote extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAdicionarActionPerformed
-//        try{
-//            new AtracaoInclusaController().addAtracao(this);
-//            getjTFData().setText("");
-//        }catch(DateTimeParseException e){
-//            JOptionPane.showMessageDialog(null,"O formato da data está incorreto. (dd/mm/aaaa)","Erro",JOptionPane.ERROR_MESSAGE);
-//        }
+        try{
+            new AtracaoInclusaController().addAtracao(this);
+            getjTFData().setText("");
+        }catch(DateTimeParseException e){
+            JOptionPane.showMessageDialog(null,"O formato da data está incorreto. (dd/mm/aaaa)","Erro",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jBAdicionarActionPerformed
 
     private void jBRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRemoverActionPerformed
-//        new AtracaoInclusaController().removeAtracao(this);
+        new AtracaoInclusaController().removeAtracao(this);
     }//GEN-LAST:event_jBRemoverActionPerformed
 
     private void jRBTipoHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTipoHotelActionPerformed
@@ -519,17 +549,6 @@ public class UpPacote extends javax.swing.JPanel {
         getjCBAtracoes().setEnabled(enable);
     }//GEN-LAST:event_jRBTipoParqueActionPerformed
 
-    private void jCBCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCidadeActionPerformed
-        getjLtAtracoes().setModel(new DefaultListModel<>());
-        loadHotel();
-        loadRestaurante();
-        loadCasaShow();
-        loadIgreja();
-        loadMuseu();
-        loadParque();
-        jRBTipoHotel.doClick();
-    }//GEN-LAST:event_jCBCidadeActionPerformed
-
     private void jTFDataCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTFDataCaretUpdate
         jBAdicionar.setEnabled(getjCBAtracoes().isEnabled() && !getjTFData().getText().isBlank());
     }//GEN-LAST:event_jTFDataCaretUpdate
@@ -537,10 +556,17 @@ public class UpPacote extends javax.swing.JPanel {
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         loadCidade();
         loadPacote();
+        loadHotel();
+        loadRestaurante();
+        loadCasaShow();
+        loadIgreja();
+        loadMuseu();
+        loadParque();
     }//GEN-LAST:event_formComponentShown
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        getListCidade().clear();
+        getjCBCidade().removeAllItems();
+        getjCBPacotes().removeAllItems();
         getListHotel().clear();
         getListRestaurante().clear();
         getListCasaShow().clear();
@@ -550,54 +576,85 @@ public class UpPacote extends javax.swing.JPanel {
     }//GEN-LAST:event_formComponentHidden
 
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
-//        String message = "Dados do cliente atualizados com sucesso!";
-//        String title = "Sucesso";
-//        int type = JOptionPane.INFORMATION_MESSAGE;
-//        try{
-//            new ClienteController().updateCliente(this);
-//            jBEditar.setText("Editar");
-//            toggleEnabled();
-//        }catch(DateTimeParseException e){
-//            message = "O formato da data está incorreto. (dd/mm/aaaa)";
-//            title = "Erro";
-//            type = JOptionPane.ERROR_MESSAGE;
-//        }catch(Exception e){
-//            message = "Ocorreu um erro ao atualizar os dados do cliente...\n\n" + e.getMessage().split("\n")[0];
-//            title = "Erro";
-//            type = JOptionPane.ERROR_MESSAGE;
-//        }finally{
-//            JOptionPane.showMessageDialog(null,message,title,type);
-//        }
+        String message = "Dados do pacote atualizados com sucesso!";
+        String title = "Sucesso";
+        int type = JOptionPane.INFORMATION_MESSAGE;
+        try{
+            new PacoteController().updatePacote(this);
+            jBEditar.setText("Editar");
+            toggleEnabled();
+        }catch(DateTimeParseException e){
+            message = "O formato da data está incorreto. (dd/mm/aaaa)";
+            title = "Erro";
+            type = JOptionPane.ERROR_MESSAGE;
+        }catch(Exception e){
+            message = "Ocorreu um erro ao atualizar os dados do pacote...\n\n" + e.getMessage().split("\n")[0];
+            title = "Erro";
+            type = JOptionPane.ERROR_MESSAGE;
+        }finally{
+            JOptionPane.showMessageDialog(null,message,title,type);
+        }
     }//GEN-LAST:event_jBSalvarActionPerformed
 
     private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
-//        toggleEnabled();
-//        if(jBEditar.getText() == "Editar"){
-//            jBEditar.setText("Cancelar");
-//        }else{
-//            jBEditar.setText("Editar");
-//            new ClienteController().showCliente(this);
-//        }
+        if(jBEditar.getText() == "Editar"){
+            jBEditar.setText("Cancelar");
+            toggleEnabled();
+            jRBTipoHotel.doClick();
+        }else{
+            jBEditar.setText("Editar");
+            new PacoteController().showPacote(this);
+            jRBTipoHotel.doClick();
+            getjCBAtracoes().removeAllItems();
+            toggleEnabled();
+        }
     }//GEN-LAST:event_jBEditarActionPerformed
 
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
-//        String message = "Confirmar exclusão do cliente";
-//        String title = "Exclusão";
-//        int type = JOptionPane.OK_CANCEL_OPTION;
-//        int response = JOptionPane.showConfirmDialog(null, message, title, type);
-//        if(response == 0){
-//            new ClienteController().deleteCliente(this);
-//            loadCliente();
-//        }
+        String message = "Confirmar exclusão do pacote";
+        String title = "Exclusão";
+        int type = JOptionPane.OK_CANCEL_OPTION;
+        int response = JOptionPane.showConfirmDialog(null, message, title, type);
+        if(response == 0){
+            new PacoteController().deletePacote(this);
+            loadPacote();
+        }
     }//GEN-LAST:event_jBExcluirActionPerformed
 
     private void jCBPacotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBPacotesActionPerformed
 //        if(jBEditar.getText() == "Cancelar"){
-//            toggleEnabled();
 //            jBEditar.setText("Editar");
+//            jRBTipoHotel.doClick();
+//            getjCBAtracoes().removeAllItems();
+//            toggleEnabled();
 //        }
-        new PacoteController().showPacote(this);
+//        new PacoteController().showPacote(this);
     }//GEN-LAST:event_jCBPacotesActionPerformed
+
+    private void jCBCidadeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBCidadeItemStateChanged
+        if(evt.getStateChange()== java.awt.event.ItemEvent.SELECTED){
+            getjLtAtracoes().setModel(new DefaultListModel<>());
+            loadHotel();
+            loadRestaurante();
+            loadCasaShow();
+            loadIgreja();
+            loadMuseu();
+            loadParque();
+            jRBTipoHotel.doClick();
+        }
+    }//GEN-LAST:event_jCBCidadeItemStateChanged
+
+    private void jCBPacotesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBPacotesItemStateChanged
+        if(evt.getStateChange()== java.awt.event.ItemEvent.SELECTED){
+                if(jBEditar.getText() == "Cancelar"){
+                jBEditar.setText("Editar");
+                jRBTipoHotel.doClick();
+                getjCBAtracoes().removeAllItems();
+                toggleEnabled();
+            }
+            new PacoteController().showPacote(this);
+        }
+    }//GEN-LAST:event_jCBPacotesItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -608,8 +665,8 @@ public class UpPacote extends javax.swing.JPanel {
     private javax.swing.JButton jBRemover;
     private javax.swing.JButton jBSalvar;
     private javax.swing.JComboBox<AtracaoTuristica> jCBAtracoes;
-    private javax.swing.JComboBox<String> jCBCidade;
-    private javax.swing.JComboBox<String> jCBPacotes;
+    private javax.swing.JComboBox<Cidade> jCBCidade;
+    private javax.swing.JComboBox<Pacote> jCBPacotes;
     private javax.swing.JLabel jLAtracoes;
     private javax.swing.JLabel jLCidade;
     private javax.swing.JLabel jLData;
@@ -636,10 +693,6 @@ public class UpPacote extends javax.swing.JPanel {
     private javax.swing.JTextField jTFValor;
     // End of variables declaration//GEN-END:variables
 
-    public ArrayList<Cidade> getListCidade() {
-        return listCidade;
-    }
-    
     public ArrayList<Hotel> getListHotel() {
         return listHotel;
     }
@@ -664,7 +717,7 @@ public class UpPacote extends javax.swing.JPanel {
         return listParque;
     }
 
-    public javax.swing.JComboBox<String> getjCBCidade() {
+    public javax.swing.JComboBox<Cidade> getjCBCidade() {
         return jCBCidade;
     }
 
@@ -700,12 +753,28 @@ public class UpPacote extends javax.swing.JPanel {
         return jCBAtracoes;
     }
 
-    public javax.swing.JComboBox<String> getjCBPacotes() {
+    public javax.swing.JComboBox<Pacote> getjCBPacotes() {
         return jCBPacotes;
     }
-
-    public ArrayList<Pacote> getListPacote() {
-        return listPacote;
+    
+    public java.util.ArrayList<AtracaoInclusa> getjLtAtracoesAsList() {
+        DefaultListModel<AtracaoInclusa> model = (DefaultListModel<AtracaoInclusa>) getjLtAtracoes().getModel();
+        int size = model.getSize();
+        ArrayList<AtracaoInclusa> list = new ArrayList<>();
+        for(int i = 0; i < size; i++){
+            list.add(model.elementAt(i));
+        }
+        return list;
     }
 
+    public java.util.ArrayList<Cidade> getjCBCidadeAsList() {
+        DefaultComboBoxModel<Cidade> model = (DefaultComboBoxModel<Cidade>) getjCBCidade().getModel();
+        int size = model.getSize();
+        ArrayList<Cidade> list = new ArrayList<>();
+        for(int i = 0; i < size; i++){
+            list.add(model.getElementAt(i));
+        }
+        return list;
+    }
+    
 }

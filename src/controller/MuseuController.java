@@ -27,7 +27,7 @@ public class MuseuController {
     public void addMuseu(AddPTuristico form) throws SQLException {
         String nome = form.getjTFNome().getText();
         String endereco = form.getjTFEndereco().getText();
-        Cidade cidade = form.getListCidade().get(form.getjCBCidade().getSelectedIndex());
+        Cidade cidade = (Cidade) form.getjCBCidade().getSelectedItem();
         String descricao = form.getjTADescricao().getText();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         int nrsalas = Integer.parseInt(form.getjTFMuseuNrsalas().getText());
@@ -48,14 +48,41 @@ public class MuseuController {
     public void updateMuseu(UpAtracoes form) throws DateTimeParseException, SQLException {
         int index = form.getjCBAtracoes().getSelectedIndex();
         Museu ms = form.getListMuseu().get(index);
-//        ms.set();
-//        MuseuDAO.getInstance().updateMuseu(ms);
+        String nome = form.getjTFNome().getText();
+        String endereco = form.getjTFEndereco().getText();
+        Cidade cidade = (Cidade) form.getjCBCidade().getSelectedItem();
+        String descricao = form.getjTAMuseuDescricao().getText();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+        int nrsalas = Integer.parseInt(form.getjTFMuseuNrsalas().getText());
+        ms.setNome(nome.isBlank() ? null : nome);
+        ms.setEndereco(endereco.isBlank() ? null : endereco);
+        ms.setCidade(cidade);
+        ms.setDescricao(descricao.isBlank() ? null : descricao);
+        ms.setDtfundacao(LocalDate.parse(form.getjTFMuseuData().getText(),format));
+        ms.setNrsalas(nrsalas);       
+        MuseuDAO.getInstance().updateMuseu(ms);
+        ArrayList<Fundador> list = form.getjLtMuseuFundadoresAsList();
+        ArrayList<Fundador> listdb = FundadorDAO.getInstance().loadAllFundador(ms);
+        for(Fundador fd : new ArrayList<>(list)){
+            for(Fundador fdb : new ArrayList<>(listdb)){
+                if(fd.getCod() == fdb.getCod()){
+                    list.remove(fd);
+                    listdb.remove(fdb);
+                }
+            }
+        }
+        for(Fundador fd : list){
+            FundadorDAO.getInstance().addFundacao(fd, ms);
+        }
+        for(Fundador fdb : listdb){
+            FundadorDAO.getInstance().deleteFundacao(fdb, ms);
+        }
     }
 
     public void deleteMuseu(UpAtracoes form){
         int index = form.getjCBAtracoes().getSelectedIndex();
         Museu ms = form.getListMuseu().get(index);
-//        MuseuDAO.getInstance().deleteMuseu(ms);
+        MuseuDAO.getInstance().deleteMuseu(ms);
     }
      
     public void showMuseu(UpAtracoes form){
@@ -66,14 +93,8 @@ public class MuseuController {
         Museu ms = form.getListMuseu().get(index);
         form.getjTFNome().setText(ms.getNome());
         form.getjTFEndereco().setText(ms.getEndereco());
-        int indexcd = -1;
-        for (Cidade cd : form.getListCidade()) {
-            if (cd.getCod() == ms.getCidade().getCod()){
-                indexcd = form.getListCidade().indexOf(cd);
-                break;
-            }
-        }
-        form.getjCBCidade().setSelectedIndex(indexcd);
+        Cidade cidade = form.getjCBCidadeAsList().stream().filter(cd -> cd.getCod() == ms.getCidade().getCod()).findFirst().get();
+        form.getjCBCidade().setSelectedItem(cidade);
         form.getjTAMuseuDescricao().setText(ms.getDescricao());
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         form.getjTFMuseuData().setText(ms.getDtfundacao().format(format));
@@ -81,7 +102,7 @@ public class MuseuController {
         form.getjCBMuseuFundadores().removeAllItems();
         ArrayList<Fundador> list = new FundadorController().loadAllFundador();
         for(Fundador item : list){
-            form.getjCBMuseuFundadores().addItem(item.toString());
+            form.getjCBMuseuFundadores().addItem(item);
         }
         DefaultListModel<Fundador> listmodel = new DefaultListModel<>();
         ArrayList<Fundador> listf = new FundadorController().loadAllFundador(ms);

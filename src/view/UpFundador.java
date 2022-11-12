@@ -6,7 +6,6 @@ package view;
 
 import controller.FundadorController;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.entity.Fundador;
 
@@ -16,23 +15,31 @@ import model.entity.Fundador;
  */
 public class UpFundador extends javax.swing.JPanel {
 
-    private final ArrayList<Fundador> listFundador;
-    
     /**
      * Creates new form AddFundador
      */
     public UpFundador() {
         initComponents();
-        listFundador = new ArrayList<>();
     }
     
     private void loadFundador(){
-        getListFundador().clear();
-        getListFundador().addAll(new FundadorController().loadAllFundador());
         getjCBFundadores().removeAllItems();
-        for(Fundador item: getListFundador()){
-            getjCBFundadores().addItem(item.toString());
+        for(Fundador item: new FundadorController().loadAllFundador()){
+            getjCBFundadores().addItem(item);
         }
+    }
+    
+    private void toggleEnabled(){
+        boolean enabled = !getjTFNome().isEnabled();
+        getjTFNome().setEnabled(enabled);
+        getjTFDtnasc().setEnabled(enabled);
+        getjCkBMorte().setEnabled(enabled);
+        if(getjCkBMorte().isSelected()){
+            getjTFDtmorte().setEnabled(enabled);
+        }
+        getjTFNacionalidade().setEnabled(enabled);
+        getjTFAtivprof().setEnabled(enabled);
+        jBSalvar.setEnabled(enabled);
     }
 
     /**
@@ -99,9 +106,9 @@ public class UpFundador extends javax.swing.JPanel {
             }
         });
 
-        jCBFundadores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBFundadoresActionPerformed(evt);
+        jCBFundadores.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBFundadoresItemStateChanged(evt);
             }
         });
 
@@ -201,75 +208,77 @@ public class UpFundador extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCkBMorteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCkBMorteActionPerformed
-//        boolean value = getjTFDtmorte().isEnabled();
-//        getjTFDtmorte().setText("");
-//        getjTFDtmorte().setEnabled(!value);
+        boolean value = getjTFDtmorte().isEnabled();
+        getjTFDtmorte().setText("");
+        getjTFDtmorte().setEnabled(!value);
     }//GEN-LAST:event_jCkBMorteActionPerformed
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        getListFundador().clear();
+        getjCBFundadores().removeAllItems();
     }//GEN-LAST:event_formComponentHidden
 
-    private void jCBFundadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBFundadoresActionPerformed
-        //        if(jBEditar.getText() == "Cancelar"){
-            //            toggleEnabled();
-            //            jBEditar.setText("Editar");
-            //        }
-        new FundadorController().showFundador(this);
-    }//GEN-LAST:event_jCBFundadoresActionPerformed
-
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
-        //        String message = "Dados do cliente atualizados com sucesso!";
-        //        String title = "Sucesso";
-        //        int type = JOptionPane.INFORMATION_MESSAGE;
-        //        try{
-            //            new ClienteController().updateCliente(this);
-            //            jBEditar.setText("Editar");
-            //            toggleEnabled();
-            //        }catch(DateTimeParseException e){
-            //            message = "O formato da data está incorreto. (dd/mm/aaaa)";
-            //            title = "Erro";
-            //            type = JOptionPane.ERROR_MESSAGE;
-            //        }catch(Exception e){
-            //            message = "Ocorreu um erro ao atualizar os dados do cliente...\n\n" + e.getMessage().split("\n")[0];
-            //            title = "Erro";
-            //            type = JOptionPane.ERROR_MESSAGE;
-            //        }finally{
-            //            JOptionPane.showMessageDialog(null,message,title,type);
-            //        }
+        String message = "Dados do fundador atualizados com sucesso!";
+        String title = "Sucesso";
+        int type = JOptionPane.INFORMATION_MESSAGE;
+        try{
+            new FundadorController().updateFundador(this);
+            jBEditar.setText("Editar");
+            toggleEnabled();
+        }catch(DateTimeParseException e){
+            message = "O formato da data está incorreto. (dd/mm/aaaa)";
+            title = "Erro";
+            type = JOptionPane.ERROR_MESSAGE;
+        }catch(Exception e){
+            message = "Ocorreu um erro ao atualizar os dados do fundador...\n\n" + e.getMessage().split("\n")[0];
+            title = "Erro";
+            type = JOptionPane.ERROR_MESSAGE;
+        }finally{
+            JOptionPane.showMessageDialog(null,message,title,type);
+        }
     }//GEN-LAST:event_jBSalvarActionPerformed
 
     private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
-        //        toggleEnabled();
-        //        if(jBEditar.getText() == "Editar"){
-            //            jBEditar.setText("Cancelar");
-            //        }else{
-            //            jBEditar.setText("Editar");
-            //            new ClienteController().showCliente(this);
-            //        }
+        toggleEnabled();
+        if(jBEditar.getText() == "Editar"){
+            jBEditar.setText("Cancelar");
+        }else{
+            jBEditar.setText("Editar");
+            new FundadorController().showFundador(this);
+        }
     }//GEN-LAST:event_jBEditarActionPerformed
 
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
-        //        String message = "Confirmar exclusão do cliente";
-        //        String title = "Exclusão";
-        //        int type = JOptionPane.OK_CANCEL_OPTION;
-        //        int response = JOptionPane.showConfirmDialog(null, message, title, type);
-        //        if(response == 0){
-            //            new ClienteController().deleteCliente(this);
-            //            loadCliente();
-            //        }
+        String message = "Confirmar exclusão do fundador";
+        String title = "Exclusão";
+        int type = JOptionPane.OK_CANCEL_OPTION;
+        int response = JOptionPane.showConfirmDialog(null, message, title, type);
+        if(response == 0){
+            new FundadorController().deleteFundador(this);
+            loadFundador();
+        }
     }//GEN-LAST:event_jBExcluirActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         loadFundador();
     }//GEN-LAST:event_formComponentShown
 
+    private void jCBFundadoresItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBFundadoresItemStateChanged
+        if(evt.getStateChange() == java.awt.event.ItemEvent.SELECTED){
+            if(jBEditar.getText() == "Cancelar"){
+                toggleEnabled();
+                jBEditar.setText("Editar");
+            }
+            new FundadorController().showFundador(this);
+        }
+    }//GEN-LAST:event_jCBFundadoresItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBEditar;
     private javax.swing.JButton jBExcluir;
     private javax.swing.JButton jBSalvar;
-    private javax.swing.JComboBox<String> jCBFundadores;
+    private javax.swing.JComboBox<Fundador> jCBFundadores;
     private javax.swing.JCheckBox jCkBMorte;
     private javax.swing.JLabel jLAtivprof;
     private javax.swing.JLabel jLDtmorte;
@@ -307,11 +316,7 @@ public class UpFundador extends javax.swing.JPanel {
         return jCkBMorte;
     }
 
-    public ArrayList<Fundador> getListFundador() {
-        return listFundador;
-    }
-
-    public javax.swing.JComboBox<String> getjCBFundadores() {
+    public javax.swing.JComboBox<Fundador> getjCBFundadores() {
         return jCBFundadores;
     }
 }

@@ -5,7 +5,6 @@
 package view;
 
 import controller.CidadeController;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.entity.Cidade;
 
@@ -15,23 +14,26 @@ import model.entity.Cidade;
  */
 public class UpCidade extends javax.swing.JPanel {
 
-    private final ArrayList<Cidade> listCidade;
-    
     /**
      * Creates new form AddCidade
      */
     public UpCidade() {
         initComponents();
-        listCidade = new ArrayList<>();
     }
 
     private void loadCidade(){
-        getListCidade().clear();
-        getListCidade().addAll(new CidadeController().loadAllCidade());
         getjCBCidades().removeAllItems();
-        for(Cidade item: getListCidade()){
-            getjCBCidades().addItem(item.toString());
+        for(Cidade item: new CidadeController().loadAllCidade()){
+            getjCBCidades().addItem(item);
         }
+    }
+    
+    private void toggleEnabled(){
+        boolean enabled = !getjTFNome().isEnabled();
+        getjTFNome().setEnabled(enabled);
+        getjCBEstado().setEnabled(enabled);
+        getjTFPopulacao().setEnabled(enabled);
+        jBSalvar.setEnabled(enabled);
     }
     
     /**
@@ -98,9 +100,9 @@ public class UpCidade extends javax.swing.JPanel {
             }
         });
 
-        jCBCidades.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBCidadesActionPerformed(evt);
+        jCBCidades.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBCidadesItemStateChanged(evt);
             }
         });
 
@@ -108,21 +110,6 @@ public class UpCidade extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLNome)
-                    .addComponent(jLEstado)
-                    .addComponent(jLPopulacao))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTFNome)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jCBEstado, 0, 85, Short.MAX_VALUE)
-                            .addComponent(jTFPopulacao))
-                        .addGap(0, 370, Short.MAX_VALUE)))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(269, Short.MAX_VALUE)
                 .addComponent(jBSalvar)
@@ -133,7 +120,21 @@ public class UpCidade extends javax.swing.JPanel {
                 .addGap(35, 35, 35))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jCBCidades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLNome)
+                            .addComponent(jLEstado)
+                            .addComponent(jLPopulacao))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTFNome)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jCBEstado, 0, 85, Short.MAX_VALUE)
+                                    .addComponent(jTFPopulacao))
+                                .addGap(0, 370, Short.MAX_VALUE))))
+                    .addComponent(jCBCidades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -163,69 +164,67 @@ public class UpCidade extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        getListCidade().clear();
+        getjCBCidades().removeAllItems();
     }//GEN-LAST:event_formComponentHidden
 
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
-        //        String message = "Dados do cliente atualizados com sucesso!";
-        //        String title = "Sucesso";
-        //        int type = JOptionPane.INFORMATION_MESSAGE;
-        //        try{
-            //            new ClienteController().updateCliente(this);
-            //            jBEditar.setText("Editar");
-            //            toggleEnabled();
-            //        }catch(DateTimeParseException e){
-            //            message = "O formato da data está incorreto. (dd/mm/aaaa)";
-            //            title = "Erro";
-            //            type = JOptionPane.ERROR_MESSAGE;
-            //        }catch(Exception e){
-            //            message = "Ocorreu um erro ao atualizar os dados do cliente...\n\n" + e.getMessage().split("\n")[0];
-            //            title = "Erro";
-            //            type = JOptionPane.ERROR_MESSAGE;
-            //        }finally{
-            //            JOptionPane.showMessageDialog(null,message,title,type);
-            //        }
+        String message = "Dados da cidade atualizados com sucesso!";
+        String title = "Sucesso";
+        int type = JOptionPane.INFORMATION_MESSAGE;
+        try{
+            new CidadeController().updateCidade(this);
+            jBEditar.setText("Editar");
+            toggleEnabled();
+        }catch(Exception e){
+            message = "Ocorreu um erro ao atualizar os dados da cidade...\n\n" + e.getMessage().split("\n")[0];
+            title = "Erro";
+            type = JOptionPane.ERROR_MESSAGE;
+        }finally{
+            JOptionPane.showMessageDialog(null,message,title,type);
+        }
     }//GEN-LAST:event_jBSalvarActionPerformed
 
     private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
-        //        toggleEnabled();
-        //        if(jBEditar.getText() == "Editar"){
-            //            jBEditar.setText("Cancelar");
-            //        }else{
-            //            jBEditar.setText("Editar");
-            //            new ClienteController().showCliente(this);
-            //        }
+        toggleEnabled();
+        if(jBEditar.getText() == "Editar"){
+            jBEditar.setText("Cancelar");
+        }else{
+            jBEditar.setText("Editar");
+            new CidadeController().showCidade(this);
+        }
     }//GEN-LAST:event_jBEditarActionPerformed
 
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
-        //        String message = "Confirmar exclusão do cliente";
-        //        String title = "Exclusão";
-        //        int type = JOptionPane.OK_CANCEL_OPTION;
-        //        int response = JOptionPane.showConfirmDialog(null, message, title, type);
-        //        if(response == 0){
-            //            new ClienteController().deleteCliente(this);
-            //            loadCliente();
-            //        }
+        String message = "Confirmar exclusão da cidade";
+        String title = "Exclusão";
+        int type = JOptionPane.OK_CANCEL_OPTION;
+        int response = JOptionPane.showConfirmDialog(null, message, title, type);
+        if(response == 0){
+            new CidadeController().deleteCidade(this);
+            loadCidade();
+        }
     }//GEN-LAST:event_jBExcluirActionPerformed
-
-    private void jCBCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCidadesActionPerformed
-        //        if(jBEditar.getText() == "Cancelar"){
-            //            toggleEnabled();
-            //            jBEditar.setText("Editar");
-            //        }
-        new CidadeController().showCidade(this);
-    }//GEN-LAST:event_jCBCidadesActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         loadCidade();
     }//GEN-LAST:event_formComponentShown
+
+    private void jCBCidadesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBCidadesItemStateChanged
+        if(evt.getStateChange() == java.awt.event.ItemEvent.SELECTED){
+            if(jBEditar.getText() == "Cancelar"){
+                toggleEnabled();
+                jBEditar.setText("Editar");
+            }
+            new CidadeController().showCidade(this);
+        }
+    }//GEN-LAST:event_jCBCidadesItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBEditar;
     private javax.swing.JButton jBExcluir;
     private javax.swing.JButton jBSalvar;
-    private javax.swing.JComboBox<String> jCBCidades;
+    private javax.swing.JComboBox<Cidade> jCBCidades;
     private javax.swing.JComboBox<String> jCBEstado;
     private javax.swing.JLabel jLEstado;
     private javax.swing.JLabel jLNome;
@@ -245,12 +244,8 @@ public class UpCidade extends javax.swing.JPanel {
     public javax.swing.JTextField getjTFNome() {
         return jTFNome;
     }
-    
-    public ArrayList<Cidade> getListCidade() {
-        return listCidade;
-    }
 
-    public javax.swing.JComboBox<String> getjCBCidades() {
+    public javax.swing.JComboBox<Cidade> getjCBCidades() {
         return jCBCidades;
     }
     

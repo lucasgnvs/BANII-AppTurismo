@@ -81,7 +81,8 @@ public class CasaShowDAO {
         updatePTuristico.setInt(4,cs.getCidade().getCod());
         updatePTuristico.setInt(5,cs.getCod());
         updateCasaShow.setTime(1, Time.valueOf(cs.getHrinicio()));
-        updateCasaShow.setInt(2,cs.getDiafech());
+        ArrayList<String> dias = new ArrayList<>(Arrays.asList("0","DOM","SEG", "TER", "QUA", "QUI", "SEX", "SAB"));
+        updateCasaShow.setString(2,dias.get(cs.getDiafech()));
         if (cs.getRestaurante() != null){
             updateCasaShow.setInt(3,cs.getRestaurante().getCod());
         }else{
@@ -92,7 +93,12 @@ public class CasaShowDAO {
         }else{
             updateCasaShow.setNull(4,Types.NULL);
         }
-        updateCasaShow.setInt(5,cs.getEspecialidade());
+        if (cs.getEspecialidade() != -1){
+            ArrayList<String> esp = new ArrayList<>(Arrays.asList("0","OUTRO", "BRA","ITA","JAP","MEX"));
+            updateCasaShow.setString(5,esp.get(cs.getEspecialidade()));
+        }else{
+            updateCasaShow.setNull(5,Types.NULL);
+        }
         updateCasaShow.setInt(6,cs.getCod());
         updatePTuristico.executeUpdate();
         updateCasaShow.executeUpdate();

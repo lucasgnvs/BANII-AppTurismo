@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.ButtonModel;
 import javax.swing.JRadioButton;
 import model.dao.RestauranteDAO;
 import model.entity.Cidade;
@@ -25,7 +24,7 @@ public class RestauranteController {
     public void addRestaurante(AddRestaurante form) throws SQLException {
         String nome = form.getjTFNome().getText();
         String endereco = form.getjTFEndereco().getText();
-        Cidade cidade = form.getListCidade().get(form.getjCBCidade().getSelectedIndex());
+        Cidade cidade = (Cidade) form.getjCBCidade().getSelectedItem();
         int categoria = Integer.parseInt(form.getButtonGroup1().getSelection().getActionCommand());        
         Restaurante rt = new Restaurante(-1,
                 nome.isBlank() ? null : nome,
@@ -39,14 +38,21 @@ public class RestauranteController {
     public void updateRestaurante(UpAtracoes form) throws DateTimeParseException, SQLException {
         int index = form.getjCBAtracoes().getSelectedIndex();
         Restaurante rt = form.getListRestaurante().get(index);
-//        ht.set();
-//        RestauranteDAO.getInstance().updateRestaurante(rt);
+        String nome = form.getjTFNome().getText();
+        String endereco = form.getjTFEndereco().getText();
+        Cidade cidade = (Cidade) form.getjCBCidade().getSelectedItem();
+        int categoria = Integer.parseInt(form.getButtonGroupRestauranteCat().getSelection().getActionCommand());        
+        rt.setNome(nome.isBlank() ? null : nome);
+        rt.setEndereco(endereco.isBlank() ? null : endereco);
+        rt.setCidade(cidade);
+        rt.setCategoria(categoria);
+        RestauranteDAO.getInstance().updateRestaurante(rt);
     }
 
     public void deleteRestaurante(UpAtracoes form){
         int index = form.getjCBAtracoes().getSelectedIndex();
         Restaurante rt = form.getListRestaurante().get(index);
-//        RestauranteDAO.getInstance().deleteRestaurante(rt);
+        RestauranteDAO.getInstance().deleteRestaurante(rt);
     }
      
     public void showRestaurante(UpAtracoes form){
@@ -57,14 +63,8 @@ public class RestauranteController {
         Restaurante rt = form.getListRestaurante().get(index);
         form.getjTFNome().setText(rt.getNome());
         form.getjTFEndereco().setText(rt.getEndereco());
-        int indexcd = -1;
-        for (Cidade cd : form.getListCidade()) {
-            if (cd.getCod() == rt.getCidade().getCod()){
-                indexcd = form.getListCidade().indexOf(cd);
-                break;
-            }
-        }
-        form.getjCBCidade().setSelectedIndex(indexcd);
+        Cidade cidade = form.getjCBCidadeAsList().stream().filter(cd -> cd.getCod() == rt.getCidade().getCod()).findFirst().get();
+        form.getjCBCidade().setSelectedItem(cidade);
         HashMap<Integer, JRadioButton> botao = new HashMap<>();
         botao.put(1,form.getjRBRestauranteCat1());
         botao.put(2,form.getjRBRestauranteCat2());

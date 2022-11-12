@@ -22,51 +22,38 @@ import model.entity.Fundador;
  */
 public class AddPTuristico extends javax.swing.JPanel {
 
-    private final ArrayList<Cidade> listCidade;
-    private final ArrayList<Restaurante> listRestaurante;
-    private final ArrayList<Fundador> listFundador;
-
     /**
      * Creates new form AddPTuristico
      */
     public AddPTuristico() {
         initComponents();
-        listCidade = new ArrayList<>();
-        listRestaurante = new ArrayList<>();
-        listFundador = new ArrayList<>();
         jCBCidade.setModel(new DefaultComboBoxModel<>());
         jCBCasashowRestaurante.setModel(new DefaultComboBoxModel<>());
         jCBMuseuFundadores.setModel(new DefaultComboBoxModel<>());
     }
     
     private void loadCidade(){
-        getListCidade().clear();
-        getListCidade().addAll(new CidadeController().loadAllCidade());
-        jCBCidade.removeAllItems();
-        for(Cidade item: getListCidade()){
-            jCBCidade.addItem(item.toString());
+        getjCBCidade().removeAllItems();
+        for(Cidade item: new CidadeController().loadAllCidade()){
+            getjCBCidade().addItem(item);
         }
     }
     
     private void loadRestaurante(){
-        int index = jCBCidade.getSelectedIndex();
-        try{
-            Cidade cd = getListCidade().get(index == -1 ? 0 : index);
-            getListRestaurante().clear();
-            getListRestaurante().addAll( new RestauranteController().loadAllRestaurante(cd));
-            jCBCasashowRestaurante.removeAllItems();
-            for(Restaurante item: getListRestaurante()){
-                jCBCasashowRestaurante.addItem(item.toString());
-            }
-        }catch(IndexOutOfBoundsException e){}
+        Cidade cd = (Cidade) getjCBCidade().getSelectedItem();
+        if(cd == null){
+            cd = getjCBCidade().getItemAt(0);
+        }
+        getjCBCasashowRestaurante().removeAllItems();
+        for(Restaurante item: new RestauranteController().loadAllRestaurante(cd)){
+            getjCBCasashowRestaurante().addItem(item);
+        }
     }
     
     private void loadFundador(){
-        getListFundador().clear();
-        getListFundador().addAll(new FundadorController().loadAllFundador());
-        jCBMuseuFundadores.removeAllItems();
-        for(Fundador item: listFundador){
-            jCBMuseuFundadores.addItem(item.toString());
+        getjCBMuseuFundadores().removeAllItems();
+        for(Fundador item: new FundadorController().loadAllFundador()){
+            getjCBMuseuFundadores().addItem(item);
         }
     }
     
@@ -243,7 +230,6 @@ public class AddPTuristico extends javax.swing.JPanel {
 
         jLCasashowRestaurante.setText("Restaurante:");
 
-        jCBCasashowRestaurante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Res 1", "Res 2", "Res 3", "Res 4" }));
         jCBCasashowRestaurante.setEnabled(false);
 
         jCkBCasashowRestaurante.addActionListener(new java.awt.event.ActionListener() {
@@ -372,8 +358,6 @@ public class AddPTuristico extends javax.swing.JPanel {
 
         jLMuseuFundadores.setText("Fundadores:");
 
-        jCBMuseuFundadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fund 1", "Fund 2", "Fund 3", "Fund 4" }));
-
         jBMuseuAdicionar.setText("Adicionar");
         jBMuseuAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -494,10 +478,9 @@ public class AddPTuristico extends javax.swing.JPanel {
 
         jTFEndereco.setToolTipText("Rua, Número, Bairro");
 
-        jCBCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cid 1", "Cid 2", "Cid 3", "Cid 4" }));
-        jCBCidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBCidadeActionPerformed(evt);
+        jCBCidade.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBCidadeItemStateChanged(evt);
             }
         });
 
@@ -638,8 +621,7 @@ public class AddPTuristico extends javax.swing.JPanel {
     }//GEN-LAST:event_jCkBCasashowRestauranteActionPerformed
 
     private void jBMuseuAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMuseuAdicionarActionPerformed
-        int index = getjCBMuseuFundadores().getSelectedIndex();
-        Fundador selected = getListFundador().get(index);
+        Fundador selected = (Fundador) getjCBMuseuFundadores().getSelectedItem();
         DefaultListModel<Fundador> list = (DefaultListModel<Fundador>) getjLtMuseuFundadores().getModel();
         if(!list.contains(selected)){
             list.addElement(selected);
@@ -656,23 +638,15 @@ public class AddPTuristico extends javax.swing.JPanel {
         getjLtMuseuFundadores().setModel(list);
     }//GEN-LAST:event_jBMuseuRemoverActionPerformed
 
-    private void jCBCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCidadeActionPerformed
-        if(getjCkBCasashowRestaurante().isSelected()){
-            getjCkBCasashowRestaurante().doClick();
-        }
-        loadRestaurante();
-        getjCkBCasashowRestaurante().setEnabled(!getListRestaurante().isEmpty());
-    }//GEN-LAST:event_jCBCidadeActionPerformed
-
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         loadCidade();
         loadFundador();
     }//GEN-LAST:event_formComponentShown
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        getListCidade().clear();
-        getListRestaurante().clear();
-        getListFundador().clear();
+        getjCBCidade().removeAllItems();
+        getjCBCasashowRestaurante().removeAllItems();
+        getjCBMuseuFundadores().removeAllItems();
     }//GEN-LAST:event_formComponentHidden
 
     private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
@@ -702,6 +676,16 @@ public class AddPTuristico extends javax.swing.JPanel {
         limparParque();
     }//GEN-LAST:event_jPParqueComponentHidden
 
+    private void jCBCidadeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBCidadeItemStateChanged
+        if(evt.getStateChange() == java.awt.event.ItemEvent.SELECTED){
+            if(getjCkBCasashowRestaurante().isSelected()){
+                getjCkBCasashowRestaurante().doClick();
+            }
+            loadRestaurante();
+            getjCkBCasashowRestaurante().setEnabled(getjCBCasashowRestaurante().getModel().getSize() != 0);
+        }
+    }//GEN-LAST:event_jCBCidadeItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -711,9 +695,9 @@ public class AddPTuristico extends javax.swing.JPanel {
     private javax.swing.JButton jBMuseuRemover;
     private javax.swing.JComboBox<String> jCBCasashowDiafech;
     private javax.swing.JComboBox<String> jCBCasashowEsp;
-    private javax.swing.JComboBox<String> jCBCasashowRestaurante;
-    private javax.swing.JComboBox<String> jCBCidade;
-    private javax.swing.JComboBox<String> jCBMuseuFundadores;
+    private javax.swing.JComboBox<Restaurante> jCBCasashowRestaurante;
+    private javax.swing.JComboBox<Cidade> jCBCidade;
+    private javax.swing.JComboBox<Fundador> jCBMuseuFundadores;
     private javax.swing.JCheckBox jCkBCasashowRestaurante;
     private javax.swing.JLabel jLCasashowDiafech;
     private javax.swing.JLabel jLCasashowEsp;
@@ -771,15 +755,15 @@ public class AddPTuristico extends javax.swing.JPanel {
         return jCBCasashowEsp;
     }
 
-    public javax.swing.JComboBox<String> getjCBCasashowRestaurante() {
+    public javax.swing.JComboBox<Restaurante> getjCBCasashowRestaurante() {
         return jCBCasashowRestaurante;
     }
 
-    public javax.swing.JComboBox<String> getjCBCidade() {
+    public javax.swing.JComboBox<Cidade> getjCBCidade() {
         return jCBCidade;
     }
 
-    public javax.swing.JComboBox<String> getjCBMuseuFundadores() {
+    public javax.swing.JComboBox<Fundador> getjCBMuseuFundadores() {
         return jCBMuseuFundadores;
     }
 
@@ -829,18 +813,6 @@ public class AddPTuristico extends javax.swing.JPanel {
 
     public javax.swing.JTextField getjTFParqueNrAtracoes() {
         return jTFParqueNrAtracoes;
-    }
-    
-    public ArrayList<Cidade> getListCidade() {
-        return listCidade;
-    }
-
-    public ArrayList<Restaurante> getListRestaurante() {
-        return listRestaurante;
-    }
-    
-    public ArrayList<Fundador> getListFundador() {
-        return listFundador;
     }
     
     public javax.swing.JList<Fundador> getjLtMuseuFundadores() {
