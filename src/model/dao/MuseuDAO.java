@@ -26,6 +26,7 @@ public class MuseuDAO {
     private PreparedStatement deleteMuseu;
     private PreparedStatement selectAllMuseu;
     private PreparedStatement selectMuseuCidade;
+    private PreparedStatement selectCountMuseu;
     
     public static MuseuDAO getInstance(){
        if (instance == null){
@@ -43,6 +44,7 @@ public class MuseuDAO {
             deleteMuseu = con.prepareStatement("delete from pturisticos where codpt = ?");
             selectAllMuseu = con.prepareStatement("select codpt, nome, descricao, endereco, codcd, dtfundacao, nrsalas from pturisticos join museus using(codpt) order by nome");
             selectMuseuCidade = con.prepareStatement("select codpt, nome, descricao, endereco, dtfundacao, nrsalas from pturisticos join museus using(codpt) where codcd = ? order by nome");
+            selectCountMuseu = con.prepareStatement("select count(codpt) from museus");
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -120,6 +122,20 @@ public class MuseuDAO {
             e.printStackTrace();
         }
         return list;
+    }
+    
+    public int loadTotal() {
+        ResultSet rs;
+        int res = 0;
+        try{
+            rs = selectCountMuseu.executeQuery();
+            if(rs.next()){
+                res = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
     
 }

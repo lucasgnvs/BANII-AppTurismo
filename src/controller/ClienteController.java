@@ -75,5 +75,9 @@ public class ClienteController {
     public ArrayList<Cliente> loadAllCliente(){
         return ClienteDAO.getInstance().loadAllCliente();
     }
+
+    public int loadTotal(){
+        return ClienteDAO.getInstance().loadTotal();
+    }
     
 }

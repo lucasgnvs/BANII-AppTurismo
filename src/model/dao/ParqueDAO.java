@@ -24,6 +24,7 @@ public class ParqueDAO {
     private PreparedStatement deleteParque;
     private PreparedStatement selectAllParque;
     private PreparedStatement selectParqueCidade;
+    private PreparedStatement selectCountParque;
     
     public static ParqueDAO getInstance(){
        if (instance == null){
@@ -41,6 +42,7 @@ public class ParqueDAO {
             deleteParque = con.prepareStatement("delete from pturisticos where codpt = ?");
             selectAllParque = con.prepareStatement("select codpt, nome, descricao, endereco, codcd, nratracoes, capacidade from pturisticos join parques using(codpt) order by nome");
             selectParqueCidade = con.prepareStatement("select codpt, nome, descricao, endereco, nratracoes, capacidade from pturisticos join parques using(codpt) where codcd = ? order by nome");
+            selectCountParque = con.prepareStatement("select count(codpt) from parques");
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -120,4 +122,18 @@ public class ParqueDAO {
         return list;
     }
 
+    public int loadTotal() {
+        ResultSet rs;
+        int res = 0;
+        try{
+            rs = selectCountParque.executeQuery();
+            if(rs.next()){
+                res = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+    
 }

@@ -82,4 +82,8 @@ public class ParqueController {
         return ParqueDAO.getInstance().loadParqueCidade(cd);
     }
     
+    public int loadTotal(){
+        return ParqueDAO.getInstance().loadTotal();
+    }
+    
 }

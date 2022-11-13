@@ -25,6 +25,7 @@ public class HotelDAO {
     private PreparedStatement deleteHotel;
     private PreparedStatement selectAllHotel;
     private PreparedStatement selectHotelCidade;
+    private PreparedStatement selectCountHotel;
     
     public static HotelDAO getInstance(){
        if (instance == null){
@@ -41,6 +42,7 @@ public class HotelDAO {
             deleteHotel = con.prepareStatement("delete from hoteis where codh = ?");
             selectAllHotel = con.prepareStatement("select codh, nome, endereco, categoria, codr, codcd from hoteis order by nome");
             selectHotelCidade = con.prepareStatement("select codh, nome, endereco, categoria, codr from hoteis where codcd = ? order by nome");
+            selectCountHotel = con.prepareStatement("select count(codh) from hoteis");
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -122,6 +124,20 @@ public class HotelDAO {
             e.printStackTrace();
         }
         return list;
+    }
+    
+    public int loadTotal() {
+        ResultSet rs;
+        int res = 0;
+        try{
+            rs = selectCountHotel.executeQuery();
+            if(rs.next()){
+                res = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
     
 }

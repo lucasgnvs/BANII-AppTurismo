@@ -24,6 +24,7 @@ public class RestauranteDAO {
     private PreparedStatement deleteRestaurante;
     private PreparedStatement selectAllRestaurante;
     private PreparedStatement selectRestauranteCidade;
+    private PreparedStatement selectCountRestaurante;
 
     public static RestauranteDAO getInstance(){
        if (instance == null){
@@ -40,6 +41,7 @@ public class RestauranteDAO {
             deleteRestaurante = con.prepareStatement("delete from restaurantes where codr = ?");
             selectAllRestaurante = con.prepareStatement("select codr, nome, endereco, categoria, codcd from restaurantes order by nome");
             selectRestauranteCidade = con.prepareStatement("select codr, nome, endereco, categoria from restaurantes where codcd = ? order by nome");
+            selectCountRestaurante = con.prepareStatement("select count(codr) from restaurantes");
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -110,6 +112,20 @@ public class RestauranteDAO {
             e.printStackTrace();
         }
         return list;
+    }
+    
+    public int loadTotal() {
+        ResultSet rs;
+        int res = 0;
+        try{
+            rs = selectCountRestaurante.executeQuery();
+            if(rs.next()){
+                res = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
     
 }

@@ -21,6 +21,7 @@ public class ContratoDAO {
     private static ContratoDAO instance;
     private PreparedStatement insertContrato;
     private PreparedStatement selectContratoPacote;
+    private PreparedStatement selectCountContrato;
     
     public static ContratoDAO getInstance(){
        if (instance == null){
@@ -34,6 +35,7 @@ public class ContratoDAO {
         try{
             insertContrato = con.prepareStatement("insert into contratos values (?, ?)");
             selectContratoPacote = con.prepareStatement("select codp, nome, dtinicio, dtfim from contratos join pacotes using (codp) where codc = ?");
+            selectCountContrato = con.prepareStatement("select count(*) from contratos");
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -65,6 +67,20 @@ public class ContratoDAO {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public int loadTotal() {
+        ResultSet rs;
+        int res = 0;
+        try{
+            rs = selectCountContrato.executeQuery();
+            if(rs.next()){
+                res = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
             
 }

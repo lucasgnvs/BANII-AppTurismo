@@ -124,4 +124,8 @@ public class CasaShowController {
         return CasaShowDAO.getInstance().loadCasaShowCidade(cd);
     }
     
+    public int loadTotal(){
+        return CasaShowDAO.getInstance().loadTotal();
+    }
+    
 }

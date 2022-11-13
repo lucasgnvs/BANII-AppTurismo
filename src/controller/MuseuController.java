@@ -120,4 +120,8 @@ public class MuseuController {
         return MuseuDAO.getInstance().loadMuseuCidade(cd);
     }
     
+    public int loadTotal(){
+        return MuseuDAO.getInstance().loadTotal();
+    }
+    
 }

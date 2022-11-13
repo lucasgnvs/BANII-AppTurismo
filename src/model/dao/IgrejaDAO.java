@@ -26,6 +26,7 @@ public class IgrejaDAO {
     private PreparedStatement deleteIgreja;
     private PreparedStatement selectAllIgreja;
     private PreparedStatement selectIgrejaCidade;
+    private PreparedStatement selectCountIgreja;
     
     public static IgrejaDAO getInstance(){
        if (instance == null){
@@ -43,6 +44,7 @@ public class IgrejaDAO {
             deleteIgreja = con.prepareStatement("delete from pturisticos where codpt = ?");
             selectAllIgreja = con.prepareStatement("select codpt, nome, descricao, endereco, codcd, data, estilo from pturisticos join igrejas using(codpt) order by nome");
             selectIgrejaCidade = con.prepareStatement("select codpt, nome, descricao, endereco, data, estilo from pturisticos join igrejas using(codpt) where codcd = ? order by nome");
+            selectCountIgreja = con.prepareStatement("select count(codpt) from igrejas");
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -121,6 +123,20 @@ public class IgrejaDAO {
             e.printStackTrace();
         }
         return list;
+    }
+    
+    public int loadTotal() {
+        ResultSet rs;
+        int res = 0;
+        try{
+            rs = selectCountIgreja.executeQuery();
+            if(rs.next()){
+                res = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
     
 }    

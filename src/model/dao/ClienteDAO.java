@@ -23,6 +23,7 @@ public class ClienteDAO {
     private PreparedStatement updateCliente;
     private PreparedStatement deleteCliente;
     private PreparedStatement selectAllCliente;
+    private PreparedStatement selectCountCliente;
     
     public static ClienteDAO getInstance(){
        if (instance == null){
@@ -38,6 +39,7 @@ public class ClienteDAO {
             updateCliente = con.prepareStatement("update clientes set nome = ?, dtnasc = ?, email = ?, endereco = ?, telefone = ? where codc = ?");
             deleteCliente = con.prepareStatement("delete from clientes where codc = ?");
             selectAllCliente = con.prepareStatement("select codc, nome, dtnasc, email, endereco, telefone from clientes order by nome");
+            selectCountCliente = con.prepareStatement("select count(codc) from clientes");
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -88,6 +90,20 @@ public class ClienteDAO {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public int loadTotal() {
+        ResultSet rs;
+        int res = 0;
+        try{
+            rs = selectCountCliente.executeQuery();
+            if(rs.next()){
+                res = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
     
 }

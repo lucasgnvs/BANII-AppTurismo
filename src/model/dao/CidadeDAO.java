@@ -21,6 +21,7 @@ public class CidadeDAO {
     private PreparedStatement updateCidade;
     private PreparedStatement deleteCidade;
     private PreparedStatement selectAllCidade;
+    private PreparedStatement selectCountCidade;
     
     public static CidadeDAO getInstance(){
        if (instance == null){
@@ -36,6 +37,7 @@ public class CidadeDAO {
             updateCidade = con.prepareStatement("update cidades set nome = ?, estado = ?, populacao = ? where codcd = ?");
             deleteCidade = con.prepareStatement("delete from cidades where codcd = ?");
             selectAllCidade = con.prepareStatement("select codcd, nome, estado, populacao from cidades order by estado, nome");
+            selectCountCidade = con.prepareStatement("select count(codcd) from cidades");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -80,6 +82,20 @@ public class CidadeDAO {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public int loadTotal() {
+        ResultSet rs;
+        int res = 0;
+        try{
+            rs = selectCountCidade.executeQuery();
+            if(rs.next()){
+                res = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
     
 }

@@ -4,6 +4,12 @@
  */
 package view;
 
+import controller.AtracaoController;
+import controller.CidadeController;
+import controller.ClienteController;
+import controller.ContratoController;
+import controller.PacoteController;
+
 /**
  *
  * @author User
@@ -15,6 +21,15 @@ public class Home extends javax.swing.JPanel {
      */
     public Home() {
         initComponents();
+        loadData();
+    }
+    
+    private void loadData(){
+        jLTtPacV.setText(Integer.toString(new ContratoController().loadTotal()));
+        jLTtPac.setText(Integer.toString(new PacoteController().loadTotal()));
+        jLTtAtr.setText(Integer.toString(new AtracaoController().loadTotal()));
+        jLTtCid.setText(Integer.toString(new CidadeController().loadTotal()));
+        jLTtCli.setText(Integer.toString(new ClienteController().loadTotal()));
     }
 
     /**
@@ -26,20 +41,28 @@ public class Home extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         upPacote1 = new view.UpPacote();
         upAtracoes1 = new view.UpAtracoes();
         upCliente1 = new view.UpCliente();
         upCidade1 = new view.UpCidade();
         upFundador1 = new view.UpFundador();
+        jLVisao = new javax.swing.JLabel();
+        jLTtPacotes = new javax.swing.JLabel();
+        jLTtPacotesVendidos = new javax.swing.JLabel();
+        jLTtAtracoes = new javax.swing.JLabel();
+        jLTtCidades = new javax.swing.JLabel();
+        jLTtClientes = new javax.swing.JLabel();
+        jLTtPac = new javax.swing.JLabel();
+        jLTtPacV = new javax.swing.JLabel();
+        jLTtCid = new javax.swing.JLabel();
+        jLTtCli = new javax.swing.JLabel();
+        jLTtAtr = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 204));
-
-        jButton1.setText("Novo PT");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
             }
         });
 
@@ -52,47 +75,104 @@ public class Home extends javax.swing.JPanel {
         jTabbedPane1.addTab("Cidades", upCidade1);
         jTabbedPane1.addTab("Fundadores", upFundador1);
 
+        jLVisao.setText("Visão geral");
+
+        jLTtPacotes.setText("Total de pacotes:");
+
+        jLTtPacotesVendidos.setText("Total de pacotes vendidos:");
+
+        jLTtAtracoes.setText("Total de atrações:");
+
+        jLTtCidades.setText("Total de cidades:");
+
+        jLTtClientes.setText("Total de clientes:");
+
+        jLTtPac.setText("0");
+
+        jLTtPacV.setText("0");
+
+        jLTtCid.setText("0");
+
+        jLTtCli.setText("0");
+
+        jLTtAtr.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLVisao)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(225, 225, 225)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLTtPacotesVendidos)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                                .addComponent(jLTtPacV))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLTtPacotes)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLTtPac)))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLTtCidades)
+                            .addComponent(jLTtAtracoes))
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLTtCid)
+                                .addGap(30, 30, 30)
+                                .addComponent(jLTtClientes)
+                                .addGap(50, 50, 50)
+                                .addComponent(jLTtCli))
+                            .addComponent(jLTtAtr)))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE))
                 .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addGap(18, 18, 18)
+                .addComponent(jLVisao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLTtPacotes)
+                    .addComponent(jLTtAtracoes)
+                    .addComponent(jLTtPac)
+                    .addComponent(jLTtAtr))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLTtPacotesVendidos)
+                    .addComponent(jLTtCidades)
+                    .addComponent(jLTtClientes)
+                    .addComponent(jLTtPacV)
+                    .addComponent(jLTtCid)
+                    .addComponent(jLTtCli))
+                .addGap(30, 30, 30)
                 .addComponent(jTabbedPane1)
                 .addGap(50, 50, 50))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        /*
-        try{
-            ResultSet rs = Conexao.getConnection().prepareStatement("select * from parques").executeQuery();
-            while(rs.next()){
-                System.out.printf("nratr %d, cap %d\n",rs.getInt(2),rs.getInt(3));
-            }
-        }catch (SQLException e){
-            System.err.println("foi de f");
-        }
-        */
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        loadData();
+    }//GEN-LAST:event_formComponentShown
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLTtAtr;
+    private javax.swing.JLabel jLTtAtracoes;
+    private javax.swing.JLabel jLTtCid;
+    private javax.swing.JLabel jLTtCidades;
+    private javax.swing.JLabel jLTtCli;
+    private javax.swing.JLabel jLTtClientes;
+    private javax.swing.JLabel jLTtPac;
+    private javax.swing.JLabel jLTtPacV;
+    private javax.swing.JLabel jLTtPacotes;
+    private javax.swing.JLabel jLTtPacotesVendidos;
+    private javax.swing.JLabel jLVisao;
     private javax.swing.JTabbedPane jTabbedPane1;
     private view.UpAtracoes upAtracoes1;
     private view.UpCidade upCidade1;

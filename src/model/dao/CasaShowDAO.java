@@ -30,6 +30,7 @@ public class CasaShowDAO {
     private PreparedStatement deleteCasaShow;
     private PreparedStatement selectAllCasaShow;
     private PreparedStatement selectCasaShowCidade;
+    private PreparedStatement selectCountCasaShow;
     
     public static CasaShowDAO getInstance(){
        if (instance == null){
@@ -47,6 +48,7 @@ public class CasaShowDAO {
             deleteCasaShow = con.prepareStatement("delete from pturisticos where codpt = ?");
             selectAllCasaShow = con.prepareStatement("select codpt, nome, descricao, endereco, codcd, hrinicio, diafech, codr, precomedio, especialidade from pturisticos join casashow using(codpt) order by nome");
             selectCasaShowCidade = con.prepareStatement("select codpt, nome, descricao, endereco, hrinicio, diafech, codr, precomedio, especialidade from pturisticos join casashow using(codpt) where codcd = ? order by nome");
+            selectCountCasaShow = con.prepareStatement("select count(codpt) from casashow");
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -161,6 +163,20 @@ public class CasaShowDAO {
             e.printStackTrace();
         }
         return list;
+    }
+    
+    public int loadTotal() {
+        ResultSet rs;
+        int res = 0;
+        try{
+            rs = selectCountCasaShow.executeQuery();
+            if(rs.next()){
+                res = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
     
 }

@@ -26,5 +26,9 @@ public class ContratoController {
     public ArrayList<Pacote> loadAllPacote(Cliente cl) {
         return ContratoDAO.getInstance().loadAllPacote(cl);
     }
+
+    public int loadTotal() {
+        return ContratoDAO.getInstance().loadTotal();
+    }
     
 }

@@ -54,5 +54,9 @@ public class CidadeController {
     public ArrayList<Cidade> loadAllCidade(){
         return CidadeDAO.getInstance().loadAllCidade();
     }
+
+    public int loadTotal(){
+        return CidadeDAO.getInstance().loadTotal();
+    }
     
 }

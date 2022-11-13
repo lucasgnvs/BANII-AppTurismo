@@ -23,4 +23,11 @@ public class PTuristicoController {
         }
     }
     
+    public int loadTotal(){
+        return new CasaShowController().loadTotal() +
+        new IgrejaController().loadTotal() +
+        new MuseuController().loadTotal() +
+        new ParqueController().loadTotal();
+    }
+    
 }

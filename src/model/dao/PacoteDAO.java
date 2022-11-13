@@ -49,6 +49,7 @@ public class PacoteDAO {
     private PreparedStatement selectPTMS;
     private PreparedStatement selectPTPQ;
     private PreparedStatement selectAllPacote;
+    private PreparedStatement selectCountPacote;
     
     public static PacoteDAO getInstance(){
        if (instance == null){
@@ -80,6 +81,7 @@ public class PacoteDAO {
             selectPTMS = con.prepareStatement("select codpt, nome, endereco, dia from ptsinclusos join pturisticos using (codpt) join museus using(codpt)where codp = ?");
             selectPTPQ = con.prepareStatement("select codpt, nome, endereco, dia from ptsinclusos join pturisticos using (codpt) join parques using(codpt)where codp = ?");
             selectAllPacote = con.prepareStatement("select codp, nome, valor, dtinicio, dtfim, disp, codcd from pacotes order by dtinicio desc");
+            selectCountPacote = con.prepareStatement("select count(codp) from pacotes");
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -306,6 +308,20 @@ public class PacoteDAO {
         }
         list.sort((a1, a2) -> a1.getData().isBefore(a2.getData()) ? 1 : -1);
         return list;
+    }
+
+    public int loadTotal() {
+        ResultSet rs;
+        int res = 0;
+        try{
+            rs = selectCountPacote.executeQuery();
+            if(rs.next()){
+                res = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
     
 }

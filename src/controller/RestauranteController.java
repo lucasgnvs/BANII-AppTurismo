@@ -79,4 +79,8 @@ public class RestauranteController {
         return RestauranteDAO.getInstance().loadRestauranteCidade(cd);
     }
     
+    public int loadTotal(){
+        return RestauranteDAO.getInstance().loadTotal();
+    }
+    
 }

@@ -86,4 +86,8 @@ public class IgrejaController {
         return IgrejaDAO.getInstance().loadIgrejaCidade(cd);
     }
     
+    public int loadTotal(){
+        return IgrejaDAO.getInstance().loadTotal();
+    }
+    
 }

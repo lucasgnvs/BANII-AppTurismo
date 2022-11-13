@@ -219,6 +219,10 @@ public class HotelController {
     
     public ArrayList<Hotel> loadAllHotel(Cidade cd){
         return HotelDAO.getInstance().loadHotelCidade(cd);
+    }   
+    
+    public int loadTotal(){
+        return HotelDAO.getInstance().loadTotal();
     }
     
 }

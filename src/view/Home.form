@@ -6,6 +6,9 @@
       <Color blue="cc" green="ff" red="ff" type="rgb"/>
     </Property>
   </Properties>
+  <Events>
+    <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="formComponentShown"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -21,16 +24,41 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLVisao" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="jTabbedPane1" pref="636" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jLTtPacotesVendidos" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="50" max="32767" attributes="0"/>
+                              <Component id="jLTtPacV" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jLTtPacotes" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jLTtPac" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLTtCidades" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLTtAtracoes" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jLTtCid" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jLTtClientes" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="jLTtCli" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jLTtAtr" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="225" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="192" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jTabbedPane1" alignment="0" pref="665" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
           </Group>
@@ -39,9 +67,25 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" pref="32" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <Component id="jLVisao" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLTtPacotes" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLTtAtracoes" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLTtPac" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLTtAtr" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLTtPacotesVendidos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLTtCidades" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLTtClientes" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLTtPacV" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLTtCid" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLTtCli" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Component id="jTabbedPane1" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
           </Group>
@@ -49,14 +93,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButton1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Novo PT"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
-      </Events>
-    </Component>
     <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
       <Properties>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
@@ -114,5 +150,60 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="jLVisao">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Vis&#xe3;o geral"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLTtPacotes">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Total de pacotes:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLTtPacotesVendidos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Total de pacotes vendidos:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLTtAtracoes">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Total de atra&#xe7;&#xf5;es:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLTtCidades">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Total de cidades:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLTtClientes">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Total de clientes:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLTtPac">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLTtPacV">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLTtCid">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLTtCli">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLTtAtr">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

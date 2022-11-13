@@ -61,5 +61,11 @@ public class AtracaoController {
             }
         }
     }
+
+    public int loadTotal(){
+        return new HotelController().loadTotal() +
+        new RestauranteController().loadTotal() +
+        new PTuristicoController().loadTotal();
+    }
         
 }
